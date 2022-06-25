@@ -91,7 +91,7 @@ genOpenapiDir下生成的目录结构如下（文件都在openapi文件夹下）
 
 ## 2、方法调用方式
 
-### genTsData函数参数
+### genOpenapiData函数参数
 - 和命令参数configFile属性一致，见上面说明（命令参数 configFile openapi生成配置文件参数属性）。
 - 使用例子
 
