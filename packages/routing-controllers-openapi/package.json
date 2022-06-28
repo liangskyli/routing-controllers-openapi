@@ -1,6 +1,6 @@
 {
   "name": "@liangskyli/routing-controllers-openapi",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0-beta.1",
   "description": "routing-controllers generate openapi file",
   "author": "liangsky <640634387@qq.com>",
   "homepage": "https://github.com/liangskyli/routing-controllers-openapi#readme",
