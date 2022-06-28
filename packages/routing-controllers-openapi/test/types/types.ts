@@ -42,6 +42,15 @@ export interface getQueryParams1Request {
   activityBases: ActivityBase[];
 }
 
+export interface commonResponse2 {
+  /**
+   * 多行注释
+   * @minimum 1
+   * @maximum 10
+   * */
+  param1: number;
+}
+
 export interface IParam1 {
   /**
    * 多行注释

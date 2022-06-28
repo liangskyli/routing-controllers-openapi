@@ -1,5 +1,5 @@
 import type { SchemaObject, ServerObject } from 'openapi3-ts';
-import type * as TJS from 'typescript-json-schema';
+import type ts from 'typescript';
 import { SwaggerSpecBuilder } from '../build/swagger-spec-builder';
 import { getFilesFromControllers } from '../utils';
 import { MetadataGenerator } from './metadata-generator';
@@ -15,18 +15,20 @@ interface ResponseSchema {
 export type GenOpenApiOption = {
   title?: string;
   routePrefix?: string;
-  compilerOptions?: TJS.CompilerOptions;
+  compilerOptions?: ts.CompilerOptions;
   servers?: ServerObject[];
   responseSchema?: ResponseSchema;
   genOpenapiType?: 'json' | 'yaml';
+  typeUniqueNames?: boolean;
 };
 
 const genOpenapiDoc = (controllerPaths: string[], options: GenOpenApiOption): string => {
-  const { compilerOptions, routePrefix, responseSchema, genOpenapiType, title } = options;
+  const { compilerOptions, routePrefix, responseSchema, genOpenapiType, typeUniqueNames, title } =
+    options;
   // 获得所有需要编译的router文件
   const routePaths = getFilesFromControllers(controllerPaths);
 
-  const metadata = new MetadataGenerator(routePaths, compilerOptions);
+  const metadata = new MetadataGenerator(routePaths, compilerOptions, typeUniqueNames);
   metadata.generate();
   const specBuilder = new SwaggerSpecBuilder(metadata, {
     info: {

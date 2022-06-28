@@ -13,6 +13,7 @@ export enum DecoratorType {
   Authorization,
   Exclude,
   Expose,
+  Omit,
 }
 
 const knownDecorators: DecoratorMetadata[] = [
@@ -179,6 +180,29 @@ const knownDecorators: DecoratorMetadata[] = [
   },
 ];
 
+const omitDecorators: DecoratorMetadata[] = [
+  {
+    package: 'routing-controllers',
+    name: 'UseBefore',
+    type: DecoratorType.Omit,
+  },
+  {
+    package: 'routing-controllers',
+    name: 'UseAfter',
+    type: DecoratorType.Omit,
+  },
+  {
+    package: 'routing-controllers',
+    name: 'Ctx',
+    type: DecoratorType.Omit,
+  },
+  {
+    package: 'typedi',
+    name: 'Service',
+    type: DecoratorType.Omit,
+  },
+];
+
 export interface DecoratorMetadata {
   name: string;
   package: string;
@@ -234,6 +258,13 @@ export function processDecorators(
         if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
           this.type = d.type;
           this.options = d.options || {};
+          return;
+        }
+      }
+
+      for (const d of omitDecorators) {
+        if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
+          this.type = d.type;
           return;
         }
       }

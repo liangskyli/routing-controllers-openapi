@@ -6,6 +6,7 @@ import type { GenOpenApiOption } from '../gen/gen-openapi-doc';
 import type { MetadataGenerator } from '../gen/metadata-generator';
 import type { TypeSchema } from '../gen/type-generator';
 import { OpenapiBuilder } from './openapi-builder';
+import { REGEX_UNIQUE_MD5 } from '../gen/type-generator';
 
 export type Config = {
   info: InfoObject;
@@ -156,9 +157,18 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
     // add all referenced schemas
     const schemas = this.metadata.typeSchemas;
-
     for (const [name, schema] of Object.entries(schemas.getSchemasData())) {
-      this.addSchema(name, schema);
+      let isAdd = true;
+
+      if (!this.metadata.typeUniqueNames) {
+        // filter unused schema
+        if (name.match(REGEX_UNIQUE_MD5)) {
+          isAdd = false;
+        }
+      }
+      if (isAdd) {
+        this.addSchema(name, schema);
+      }
     }
 
     return super.getSpec();

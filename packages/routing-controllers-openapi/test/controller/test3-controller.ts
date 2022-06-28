@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Get, JsonController, QueryParam, QueryParams } from 'routing-controllers';
+import { Body, Get, JsonController, Post, QueryParam, QueryParams } from 'routing-controllers';
 import type {
-  /*commonResponse,*/ getQueryParams1Request,
+  /*commonResponse,*/ commonResponse2,
+  getQueryParams1Request,
   IParam2 as otherParam,
 } from '../types/types';
+import type * as types from '../types/types-2';
 
-export type commonResponse = { a3: string };
+export type commonResponse = { a3: string; b: commonResponse2 };
 
 /**
  * Test3Controller 注释
@@ -16,7 +18,7 @@ export type commonResponse = { a3: string };
 export default class Test3Controller {
   @Get('/getQueryParams1-v3')
   getQueryParams1(@QueryParams() data: getQueryParams1Request): commonResponse {
-    return { a3: '1' };
+    return { a3: '1' } as any;
   }
 
   @Get('/getQueryParam-v3/:id')
@@ -33,5 +35,10 @@ export default class Test3Controller {
     @QueryParam('queryParam10') queryParam10?: '1' | '2' | 3 | true,
   ): Promise<{ a33: string }> {
     return Promise.resolve({ a33: '1' });
+  }
+
+  @Post('/postBody1-v3')
+  postBody1(@Body() body: types.proto.LockRequest): commonResponse {
+    return { a3: '1' } as any;
   }
 }

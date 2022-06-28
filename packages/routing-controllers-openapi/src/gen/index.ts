@@ -12,17 +12,11 @@ export type IGenOpenapiDataOpts = {
 } & GenOpenApiOption;
 
 const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
-  const {
-    title,
-    genOpenapiDir = './',
-    controllers,
-    compilerOptions,
-    routePrefix,
-    servers,
-    responseSchema,
-    genOpenapiType = 'json',
-  } = opts;
+  const { genOpenapiDir = './', controllers, ...genOpenApiOption } = opts;
   let { prettierOptions } = opts;
+  if (!genOpenApiOption.genOpenapiType) {
+    genOpenApiOption.genOpenapiType = 'json';
+  }
 
   const genOpenapiPath = path.join(genOpenapiDir, 'openapi');
   const genOpenapiAbsolutePath = getAbsolutePath(genOpenapiPath);
@@ -37,19 +31,15 @@ const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   fs.ensureDirSync(genOpenapiAbsolutePath);
 
   // 生成openapi数据
-  const specOpenapiString = genOpenapiDoc(controllers, {
-    title,
-    routePrefix,
-    compilerOptions,
-    servers,
-    responseSchema,
-    genOpenapiType,
-  });
+  const specOpenapiString = genOpenapiDoc(controllers, genOpenApiOption);
   if (prettierOptions === undefined) {
     prettierOptions = { parser: 'json' };
   }
-  prettierOptions = Object.assign(prettierOptions, { parser: genOpenapiType });
-  const openApiV3Path = path.join(genOpenapiAbsolutePath, `openapi-v3.${genOpenapiType}`);
+  prettierOptions = Object.assign(prettierOptions, { parser: genOpenApiOption.genOpenapiType });
+  const openApiV3Path = path.join(
+    genOpenapiAbsolutePath,
+    `openapi-v3.${genOpenApiOption.genOpenapiType}`,
+  );
   fs.writeFileSync(openApiV3Path, await prettierData(specOpenapiString, prettierOptions));
   console.info(colors.green(`gen openapi success: ${genOpenapiPath}`));
 };

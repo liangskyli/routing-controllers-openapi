@@ -3,33 +3,22 @@ import type { Controller } from './controller-generator';
 import { ControllerGenerator } from './controller-generator';
 import type { TypeSchemaMap } from './type-generator';
 import { TypeGenerator } from './type-generator';
+import * as TJS from 'typescript-json-schema';
 
 export class MetadataGenerator {
   program: ts.Program;
   typeChecker: ts.TypeChecker;
   typeGenerator: TypeGenerator;
   controllers: Controller[] = [];
+  readonly typeUniqueNames: boolean;
 
-  constructor(files: string[], jsonCompilerOptions: ts.CompilerOptions = {}) {
-    const compilerOptions = ts.convertCompilerOptionsFromJson(
-      jsonCompilerOptions,
-      process.cwd(),
-    ).options;
-    const options: ts.CompilerOptions = {
-      noEmit: true,
-      emitDecoratorMetadata: true,
-      experimentalDecorators: true,
-      target: ts.ScriptTarget.ES5,
-      module: ts.ModuleKind.CommonJS,
-      allowUnusedLabels: true,
-    };
-    for (const k in compilerOptions) {
-      if (compilerOptions.hasOwnProperty(k)) {
-        options[k] = compilerOptions[k];
-      }
-    }
-
-    this.program = ts.createProgram(files, options);
+  constructor(
+    files: string[],
+    jsonCompilerOptions: ts.CompilerOptions = {},
+    typeUniqueNames: boolean = true,
+  ) {
+    this.typeUniqueNames = typeUniqueNames;
+    this.program = TJS.getProgramFromFiles(files, jsonCompilerOptions);
     this.typeChecker = this.program.getTypeChecker();
     this.typeGenerator = new TypeGenerator(this);
   }
@@ -47,12 +36,6 @@ export class MetadataGenerator {
       }
     }
   }
-
-  /** True if this is visible outside this file, false otherwise */
-  /*private isNodeExported(node: ts.Node): boolean {
-        return (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0
-            || (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
-    }*/
 
   private walkNodeTree(node: ts.Node) {
     if (ts.isClassDeclaration(node) && node.name) {

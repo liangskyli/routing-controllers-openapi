@@ -6,6 +6,10 @@ import * as TJS from 'typescript-json-schema';
 import { DecoratorType, processDecorators } from './decorator-util';
 import type { MetadataGenerator } from './metadata-generator';
 
+const REGEX_FILE_NAME_OR_SPACE = /(\bimport\(".*?"\)|".*?")\.| /g;
+const REGEX_FILE_NAME_OR_SPACE2 = /(\bimport\()(".*?")(\)|".*?")(\.)| /g;
+export const REGEX_UNIQUE_MD5 = /([.])[0-9a-z]{8}$/g;
+
 export type TypeSchema = SchemaObject & Partial<ReferenceObject>;
 
 type PrimitiveType = number | boolean | string | null;
@@ -13,16 +17,35 @@ type PrimitiveType = number | boolean | string | null;
 const PrimitiveTypeFlags =
   ts.TypeFlags.Number | ts.TypeFlags.Boolean | ts.TypeFlags.String | ts.TypeFlags.Null;
 
+const repeatRefName = new Map();
+
 export class TypeSchemaMap {
-  private nameToId: Record<string, number> = {};
-  private idToRefSchema: Record<number, ReferenceObject | undefined> = {};
+  private idToSchemaData: Record<number, SchemaObject | ReferenceObject | undefined> = {};
+  private readonly metadata: MetadataGenerator;
   private readonly generatorJsonSchema: TJS.JsonSchemaGenerator;
-  private repeatRefName = new Map();
+  private readonly uniqueGeneratorJsonSchema: TJS.JsonSchemaGenerator | null = null;
 
   private schemasData: SchemasObject = {};
 
-  constructor(generatorJsonSchema: TJS.JsonSchemaGenerator) {
-    this.generatorJsonSchema = generatorJsonSchema;
+  constructor(metadata: MetadataGenerator) {
+    this.metadata = metadata;
+    const jsonSchemaGeneratorData = TJS.buildGenerator(metadata.program, {
+      required: true,
+      ignoreErrors: true,
+      uniqueNames: this.metadata.typeUniqueNames,
+    });
+    if (jsonSchemaGeneratorData) {
+      this.generatorJsonSchema = jsonSchemaGeneratorData;
+    } else {
+      throw Error('generatorJsonSchema error');
+    }
+    if (!this.metadata.typeUniqueNames) {
+      this.uniqueGeneratorJsonSchema = TJS.buildGenerator(metadata.program, {
+        required: true,
+        ignoreErrors: true,
+        uniqueNames: true,
+      });
+    }
   }
 
   getSchemasData(): SchemasObject {
@@ -31,7 +54,7 @@ export class TypeSchemaMap {
 
   getSchemaByRef(ref: string): TypeSchema {
     const name = ref.match(/^\#\/components\/schemas\/(.+)$/)?.[1] ?? '';
-    return this.schemasData[name];
+    return this.schemasData[name] ?? {};
   }
 
   // 生成schema
@@ -86,66 +109,139 @@ export class TypeSchemaMap {
     }
   }
 
-  /** Gets/generates a globally unique type name for the given type */
-  getRefSchema(type: ts.Type, typeChecker: ts.TypeChecker): ReferenceObject | undefined {
-    let ref: ReferenceObject | undefined;
+  // 生成schemaObj
+  private genUniqueSchemaObj(refName: string) {
+    const processSchemas = (scope: Record<string, any>) => {
+      delete scope.definitions;
+      delete scope.$schema;
+      lodash.keys(scope).map((key) => {
+        const value = scope[key];
+        if (key === '$ref') {
+          // ref change to openapi ref
+          const uniqueRefName = value.replace(/#\/definitions\//g, '');
+          const noMd5Name = uniqueRefName.replace(REGEX_UNIQUE_MD5, '');
+          const symbolList = this.generatorJsonSchema.getSymbols(noMd5Name);
+          if (symbolList.length > 1) {
+            // no unique to use schemaObj
+            this.genUniqueSchemaObj(uniqueRefName);
+            scope = this.schemasData[uniqueRefName];
+          } else {
+            scope[key] = `#/components/schemas/${noMd5Name}`;
+            this.genSchema(noMd5Name);
+          }
+        }
+        if (key === 'type' && lodash.isArray(value)) {
+          /**
+           "type":["string","number"] to
+           "anyOf": [
+           {"type": "string"},
+           {"type": "number"}
+           ],
+           */
+          scope.anyOf = value.map((item) => {
+            return { type: item };
+          });
+          delete scope[key];
+        }
+        if (lodash.isObject(value)) {
+          processSchemas(value);
+        }
+      });
+    };
+    if (!this.schemasData[refName]) {
+      try {
+        const definition: Definition = this.uniqueGeneratorJsonSchema!.getSchemaForSymbol(refName);
+        (function fn(
+          schemas: Record<string, SchemaObject | ReferenceObject>,
+          definitions: Definition['definitions'] = {},
+        ): void {
+          Object.keys(definitions).map((name) => {
+            const scope = definitions[name];
+            if (!schemas[name] && typeof scope === 'object') {
+              const definitionsScope = scope.definitions;
+              processSchemas(scope);
+              schemas[name] = scope as any;
+              fn(schemas, definitionsScope);
+            }
+          });
+        })(this.schemasData, { [refName]: definition });
+      } catch (e: any) {
+        console.error(colors.red(['Method::genUniqueSchemaObj', e.message].join(',')));
+      }
+    }
+  }
+
+  getSchemaData(
+    type: ts.Type,
+    typeChecker: ts.TypeChecker,
+  ): SchemaObject | ReferenceObject | undefined {
+    let schemaData: SchemaObject | ReferenceObject | undefined;
     const id = (type as any).id as number;
-    if (this.idToRefSchema[id]) {
-      return this.idToRefSchema[id];
+    if (this.idToSchemaData[id]) {
+      return this.idToSchemaData[id];
     }
 
-    const baseName = typeChecker.typeToString(
+    const fullyName = typeChecker.typeToString(
       type,
       undefined,
-      //ts.TypeFormatFlags.UseFullyQualifiedType,
+      ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.UseFullyQualifiedType,
     );
+
+    const curFullyQualifiedName = fullyName.replace(REGEX_FILE_NAME_OR_SPACE2, '$2$4');
+    let baseName = fullyName.replace(REGEX_FILE_NAME_OR_SPACE, '');
 
     const symbolList = this.generatorJsonSchema.getSymbols(baseName);
     if (symbolList.length > 0) {
-      if (symbolList.length > 1) {
-        // todo repeatRefName
-        if (!this.repeatRefName.has(baseName)) {
-          this.repeatRefName.set(baseName, baseName);
-          const fullyQualifiedName = symbolList
-            .map((item, i) => `${i + 1}、${item.fullyQualifiedName}`)
-            .join('\n');
-          console.error(
-            colors.red(
-              [
-                `类型定义重复：${baseName}，请更改唯一名`,
-                `\n重复位置：\n${fullyQualifiedName}`,
-              ].join(','),
-            ),
-          );
-        }
-      }
-
-      this.genSchema(baseName);
-
-      let name = baseName;
-      if (this.nameToId[name]) {
-        // If a type with same name exists
-        for (let i = 1; true; ++i) {
-          // Try appending "_1", "_2", etc.
-          name = `${baseName}_${i}`;
-          if (!this.nameToId[name]) {
-            break;
+      if (this.metadata.typeUniqueNames) {
+        // use unique baseName
+        symbolList.map((item) => {
+          if (item.fullyQualifiedName === curFullyQualifiedName) {
+            baseName = item.name;
+          }
+        });
+      } else {
+        if (symbolList.length > 1) {
+          // repeatRefName warn tip
+          if (!repeatRefName.has(baseName)) {
+            repeatRefName.set(baseName, baseName);
+            const fullyQualifiedName = symbolList
+              .map((item, i) => `${i + 1}、${item.fullyQualifiedName}`)
+              .join('\n');
+            console.warn(
+              colors.yellow(
+                [
+                  `Duplicate type definition：${baseName}，Please change the unique name or use typeUniqueNames unique name. \nIf you do not change it, it will be generated schemaObj, openapi file will larger`,
+                  `\nRepeat position：\n${fullyQualifiedName}`,
+                ].join(','),
+              ),
+            );
           }
         }
-        console.warn(
-          colors.yellow(['exists type name:', baseName, ',now change to:', name].join('')),
-        );
       }
 
-      this.nameToId[name] = id;
+      if (this.metadata.typeUniqueNames || !repeatRefName.has(baseName)) {
+        schemaData = {
+          $ref: `#/components/schemas/${baseName}`,
+        };
 
-      ref = {
-        $ref: `#/components/schemas/${name}`,
-      };
+        this.genSchema(baseName);
+      }
+      if (!this.metadata.typeUniqueNames && symbolList.length > 1) {
+        // get SchemaObject from Unique ref
+        const uniqueSymbolList = this.uniqueGeneratorJsonSchema!.getSymbols(baseName);
+        let curUniqueName = '';
+        uniqueSymbolList.map((item) => {
+          if (item.fullyQualifiedName === curFullyQualifiedName) {
+            curUniqueName = item.name;
+          }
+        });
+        this.genUniqueSchemaObj(curUniqueName);
+        schemaData = this.schemasData[curUniqueName];
+      }
     }
-    this.idToRefSchema[id] = ref;
+    this.idToSchemaData[id] = schemaData;
 
-    return ref;
+    return schemaData;
   }
 }
 
@@ -153,23 +249,17 @@ export class TypeGenerator {
   reffedSchemas: TypeSchemaMap;
   private readonly metadata: MetadataGenerator;
   private readonly typeChecker: ts.TypeChecker;
-  private readonly generatorJsonSchema: TJS.JsonSchemaGenerator | null;
 
   constructor(metadata: MetadataGenerator) {
     this.metadata = metadata;
-    this.generatorJsonSchema = TJS.buildGenerator(metadata.program, {
-      required: true,
-      ignoreErrors: true,
-      //uniqueNames: false,
-    });
     this.typeChecker = metadata.typeChecker;
-    this.reffedSchemas = new TypeSchemaMap(this.generatorJsonSchema!);
+    this.reffedSchemas = new TypeSchemaMap(this.metadata);
   }
 
   public getTypeSchema(type: ts.Type, schema: TypeSchema = {}): TypeSchema {
-    const refSchema = this.reffedSchemas.getRefSchema(type, this.typeChecker);
-    if (refSchema) {
-      return refSchema;
+    const schemaData = this.reffedSchemas.getSchemaData(type, this.typeChecker);
+    if (schemaData) {
+      return schemaData;
     }
 
     let returnSchema = schema;
@@ -217,7 +307,7 @@ export class TypeGenerator {
       // enum type
       this.getUnionTypeSchema(<ts.UnionType>type, schema);
     } else {
-      throw new Error('Unknown type ' + this.typeChecker.typeToString(type));
+      console.warn(colors.yellow('Unknown type ' + this.typeChecker.typeToString(type)));
     }
 
     //return returnSchema;

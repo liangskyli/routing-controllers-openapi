@@ -5,6 +5,7 @@ genOpenapiData({
   genOpenapiDir: './test/gen-openapi-dir',
   controllers: ['./test/controller/**/*.ts'],
   routePrefix: '/root',
+  typeUniqueNames: false,
   //genOpenapiType: 'yaml',
   // 自定义统一 response 返回结构（可选）
   responseSchema: {
