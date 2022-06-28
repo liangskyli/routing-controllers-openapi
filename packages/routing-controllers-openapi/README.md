@@ -47,6 +47,7 @@ yarn gen-openapi -c ./config.cli.ts
 | servers         | openapi文件里servers配置  `ServerObject[]`                                                                                                                   | `undefined`                |
 | responseSchema  | openapi文件里responses响应数据包裹格式  `ResponseSchema`                                                                                                           | `undefined`                |
 | genOpenapiType  | openapi文件生成格式  `json｜yaml`                                                                                                                              | `json`                     |
+| typeUniqueNames | 生成类型使用唯一名称  `boolean`                                                                                                                                   | `true`                     |
 
 - configFile openapi生成配置文件示例
 
