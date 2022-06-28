@@ -201,20 +201,9 @@ export class TypeSchemaMap {
         });
       } else {
         if (symbolList.length > 1) {
-          // repeatRefName warn tip
+          // save repeatRefName
           if (!repeatRefName.has(baseName)) {
             repeatRefName.set(baseName, baseName);
-            const fullyQualifiedName = symbolList
-              .map((item, i) => `${i + 1}、${item.fullyQualifiedName}`)
-              .join('\n');
-            console.warn(
-              colors.yellow(
-                [
-                  `Duplicate type definition：${baseName}，Please change the unique name or use typeUniqueNames unique name. \nIf you do not change it, it will be generated schemaObj, openapi file will larger`,
-                  `\nRepeat position：\n${fullyQualifiedName}`,
-                ].join(','),
-              ),
-            );
           }
         }
       }
