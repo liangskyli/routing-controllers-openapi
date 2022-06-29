@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.1.0-beta.1...v0.1.0) (2022-06-29)
+
+
+### Features
+
+* add customOmitDecorators config ([60f1cfa](https://github.com/liangskyli/routing-controllers-openapi/commit/60f1cfa576a48af4bed3c06e9066fba1c7e4fbb3))
+* now can remove repeatRefName warn tip ([2ac6927](https://github.com/liangskyli/routing-controllers-openapi/commit/2ac69272c49f5b9ef077eba5eb86ef936d2608d9))
+
+
+
 ## [0.1.0-beta.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.1.0-beta.0...v0.1.0-beta.1) (2022-06-28)
 
 
