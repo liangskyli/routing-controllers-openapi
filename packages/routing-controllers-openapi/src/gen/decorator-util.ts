@@ -22,7 +22,7 @@ const knownDecorators: DecoratorMetadata[] = [
     name: 'Controller',
     type: DecoratorType.Controller,
     options: {
-      mediaType: '*/*',
+      mediaType: 'text/plain',
     },
   },
   {
@@ -163,24 +163,14 @@ const knownDecorators: DecoratorMetadata[] = [
       wholeParam: true,
     },
   },
-  {
+  /*{
     package: 'routing-controllers',
     name: 'Authorized',
     type: DecoratorType.Authorization,
-  },
-  {
-    package: 'class-transformer',
-    name: 'Exclude',
-    type: DecoratorType.Exclude,
-  },
-  {
-    package: 'class-transformer',
-    name: 'Expose',
-    type: DecoratorType.Expose,
-  },
+  },*/
 ];
 
-const omitDecorators: DecoratorMetadata[] = [
+export const omitDecorators: DecoratorMetadata[] = [
   {
     package: 'routing-controllers',
     name: 'UseBefore',
@@ -194,11 +184,6 @@ const omitDecorators: DecoratorMetadata[] = [
   {
     package: 'routing-controllers',
     name: 'Ctx',
-    type: DecoratorType.Omit,
-  },
-  {
-    package: 'typedi',
-    name: 'Service',
     type: DecoratorType.Omit,
   },
 ];

@@ -7,6 +7,12 @@ genOpenapiData({
   routePrefix: '/root',
   typeUniqueNames: false,
   //genOpenapiType: 'yaml',
+  customOmitDecorators: [
+    {
+      package: 'typedi',
+      name: 'Service',
+    },
+  ],
   // 自定义统一 response 返回结构（可选）
   responseSchema: {
     type: 'object',
