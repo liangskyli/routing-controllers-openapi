@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Controller, Get, Head, Patch, QueryParams } from 'routing-controllers';
+import { Body, Controller, Get, Head, Patch, Post, QueryParams } from 'routing-controllers';
 import type { commonResponse, getQueryParams1Request } from '../types/types';
+import type * as types from '../types/types-2';
 
 /**
  * Test3Controller 注释
@@ -11,6 +12,11 @@ import type { commonResponse, getQueryParams1Request } from '../types/types';
 export default class Test4Controller {
   @Get('/getQueryParams1-v4')
   getQueryParams1V4(@QueryParams() data: getQueryParams1Request): commonResponse {
+    return { a3: '1' } as any;
+  }
+
+  @Post('/postBody1-v4')
+  postBody1(@Body() body: types.proto.LockRequest): commonResponse {
     return { a3: '1' } as any;
   }
 
