@@ -88,7 +88,10 @@ export default class Test1Controller {
   }
 
   @Post('/postBody1')
-  postBody1(@Body() body: postBody1): commonResponse {
+  postBody1(
+    @Body() body: postBody1,
+    @QueryParam('queryParam1') queryParam1: IParam1,
+  ): commonResponse {
     return { a: '1' };
   }
 
