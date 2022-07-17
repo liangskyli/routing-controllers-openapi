@@ -1,11 +1,16 @@
-import { colors, getAbsolutePath, prettierData, removeFilesSync } from '@liangskyli/utils';
+import {
+  colors,
+  getAbsolutePath,
+  prettierData,
+  removeFilesSync,
+} from '@liangskyli/utils';
 import fs from 'fs-extra';
 import path from 'path';
 import type prettier from 'prettier';
-import type { GenOpenApiOption } from './gen-openapi-doc';
-import { genOpenapiDoc } from './gen-openapi-doc';
 import type { DecoratorMetadata } from './decorator-util';
 import { DecoratorType, omitDecorators } from './decorator-util';
+import type { GenOpenApiOption } from './gen-openapi-doc';
+import { genOpenapiDoc } from './gen-openapi-doc';
 
 export type IGenOpenapiDataOpts = {
   genOpenapiDir: string;
@@ -39,7 +44,7 @@ const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   fs.ensureDirSync(genOpenapiAbsolutePath);
 
   // add customOmitDecorators
-  customOmitDecorators.map((item) => {
+  customOmitDecorators.forEach((item) => {
     omitDecorators.push({
       name: item.name,
       package: item.package,
@@ -52,12 +57,17 @@ const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   if (prettierOptions === undefined) {
     prettierOptions = { parser: 'json' };
   }
-  prettierOptions = Object.assign(prettierOptions, { parser: genOpenApiOption.genOpenapiType });
+  prettierOptions = Object.assign(prettierOptions, {
+    parser: genOpenApiOption.genOpenapiType,
+  });
   const openApiV3Path = path.join(
     genOpenapiAbsolutePath,
     `openapi-v3.${genOpenApiOption.genOpenapiType}`,
   );
-  fs.writeFileSync(openApiV3Path, await prettierData(specOpenapiString, prettierOptions));
+  fs.writeFileSync(
+    openApiV3Path,
+    await prettierData(specOpenapiString, prettierOptions),
+  );
   console.info(colors.green(`gen openapi success: ${genOpenapiPath}`));
 };
 

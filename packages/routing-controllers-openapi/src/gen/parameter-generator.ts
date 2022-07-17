@@ -39,14 +39,19 @@ export class ParameterGenerator implements Parameter {
 
   private processDecorators(): void {
     processDecorators(this.node, this.metadata, (decorator) => {
-      if (decorator.type == DecoratorType.Param || decorator.type == DecoratorType.Body) {
+      if (
+        decorator.type === DecoratorType.Param ||
+        decorator.type === DecoratorType.Body
+      ) {
         this.name = decorator.arguments?.[0];
         this.options = decorator.options;
         if (this.node.type) {
-          const type = this.metadata.typeChecker.getTypeFromTypeNode(this.node.type);
+          const type = this.metadata.typeChecker.getTypeFromTypeNode(
+            this.node.type,
+          );
           this.schema = this.metadata.typeGenerator.getTypeSchema(type);
         }
-      } else if (decorator.type == DecoratorType.File) {
+      } else if (decorator.type === DecoratorType.File) {
         this.name = decorator.arguments?.[0];
         this.options = decorator.options;
         this.schema = { type: 'string', format: 'binary' };
@@ -56,7 +61,9 @@ export class ParameterGenerator implements Parameter {
 
   private processTokens() {
     if (this.node.initializer) {
-      this.schema.default = this.metadata.typeGenerator.getInitializerValue(this.node.initializer);
+      this.schema.default = this.metadata.typeGenerator.getInitializerValue(
+        this.node.initializer,
+      );
     } else if (!this.node.questionToken) {
       this.required = true;
     }

@@ -48,10 +48,12 @@ export class ControllerGenerator implements Controller {
 
   private processDecorators() {
     processDecorators(this.node, this.metadata, (decorator) => {
-      if (decorator.type == DecoratorType.Controller) {
+      if (decorator.type === DecoratorType.Controller) {
         if (this.route)
           throw new Error(
-            `Encountered multiple route decorator in '${this.node.name!.text}' controller`,
+            `Encountered multiple route decorator in '${
+              this.node.name!.text
+            }' controller`,
           );
         this.route = decorator.arguments?.[0] ?? '';
         this.options = decorator.options;

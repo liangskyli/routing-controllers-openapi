@@ -5,8 +5,8 @@ import type { Controller } from '../gen/controller-generator';
 import type { GenOpenApiOption } from '../gen/gen-openapi-doc';
 import type { MetadataGenerator } from '../gen/metadata-generator';
 import type { TypeSchema } from '../gen/type-generator';
-import { OpenapiBuilder } from './openapi-builder';
 import { REGEX_UNIQUE_MD5 } from '../gen/type-generator';
+import { OpenapiBuilder } from './openapi-builder';
 
 export type Config = {
   info: InfoObject;
@@ -61,11 +61,16 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
             } else {
               let bodySchema: oa.SchemaObject | undefined = mediaTypeObj.schema;
               if (!bodySchema) {
-                bodySchema = mediaTypeObj.schema = { type: 'object', properties: {} };
+                bodySchema = mediaTypeObj.schema = {
+                  type: 'object',
+                  properties: {},
+                };
               }
 
               if (bodySchema.properties![parameter.name]) {
-                throw new Error('encountered multiple body parameter ' + parameter.name);
+                throw new Error(
+                  'encountered multiple body parameter ' + parameter.name,
+                );
               }
 
               bodySchema.properties![parameter.name] = parameter.schema ?? {};
@@ -83,13 +88,16 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               : parameter.schema;
             if (schema.properties) {
               for (const name in schema.properties) {
-                if (schema.properties.hasOwnProperty(name) && parameter.options.paramIn) {
+                if (
+                  schema.properties.hasOwnProperty(name) &&
+                  parameter.options.paramIn
+                ) {
                   paramObjs.push(
                     this.getParamObject(
                       name,
                       parameter.options.paramIn,
                       schema.properties[name],
-                      schema.required && schema.required.indexOf(name) != -1,
+                      schema.required && schema.required.indexOf(name) !== -1,
                     ),
                   );
                 }
@@ -120,7 +128,8 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
           };
           if (method.summary) operation.summary = method.summary;
           if (paramObjs.length) operation.parameters = paramObjs;
-          if (requestBody && route.method !== 'get') operation.requestBody = requestBody;
+          if (requestBody && route.method !== 'get')
+            operation.requestBody = requestBody;
           let newResponseSchema: GenOpenApiOption['responseSchema'];
           if (method.returnSchema) {
             if (responseSchema) {
@@ -137,14 +146,18 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               if (!haveResponseSchema) {
                 if (this.noResponseSchemaFlagTip) {
                   console.warn(
-                    colors.yellow('you have not set #ResponseSchema in responseSchema config.'),
+                    colors.yellow(
+                      'you have not set #ResponseSchema in responseSchema config.',
+                    ),
                   );
                   this.noResponseSchemaFlagTip = false;
                 }
               }
             }
             operation.responses['200'].content = {
-              [method.options?.mediaType || controller.options?.mediaType || '*/*']: {
+              [method.options?.mediaType ||
+              controller.options?.mediaType ||
+              '*/*']: {
                 schema: newResponseSchema ?? method.returnSchema,
               },
             };
