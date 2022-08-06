@@ -1,12 +1,12 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const ts = require('gulp-typescript');
-const del = require('del');
+const del = require('./esm-to-commjs').del;
 const through = require('through2');
 const tsconfig = require('../tsconfig.base.json');
 
 function clean() {
-  return del('./lib/**');
+  return del.deleteAsync('./lib/**');
 }
 
 function buildCJS() {
@@ -28,7 +28,10 @@ function buildES() {
     ...tsconfig.compilerOptions,
     module: 'ESNext',
   });
-  return gulp.src(['src/**/*.{ts,tsx}']).pipe(tsProject).pipe(gulp.dest('lib/es/'));
+  return gulp
+    .src(['src/**/*.{ts,tsx}'])
+    .pipe(tsProject)
+    .pipe(gulp.dest('lib/es/'));
 }
 
 function buildDeclaration() {
@@ -46,7 +49,9 @@ function buildDeclaration() {
 }
 
 function copyMetaFiles() {
-  return gulp.src(['./README.md', 'LICENSE', './bin*/**']).pipe(gulp.dest('./lib/'));
+  return gulp
+    .src(['./README.md', 'LICENSE', './bin*/**'])
+    .pipe(gulp.dest('./lib/'));
 }
 
 function generateCliPackageJSON() {
