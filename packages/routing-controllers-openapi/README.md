@@ -1,6 +1,15 @@
 # routing-controllers to openapi 生成工具
-- routing-controllers 生成 openapi v3文件。
 
+<p>
+  <a href="https://github.com/liangskyli/routing-controllers-openapi/releases">
+    <img alt="preview badge" src="https://img.shields.io/github/v/release/liangskyli/routing-controllers-openapi">
+  </a>
+  <a href="https://www.npmjs.com/package/@liangskyli/routing-controllers-openapi">
+   <img alt="preview badge" src="https://img.shields.io/npm/v/@liangskyli/routing-controllers-openapi?label=%40liangskyli%2Frouting-controllers-openapi">
+  </a>
+</p>
+
+- routing-controllers 生成 openapi v3文件。
 
 ## 安装:
 ```bash
