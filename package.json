@@ -1,9 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/liangskyli/routing-controllers-openapi.git"
@@ -19,7 +16,7 @@
     "version:graduate": "echo '预发布版本包升级为稳定版本' && HUSKY=1 lerna version --conventional-graduate",
     "publish-all": "lerna run build && lerna publish from-package",
     "publish-all-pre": "lerna run build && lerna publish from-package --pre-dist-tag beta",
-    "update:deps": "yarn upgrade-interactive --latest"
+    "update:deps": "pnpm update --interactive --latest"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,less}": [
@@ -46,7 +43,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "husky": "^8.0.1",
-    "lerna": "^5.3.0",
+    "lerna": "^6.1.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.1",
@@ -57,7 +54,9 @@
     "through2": "^4.0.2",
     "typescript": "^4.7.4"
   },
+  "packageManager": "pnpm",
   "engines": {
-    "node": "^14.17.0 || >=16.0.0"
+    "node": "^14.17.0 || >=16.0.0",
+    "pnpm": ">=7"
   }
 }

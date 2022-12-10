@@ -1,4 +1,4 @@
-import type { IGenOpenapiDataOpts } from '@liangskyli/routing-controllers-openapi';
+import type { IGenOpenapiDataOpts } from '../../lib';
 
 const config: IGenOpenapiDataOpts = {
   genOpenapiDir: './test/gen-openapi-dir',
