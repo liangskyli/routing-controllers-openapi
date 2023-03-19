@@ -18,6 +18,7 @@
     "lib",
     "bin",
     "script",
+    "CHANGELOG.md",
     "LICENSE",
     "README.md",
     "package.json"
