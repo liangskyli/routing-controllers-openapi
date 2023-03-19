@@ -10,28 +10,29 @@
     "openapi",
     "routing-controllers generate openapi file"
   ],
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/es/index.js",
-  "types": "./lib/es/index.d.ts",
-  "typings": "./lib/es/index.d.ts",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "bin",
+    "script",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ],
   "bin": {
     "gen-openapi": "bin/index.js"
-  },
-  "publishConfig": {
-    "access": "public",
-    "directory": "lib"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/liangskyli/routing-controllers-openapi.git"
   },
   "scripts": {
-    "test-code-gen": "cross-env TS_NODE_PROJECT=test/tsconfig.json node -r ts-node/register test/gen/gen.ts",
+    "test-code-gen": "cross-env LIANGSKY_ENV=development TS_NODE_PROJECT=test/tsconfig.json node -r ts-node/register test/gen/gen.ts",
     "test-code-gen-cli": "cross-env TS_NODE_PROJECT=test/tsconfig.json node -r ts-node/register test/gen/gen-cli.ts",
-    "build": "gulp",
+    "build": "rollup --bundleConfigAsCjs --config=./rollup.config.js",
     "update:deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
@@ -49,7 +50,6 @@
   },
   "devDependencies": {
     "@babel/types": "^7.21.3",
-    "@qiwi/esm": "^1.1.8",
     "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.1.0",
