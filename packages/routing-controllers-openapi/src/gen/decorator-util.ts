@@ -207,12 +207,16 @@ export function processDecorators(
   metadata: MetadataGenerator,
   cb: (decorator: DecoratorMetadata) => void,
 ) {
-  if (!node.decorators || !node.decorators.length) {
+  const decorators = ts.canHaveDecorators(node)
+    ? ts.getDecorators(node)
+    : undefined;
+  if (!decorators || !decorators.length) {
     return;
   }
 
   const typeChecker = metadata.typeChecker;
-  const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program).sourceFileToPackageName;
+  const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program)
+    .sourceFileToPackageName;
 
   class Decorator implements DecoratorMetadata {
     name: string;
@@ -226,7 +230,9 @@ export function processDecorators(
     constructor(decoratorNode: ts.Decorator) {
       this.node = decoratorNode;
       this.options = {};
-      const signature = typeChecker.getResolvedSignature(<ts.CallExpression>this.node.expression);
+      const signature = typeChecker.getResolvedSignature(
+        <ts.CallExpression>this.node.expression,
+      );
       const declaration = signature?.getDeclaration() as ts.FunctionDeclaration;
       const fileName = declaration.getSourceFile().fileName;
       this.name = declaration.name?.text ?? '';
@@ -255,12 +261,14 @@ export function processDecorators(
       }
 
       const sourceFile = this.node.getSourceFile();
-      const pos = sourceFile.getLineAndCharacterOfPosition(this.node.getStart(sourceFile));
+      const pos = sourceFile.getLineAndCharacterOfPosition(
+        this.node.getStart(sourceFile),
+      );
       console.warn(
         colors.yellow(
-          `Decorator unknown: ${this.package}.${this.name}: ${sourceFile.fileName}(${
-            pos.line + 1
-          },${pos.character + 1})`,
+          `Decorator unknown: ${this.package}.${this.name}: ${
+            sourceFile.fileName
+          }(${pos.line + 1},${pos.character + 1})`,
         ),
       );
     }
@@ -278,7 +286,7 @@ export function processDecorators(
     }
   }
 
-  node.decorators.forEach((decorator) => {
+  decorators.forEach((decorator) => {
     const decoratorMetadata = new Decorator(decorator);
     cb(decoratorMetadata);
   });
