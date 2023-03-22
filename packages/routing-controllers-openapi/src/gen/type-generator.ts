@@ -379,7 +379,7 @@ export class TypeGenerator {
       } else {
         console.warn(
           colors.yellow(
-            'Multiple type not supported at ' +
+            'Multiple type use enum at ' +
               this.typeChecker.typeToString(unionType),
           ),
         );
