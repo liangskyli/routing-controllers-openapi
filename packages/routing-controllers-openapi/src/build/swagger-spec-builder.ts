@@ -59,7 +59,9 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               mediaTypeObj.schema = parameter.schema;
               if (parameter.required) requestBody.required = true;
             } else {
-              let bodySchema: oa.SchemaObject | undefined = mediaTypeObj.schema;
+              let bodySchema = mediaTypeObj.schema as
+                | oa.SchemaObject
+                | undefined;
               if (!bodySchema) {
                 bodySchema = mediaTypeObj.schema = {
                   type: 'object',
@@ -67,7 +69,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
                 };
               }
 
-              if (bodySchema.properties![parameter.name]) {
+              if (bodySchema.properties?.[parameter.name]) {
                 throw new Error(
                   'encountered multiple body parameter ' + parameter.name,
                 );
@@ -96,7 +98,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
                     this.getParamObject(
                       name,
                       parameter.options.paramIn,
-                      schema.properties[name],
+                      schema.properties[name] as TypeSchema,
                       schema.required && schema.required.indexOf(name) !== -1,
                     ),
                   );

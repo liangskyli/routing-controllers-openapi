@@ -14,6 +14,7 @@ import {
   QueryParams,
 } from 'routing-controllers';
 import type {
+  BodyParam1,
   commonResponse,
   getQueryParams1Request,
   getUserRequest,
@@ -21,15 +22,25 @@ import type {
   IParam2,
   IParam3,
   IParam4,
-  Response1,
   postBody1,
-  BodyParam1,
+  Response1,
 } from '../types/types';
 
 @JsonController('/v1')
 export default class Test1Controller {
   @Get('/getQueryParams1')
   getQueryParams1(@QueryParams() data: getQueryParams1Request): commonResponse {
+    return { a: '1' };
+  }
+
+  @Get('/getQueryParams2')
+  getQueryParams2(
+    @QueryParams()
+    data: {
+      inlineQueryParam1: string;
+      inlineQueryParam2?: number | string;
+    },
+  ): commonResponse {
     return { a: '1' };
   }
 
@@ -107,6 +118,13 @@ export default class Test1Controller {
 
   @Post('/postBody4')
   postBody4(@Body() body: getQueryParams1Request): commonResponse | Response1 {
+    return { a: '1' };
+  }
+
+  @Post('/postBody5')
+  postBody5(
+    @Body() body: { inlineBody1: string; inlineBody2?: number },
+  ): commonResponse | Response1 {
     return { a: '1' };
   }
 

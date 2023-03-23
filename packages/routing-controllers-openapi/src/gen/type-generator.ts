@@ -268,7 +268,7 @@ export class TypeGenerator {
   public getTypeSchema(type: ts.Type, schema: TypeSchema = {}): TypeSchema {
     const schemaData = this.reffedSchemas.getSchemaData(type, this.typeChecker);
     if (schemaData) {
-      return schemaData;
+      return schemaData as TypeSchema;
     }
 
     let returnSchema = schema;

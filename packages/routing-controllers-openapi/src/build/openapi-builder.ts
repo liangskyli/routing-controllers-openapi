@@ -11,7 +11,7 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
 
   constructor() {
     this.rootDoc = {
-      openapi: '3.0.0',
+      openapi: '3.1.0',
       info: {
         title: '',
         license: { name: fileTip },
@@ -26,7 +26,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this.rootDoc;
   }
 
-  getSpecAsJson(replacer?: (key: string, value: any) => any, space?: string | number): string {
+  getSpecAsJson(
+    replacer?: (key: string, value: any) => any,
+    space?: string | number,
+  ): string {
     return JSON.stringify(this.getSpec(), replacer, space);
   }
 
@@ -96,7 +99,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addResponse(name: string, response: oa.ResponseObject): oa.OpenApiBuilder {
+  public addResponse(
+    name: string,
+    response: oa.ResponseObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -110,7 +116,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addParameter(name: string, parameter: oa.ParameterObject): oa.OpenApiBuilder {
+  public addParameter(
+    name: string,
+    parameter: oa.ParameterObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -124,7 +133,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addExample(name: string, example: oa.ExampleObject): oa.OpenApiBuilder {
+  public addExample(
+    name: string,
+    example: oa.ExampleObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -138,7 +150,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addRequestBody(name: string, reqBody: oa.RequestBodyObject): oa.OpenApiBuilder {
+  public addRequestBody(
+    name: string,
+    reqBody: oa.RequestBodyObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -166,7 +181,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addSecurityScheme(name: string, secScheme: oa.SecuritySchemeObject): oa.OpenApiBuilder {
+  public addSecurityScheme(
+    name: string,
+    secScheme: oa.SecuritySchemeObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -194,7 +212,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addCallback(name: string, callback: oa.CallbackObject): oa.OpenApiBuilder {
+  public addCallback(
+    name: string,
+    callback: oa.CallbackObject,
+  ): oa.OpenApiBuilder {
     if (this.rootDoc.components === undefined) {
       this.rootDoc.components = {};
     }
@@ -224,8 +245,20 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
     return this;
   }
 
-  public addExternalDocs(extDoc: oa.ExternalDocumentationObject): oa.OpenApiBuilder {
+  public addExternalDocs(
+    extDoc: oa.ExternalDocumentationObject,
+  ): oa.OpenApiBuilder {
     this.rootDoc.externalDocs = extDoc;
+    return this;
+  }
+
+  public addWebhook(
+    webhook: string,
+    webhookItem: oa.PathItemObject,
+  ): oa.OpenApiBuilder {
+    this.rootDoc.webhooks = {
+      webhook: webhookItem,
+    };
     return this;
   }
 }
