@@ -2,14 +2,18 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Head,
   Patch,
   Post,
+  Put,
   QueryParam,
   QueryParams,
+  UploadedFile,
+  UploadedFiles,
 } from 'routing-controllers';
-import type { commonResponse, getQueryParams1Request } from '../types/types';
+import type { getQueryParams1Request } from '../types/types';
 import type * as types from '../types/types-2';
 
 /**
@@ -17,28 +21,48 @@ import type * as types from '../types/types-2';
  * 注释3
  * @注释3
  */
-@Controller()
+@Controller('/v4')
 export default class Test4Controller {
   @Get('/getQueryParams1-v4')
-  getQueryParams1V4(@QueryParams() data: getQueryParams1Request): commonResponse {
-    return { a3: '1' } as any;
+  getQueryParams1V4(@QueryParams() data: getQueryParams1Request): string {
+    return 'string';
   }
 
   @Post('/postBody1-v4')
   postBody1(
     @Body() body: types.proto.LockRequest,
     @QueryParam('queryParam1', { required: true }) queryParam1: number,
-  ): commonResponse {
-    return { a3: '1' } as any;
+  ): string {
+    return 'string';
   }
 
   @Head('/getQueryParams2-v4/:id')
-  getQueryParams2V4(@QueryParams() data: getQueryParams1Request): commonResponse {
-    return { a3: '1' } as any;
+  getQueryParams2V4(@QueryParams() data: getQueryParams1Request): string {
+    return 'string';
   }
 
   @Patch('/getQueryParams3-v4')
-  getQueryParams3V4(@QueryParams() data: getQueryParams1Request): commonResponse {
-    return { a3: '1' } as any;
+  getQueryParams3V4(@QueryParams() data: getQueryParams1Request): string {
+    return 'string';
+  }
+
+  @Post('/file')
+  saveFile(@UploadedFile('fileName') file: any) {
+    return 'string';
+  }
+
+  @Post('/files')
+  saveFiles(@UploadedFiles('fileNames') files: any[]) {
+    return 'string';
+  }
+
+  @Put('/Put')
+  Put(@QueryParams() data: getQueryParams1Request) {
+    return 'string';
+  }
+
+  @Delete('/Delete')
+  Delete(@QueryParams() data: getQueryParams1Request) {
+    return 'string';
   }
 }

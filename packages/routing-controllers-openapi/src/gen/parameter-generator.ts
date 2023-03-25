@@ -54,7 +54,23 @@ export class ParameterGenerator implements Parameter {
       } else if (decorator.type === DecoratorType.File) {
         this.name = decorator.arguments?.[0];
         this.options = decorator.options;
-        this.schema = { type: 'string', format: 'binary' };
+        if (this.options?.wholeParam) {
+          this.schema = {
+            type: 'object',
+            properties: {
+              [this.name]: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                  format: 'binary',
+                },
+              },
+            },
+            required: [this.name],
+          };
+        } else {
+          this.schema = { type: 'string', format: 'binary' };
+        }
       }
     });
   }

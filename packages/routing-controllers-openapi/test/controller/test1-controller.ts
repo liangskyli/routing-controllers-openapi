@@ -9,9 +9,11 @@ import {
   HeaderParams,
   JsonController,
   Param,
+  Params,
   Post,
   QueryParam,
   QueryParams,
+  UploadedFile,
 } from 'routing-controllers';
 import type {
   BodyParam1,
@@ -64,6 +66,7 @@ export default class Test1Controller {
     @QueryParam('queryParam2') queryParam2: IParam2,
 
     @QueryParams() data: getQueryParams1Request,
+    @Params() params: { param1: string; param2?: number },
   ): Response1 {
     return { a: '1' } as any;
   }
@@ -124,6 +127,7 @@ export default class Test1Controller {
   @Post('/postBody5')
   postBody5(
     @Body() body: { inlineBody1: string; inlineBody2?: number },
+    @UploadedFile('fileName') file: any,
   ): commonResponse | Response1 {
     return { a: '1' };
   }

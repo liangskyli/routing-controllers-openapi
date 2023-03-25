@@ -55,11 +55,6 @@ const knownDecorators: DecoratorMetadata[] = [
   },
   {
     package: 'routing-controllers',
-    name: 'Options',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
     name: 'Head',
     type: DecoratorType.Action,
   },
@@ -74,6 +69,15 @@ const knownDecorators: DecoratorMetadata[] = [
     type: DecoratorType.Param,
     options: {
       paramIn: 'path',
+    },
+  },
+  {
+    package: 'routing-controllers',
+    name: 'Params',
+    type: DecoratorType.Param,
+    options: {
+      paramIn: 'path',
+      wholeParam: true,
     },
   },
   {
@@ -133,6 +137,7 @@ const knownDecorators: DecoratorMetadata[] = [
     type: DecoratorType.Body,
     options: {
       paramIn: 'body',
+      mediaType: 'application/json',
     },
   },
   {
@@ -141,6 +146,7 @@ const knownDecorators: DecoratorMetadata[] = [
     type: DecoratorType.Body,
     options: {
       paramIn: 'body',
+      mediaType: 'application/json',
       wholeParam: true,
     },
   },
@@ -170,23 +176,30 @@ const knownDecorators: DecoratorMetadata[] = [
   },*/
 ];
 
-export const omitDecorators: DecoratorMetadata[] = [
-  {
-    package: 'routing-controllers',
-    name: 'UseBefore',
-    type: DecoratorType.Omit,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'UseAfter',
-    type: DecoratorType.Omit,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Ctx',
-    type: DecoratorType.Omit,
-  },
-];
+const getOmitDecorators: () => DecoratorMetadata[] = () => {
+  const omitRoutingControllersName = [
+    'Ctx',
+    'CurrentUser',
+    'Interceptor',
+    'Header',
+    'Middleware',
+    'Session',
+    'SessionParam',
+    'State',
+    'UseAfter',
+    'UseBefore',
+    'UseInterceptor',
+  ];
+  return omitRoutingControllersName.map((name) => {
+    return {
+      package: 'routing-controllers',
+      name: name,
+      type: DecoratorType.Omit,
+    };
+  });
+};
+
+export const omitDecorators = getOmitDecorators();
 
 export interface DecoratorMetadata {
   name: string;

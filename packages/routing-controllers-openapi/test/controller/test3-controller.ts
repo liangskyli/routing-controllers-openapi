@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Body, Get, JsonController, Post, QueryParam, QueryParams } from 'routing-controllers';
+import {
+  Body,
+  Get,
+  JsonController,
+  Post,
+  QueryParam,
+  QueryParams,
+} from 'routing-controllers';
 import type {
   /*commonResponse,*/ commonResponse2,
   getQueryParams1Request,
@@ -38,7 +45,7 @@ export default class Test3Controller {
   }
 
   @Post('/postBody1-v3')
-  postBody1(@Body() body: types.proto.LockRequest): commonResponse {
-    return { a3: '1' } as any;
+  postBody1(@Body() body: types.proto.LockRequest): string {
+    return 'string';
   }
 }

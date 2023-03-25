@@ -39,7 +39,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
       controller.methods.forEach((method) => {
         const paramObjs: oa.ParameterObject[] = [];
-        let requestBody: oa.RequestBodyObject | undefined;
+        let requestBody: oa.RequestBodyObject | undefined = undefined;
 
         for (const parameter of method.parameters) {
           if (parameter.options?.paramIn === 'body') {
@@ -48,9 +48,17 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               method.options?.mediaType ||
               controller.options?.mediaType ||
               '*/*';
-            requestBody = requestBody || {
+            requestBody = requestBody ?? {
               content: { [mediaType]: {} },
             };
+            if (!requestBody.content[mediaType]) {
+              requestBody = {
+                content: {
+                  ...requestBody.content,
+                  [mediaType]: {},
+                },
+              };
+            }
             const mediaTypeObj = requestBody.content[mediaType];
             if (parameter.options.wholeParam) {
               if (mediaTypeObj.schema) {
@@ -133,7 +141,13 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
           if (requestBody && route.method !== 'get')
             operation.requestBody = requestBody;
           let newResponseSchema: GenOpenApiOption['responseSchema'];
-          if (method.returnSchema) {
+          const returnSchema = method.returnSchema;
+          if (returnSchema) {
+            const responseMediaType =
+              method.options?.mediaType ||
+              controller.options?.mediaType ||
+              '*/*';
+            const isResponseTextPlain = responseMediaType === 'text/plain';
             if (responseSchema) {
               let haveResponseSchema = false;
               newResponseSchema = lodash.cloneDeep(responseSchema);
@@ -141,10 +155,14 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               Object.keys(properties).forEach((key: string) => {
                 const propItem = properties[key];
                 if (propItem === '#ResponseSchema') {
-                  properties[key] = method.returnSchema;
+                  properties[key] = returnSchema;
                   haveResponseSchema = true;
                 }
               });
+              if (isResponseTextPlain) {
+                // 返回类型为text/plain，返回字符串
+                newResponseSchema = undefined;
+              }
               if (!haveResponseSchema) {
                 if (this.noResponseSchemaFlagTip) {
                   console.warn(
@@ -157,10 +175,10 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
               }
             }
             operation.responses['200'].content = {
-              [method.options?.mediaType ||
-              controller.options?.mediaType ||
-              '*/*']: {
-                schema: newResponseSchema ?? method.returnSchema,
+              [responseMediaType]: {
+                schema:
+                  newResponseSchema ??
+                  (isResponseTextPlain ? { type: 'string' } : returnSchema),
               },
             };
           }
