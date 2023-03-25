@@ -144,29 +144,57 @@ genOpenapiData({
 ```
 
 # routing-controllers 支持项说明
-- 支持的装饰器支持（其它装饰器不处理，会警告提示）
-  - @JsonController
-  - @Controller
+- 支持的装饰器（其它装饰器不处理）
   - @Body
   - @BodyParam
+  - @Controller
   - @CookieParam
   - @CookieParams
+  - @Delete
   - @Get
+  - @Head
   - @HeaderParam
   - @HeaderParams
+  - @JsonController
   - @Param
+  - @Params
+  - @Patch
   - @Post
+  - @Put
   - @QueryParam
   - @QueryParams
-  - @Put
-  - @Delete
-  - @Options
-  - @Head
-  - @Patch
   - @UploadedFile
   - @UploadedFiles
+- 目前不支持的装饰器支持（会警告提示）
+  - @All
+  - @Authorized
+  - @ContentType
+  - @HttpCode
+  - @Location
+  - @Method
+  - @OnNull
+  - @OnUndefined
+  - @Redirect
+  - @Render
+  - @Req
+  - @Res
+  - @ResponseClassTransformOptions
+- 默认忽略警告提示的装饰器（不会警告提示）
+  - @Ctx
+  - @CurrentUser
+  - @Interceptor
+  - @Header
+  - @Middleware
+  - @Session
+  - @SessionParam
+  - @State
+  - @UseAfter
+  - @UseBefore
+  - @UseInterceptor
+- 使用customOmitDecorators配置忽略警告提示的装饰器
 - 方法需要明确指定入参和返回类型，目前不会对方法返回类型类型进行推导(如下例子)
 - 支持所有的TS类型声明,含namespace的支持（any,never类型会忽略）
+
 
 ```ts
 @JsonController('/v1')
@@ -192,9 +220,3 @@ export default class Test1Controller {
 }
 
 ```
-
-- 默认忽略警告提示的装饰器（不会警告提示）
-  - @UseBefore
-  - @UseAfter
-  - @Ctx
-- 使用customOmitDecorators配置忽略警告提示的装饰器
