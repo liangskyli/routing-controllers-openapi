@@ -1,3 +1,4 @@
+import type { IPrettierOptions } from '@liangskyli/utils';
 import {
   colors,
   getAbsolutePath,
@@ -6,7 +7,6 @@ import {
 } from '@liangskyli/utils';
 import fs from 'fs-extra';
 import path from 'path';
-import type prettier from 'prettier';
 import type { DecoratorMetadata } from './decorator-util';
 import { DecoratorType, omitDecorators } from './decorator-util';
 import type { GenOpenApiOption } from './gen-openapi-doc';
@@ -15,7 +15,7 @@ import { genOpenapiDoc } from './gen-openapi-doc';
 export type IGenOpenapiDataOpts = {
   genOpenapiDir: string;
   controllers: string[];
-  prettierOptions?: prettier.Options;
+  prettierOptions?: IPrettierOptions;
   customOmitDecorators?: Pick<DecoratorMetadata, 'name' | 'package'>[];
 } & GenOpenApiOption;
 
