@@ -1,7 +1,7 @@
 const commander = require('commander');
 const fs = require('fs-extra');
 const utils = require('@liangskyli/utils');
-const genOpenapiData = require('../lib/index.cjs');
+const genOpenapiData = require('../lib/index.cjs').default;
 
 const packageJson = require('../package.json');
 commander.program

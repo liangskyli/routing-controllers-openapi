@@ -234,6 +234,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
     for (const key in schema) {
       if (schema.hasOwnProperty(key)) {
         if (key !== 'description') {
+          // @ts-ignore
           paramObj.schema[key] = schema[key];
         } else {
           paramObj[key] = schema[key];

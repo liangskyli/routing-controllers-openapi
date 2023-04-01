@@ -1,3 +1,4 @@
+import type { PathItemObject } from 'openapi3-ts';
 import * as ts from 'typescript';
 import type { DecoratorOptions } from './decorator-util';
 import { DecoratorType, processDecorators } from './decorator-util';
@@ -6,8 +7,13 @@ import type { Parameter } from './parameter-generator';
 import { ParameterGenerator } from './parameter-generator';
 import type { TypeSchema } from './type-generator';
 
+export type OpenapiMethod = keyof Pick<
+  PathItemObject,
+  'get' | 'put' | 'post' | 'delete' | 'options' | 'head' | 'patch' | 'trace'
+>;
+
 interface Route {
-  method: string;
+  method: OpenapiMethod;
   route: string;
 }
 export interface Method {
@@ -35,7 +41,11 @@ export class MethodGenerator implements Method {
   private readonly metadata: MetadataGenerator;
   private readonly controllerName: string;
 
-  constructor(node: ts.MethodDeclaration, metadata: MetadataGenerator, controllerName: string) {
+  constructor(
+    node: ts.MethodDeclaration,
+    metadata: MetadataGenerator,
+    controllerName: string,
+  ) {
     this.node = node;
     this.metadata = metadata;
     this.controllerName = controllerName;
@@ -58,7 +68,7 @@ export class MethodGenerator implements Method {
     processDecorators(this.node, this.metadata, (decorator) => {
       if (decorator.type === DecoratorType.Action) {
         this.routes.push({
-          method: decorator.name.toLowerCase(),
+          method: decorator.name.toLowerCase() as OpenapiMethod,
           route: decorator.arguments?.[0] ?? '',
         });
         this.options = decorator.options;

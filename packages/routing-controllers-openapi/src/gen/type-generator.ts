@@ -390,6 +390,7 @@ export class TypeGenerator {
     if (schemas.length === 1) {
       for (const key in schemas[0]) {
         if (schemas[0].hasOwnProperty(key)) {
+          // @ts-ignore
           schema[key] = schemas[0][key];
         }
       }
