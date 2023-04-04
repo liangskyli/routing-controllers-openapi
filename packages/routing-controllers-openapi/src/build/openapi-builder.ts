@@ -1,5 +1,5 @@
 import { dump } from 'js-yaml';
-import type * as oa from 'openapi3-ts';
+import type { oas31 as oa } from 'openapi3-ts';
 import { fileTip } from '../utils';
 
 export class OpenapiBuilder implements oa.OpenApiBuilder {
@@ -78,10 +78,10 @@ export class OpenapiBuilder implements oa.OpenApiBuilder {
   }
 
   public addPath(path: string, pathItem: oa.PathItemObject): oa.OpenApiBuilder {
-    if (this.rootDoc.paths[path] !== undefined) {
+    if (this.rootDoc.paths![path] !== undefined) {
       throw new Error(`exist path "${path}"`);
     }
-    this.rootDoc.paths[path] = pathItem;
+    this.rootDoc.paths![path] = pathItem;
     return this;
   }
 

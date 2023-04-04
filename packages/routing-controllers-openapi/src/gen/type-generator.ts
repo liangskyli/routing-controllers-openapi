@@ -1,5 +1,5 @@
 import { colors, lodash } from '@liangskyli/utils';
-import type { ReferenceObject, SchemaObject, SchemasObject } from 'openapi3-ts';
+import type { oas31 as oa } from 'openapi3-ts';
 import * as ts from 'typescript';
 import type { Definition } from 'typescript-json-schema';
 import * as TJS from 'typescript-json-schema';
@@ -10,7 +10,7 @@ const REGEX_FILE_NAME_OR_SPACE = /(\bimport\(".*?"\)|".*?")\.| /g;
 const REGEX_FILE_NAME_OR_SPACE2 = /(\bimport\()(".*?")(\)|".*?")(\.)| /g;
 export const REGEX_UNIQUE_MD5 = /([.])[0-9a-z]{8}$/g;
 
-export type TypeSchema = SchemaObject & Partial<ReferenceObject>;
+export type TypeSchema = oa.SchemaObject & Partial<oa.ReferenceObject>;
 
 type PrimitiveType = number | boolean | string | null;
 
@@ -25,14 +25,14 @@ const repeatRefName = new Map();
 export class TypeSchemaMap {
   private idToSchemaData: Record<
     number,
-    SchemaObject | ReferenceObject | undefined
+    oa.SchemaObject | oa.ReferenceObject | undefined
   > = {};
   private readonly metadata: MetadataGenerator;
   private readonly generatorJsonSchema: TJS.JsonSchemaGenerator;
   private readonly uniqueGeneratorJsonSchema: TJS.JsonSchemaGenerator | null =
     null;
 
-  private schemasData: SchemasObject = {};
+  private schemasData: oa.SchemasObject = {};
 
   constructor(metadata: MetadataGenerator) {
     this.metadata = metadata;
@@ -55,7 +55,7 @@ export class TypeSchemaMap {
     }
   }
 
-  getSchemasData(): SchemasObject {
+  getSchemasData(): oa.SchemasObject {
     return this.schemasData;
   }
 
@@ -101,7 +101,7 @@ export class TypeSchemaMap {
         const definition: Definition =
           this.generatorJsonSchema.getSchemaForSymbol(refName);
         (function fn(
-          schemas: Record<string, SchemaObject | ReferenceObject>,
+          schemas: Record<string, oa.SchemaObject | oa.ReferenceObject>,
           definitions: Definition['definitions'] = {},
         ): void {
           Object.keys(definitions).forEach((name) => {
@@ -164,7 +164,7 @@ export class TypeSchemaMap {
         const definition: Definition =
           this.uniqueGeneratorJsonSchema!.getSchemaForSymbol(refName);
         (function fn(
-          schemas: Record<string, SchemaObject | ReferenceObject>,
+          schemas: Record<string, oa.SchemaObject | oa.ReferenceObject>,
           definitions: Definition['definitions'] = {},
         ): void {
           // eslint-disable-next-line array-callback-return
@@ -189,8 +189,8 @@ export class TypeSchemaMap {
   getSchemaData(
     type: ts.Type,
     typeChecker: ts.TypeChecker,
-  ): SchemaObject | ReferenceObject | undefined {
-    let schemaData: SchemaObject | ReferenceObject | undefined;
+  ): oa.SchemaObject | oa.ReferenceObject | undefined {
+    let schemaData: oa.SchemaObject | oa.ReferenceObject | undefined;
     const id = (type as any).id as number;
     if (this.idToSchemaData[id]) {
       return this.idToSchemaData[id];

@@ -1,4 +1,4 @@
-import type { SchemaObject, ServerObject } from 'openapi3-ts';
+import type { oas31 as oa } from 'openapi3-ts';
 import * as process from 'process';
 import type ts from 'typescript';
 import { SwaggerSpecBuilder } from '../build/swagger-spec-builder';
@@ -12,7 +12,7 @@ const packageJson = require(process.env.LIANGSKY_ENV === 'development'
 
 interface ResponseSchema {
   type: 'object';
-  properties: Record<string, '#ResponseSchema' | SchemaObject>;
+  properties: Record<string, '#ResponseSchema' | oa.SchemaObject>;
   required?: string[];
 }
 
@@ -20,7 +20,7 @@ export type GenOpenApiOption = {
   title?: string;
   routePrefix?: string;
   compilerOptions?: ts.CompilerOptions;
-  servers?: ServerObject[];
+  servers?: oa.ServerObject[];
   responseSchema?: ResponseSchema;
   genOpenapiType?: 'json' | 'yaml';
   typeUniqueNames?: boolean;

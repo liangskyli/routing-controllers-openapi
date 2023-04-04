@@ -1,4 +1,4 @@
-import type { PathItemObject } from 'openapi3-ts';
+import type { oas31 as oa } from 'openapi3-ts';
 import * as ts from 'typescript';
 import type { DecoratorOptions } from './decorator-util';
 import { DecoratorType, processDecorators } from './decorator-util';
@@ -8,7 +8,7 @@ import { ParameterGenerator } from './parameter-generator';
 import type { TypeSchema } from './type-generator';
 
 export type OpenapiMethod = keyof Pick<
-  PathItemObject,
+  oa.PathItemObject,
   'get' | 'put' | 'post' | 'delete' | 'options' | 'head' | 'patch' | 'trace'
 >;
 

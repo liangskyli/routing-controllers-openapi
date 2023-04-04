@@ -1,6 +1,5 @@
 import { colors, lodash } from '@liangskyli/utils';
-import type * as oa from 'openapi3-ts';
-import type { InfoObject } from 'openapi3-ts';
+import type { oas31 as oa } from 'openapi3-ts';
 import type { Controller } from '../gen/controller-generator';
 import type { GenOpenApiOption } from '../gen/gen-openapi-doc';
 import type { MetadataGenerator } from '../gen/metadata-generator';
@@ -9,7 +8,7 @@ import { REGEX_UNIQUE_MD5 } from '../gen/type-generator';
 import { OpenapiBuilder } from './openapi-builder';
 
 export type Config = {
-  info: InfoObject;
+  info: oa.InfoObject;
 } & Pick<GenOpenApiOption, 'routePrefix' | 'servers' | 'responseSchema'>;
 
 export class SwaggerSpecBuilder extends OpenapiBuilder {
@@ -127,7 +126,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
         method.routes.forEach((route) => {
           const path = this.buildFullRoute(route.route, controller);
-          let pathObj: oa.PathItemObject = this.rootDoc.paths[path];
+          let pathObj: oa.PathItemObject = this.rootDoc.paths![path];
           if (!pathObj) {
             this.addPath(path, (pathObj = {}));
           }
@@ -190,7 +189,9 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
     // add all referenced schemas
     const schemas = this.metadata.typeSchemas;
-    for (const [name, schema] of Object.entries(schemas.getSchemasData())) {
+    for (const [name, schema] of Object.entries<oa.SchemaObject>(
+      schemas.getSchemasData(),
+    )) {
       let isAdd = true;
 
       if (!this.metadata.typeUniqueNames) {
