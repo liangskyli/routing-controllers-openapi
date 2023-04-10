@@ -28,10 +28,23 @@ export default class Test4Controller {
     return 'string';
   }
 
+  @Get('/getNoQueryParams-v4')
+  getNoQueryParamsV4(): string {
+    return 'string';
+  }
+
   @Post('/postBody1-v4')
   postBody1(
     @Body() body: types.proto.LockRequest,
     @QueryParam('queryParam1', { required: true }) queryParam1: number,
+  ): string {
+    return 'string';
+  }
+
+  @Post('/postBody2-v4')
+  postBody2(
+    @Body() body?: types.proto.LockRequest,
+    @QueryParams() data?: getQueryParams1Request,
   ): string {
     return 'string';
   }
