@@ -19,8 +19,16 @@ yarn add @liangskyli/routing-controllers-openapi --dev
 # 生成方式:
 ## 1、CLI 命令方式（推荐）
 
+- 默认配置文件在运行目录下openapi.config.ts文件
+
 ```bash
-yarn gen-openapi -c ./config.cli.ts
+yarn gen-openapi
+```
+
+- 配置文件别名openapi.config2.ts
+
+```bash
+yarn gen-openapi -c ./openapi.config2.ts
 ```
 
 注意：
@@ -39,10 +47,9 @@ yarn gen-openapi -c ./config.cli.ts
 
 ### 命令参数
 
-| 参数               | 说明                           | 默认值 |
-|------------------|------------------------------|-----|
-| -c, --configFile | openapi v3文件生成配置文件 `配置参数见下面` |     |
-
+| 参数               | 说明                           | 默认值                 |
+|------------------|------------------------------|---------------------|
+| -c, --configFile | openapi v3文件生成配置文件 `配置参数见下面` | `openapi.config.ts` |
 
 ### 命令参数 configFile openapi生成配置文件参数属性
 
