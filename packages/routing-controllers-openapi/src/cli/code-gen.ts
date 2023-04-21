@@ -1,7 +1,7 @@
-import { colors, getAbsolutePath, getConfig } from '@liangskyli/utils';
+import { colors, getAbsolutePath, getConfig, lodash } from '@liangskyli/utils';
 import { program } from 'commander';
 import fs from 'fs-extra';
-import type { IGenOpenapiDataOpts } from '../gen';
+import type { IGenOpenapiDataOpts, IGenOpenapiDataOptsCLI } from '../gen';
 import genOpenapiData from '../index';
 
 const commandCodeGenCli = (version: string) => {
@@ -9,33 +9,46 @@ const commandCodeGenCli = (version: string) => {
     .version(version)
     .option('-c, --configFile [configFile]', 'config file')
     .parse(process.argv);
-  const { configFile } = program.opts();
+  let { configFile } = program.opts();
+
   if (!configFile) {
-    console.error(colors.red('-c, --configFile [configFile] field need'));
-    process.exit(1);
+    configFile = './openapi.config.ts';
   }
   const configFilePath = getAbsolutePath(configFile);
-  if (!fs.existsSync(configFilePath)) {
+  if (fs.existsSync(configFilePath)) {
+    console.info(colors.green(`use configFile path: ${configFile}`));
+  } else {
     console.error(colors.red(`-c, --configFile path not exits: ${configFile}`));
     process.exit(1);
   }
 
-  const data: IGenOpenapiDataOpts = getConfig(configFilePath);
-  if (!data.genOpenapiDir) {
-    console.error(
-      colors.red(`config file need genOpenapiDir field: ${configFile}`),
-    );
-  }
-  if (!data.controllers) {
-    console.error(
-      colors.red(`config file need controllers field: ${configFile}`),
-    );
-  }
-  try {
-    genOpenapiData(data).then();
-  } catch (err: any) {
-    console.error(err);
-  }
+  let opts: IGenOpenapiDataOptsCLI = getConfig(configFilePath);
+
+  const runningScript = async () => {
+    try {
+      if (!lodash.isArray(opts)) {
+        opts = [opts] as IGenOpenapiDataOpts[];
+      }
+      for (let i = 0; i < opts.length; i++) {
+        const singleOpts = opts[i];
+        if (!singleOpts.genOpenapiDir) {
+          console.error(
+            colors.red(`config file need genOpenapiDir field: ${configFile}`),
+          );
+        }
+        if (!singleOpts.controllers) {
+          console.error(
+            colors.red(`config file need controllers field: ${configFile}`),
+          );
+        }
+        await genOpenapiData(singleOpts);
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
+
+  runningScript();
 };
 
 export { commandCodeGenCli };

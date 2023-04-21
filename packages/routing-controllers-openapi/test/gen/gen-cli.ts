@@ -2,7 +2,7 @@ import * as spawn from 'cross-spawn';
 
 const result = spawn.sync(
   'node',
-  'bin/index.js -c ./test/gen/config.cli.ts'.split(' '),
+  'bin/index.js -c ./test/gen/openapi.config.ts'.split(' '),
   {
     stdio: 'inherit',
   },

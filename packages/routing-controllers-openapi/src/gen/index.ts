@@ -19,6 +19,10 @@ export type IGenOpenapiDataOpts = {
   customOmitDecorators?: Pick<DecoratorMetadata, 'name' | 'package'>[];
 } & GenOpenApiOption;
 
+export type IGenOpenapiDataOptsCLI =
+  | IGenOpenapiDataOpts
+  | IGenOpenapiDataOpts[];
+
 const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   const {
     genOpenapiDir = './',
