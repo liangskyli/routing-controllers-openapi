@@ -12,8 +12,6 @@ export const REGEX_UNIQUE_MD5 = /([.])[0-9a-z]{8}$/g;
 
 export type TypeSchema = oa.SchemaObject & Partial<oa.ReferenceObject>;
 
-type PrimitiveType = number | boolean | string | null;
-
 const PrimitiveTypeFlags =
   ts.TypeFlags.Number |
   ts.TypeFlags.Boolean |
@@ -330,17 +328,15 @@ export class TypeGenerator {
       );
     }
 
-    //return returnSchema;
-    return schema.type === 'null' ? {} : returnSchema;
+    return returnSchema;
   }
 
   private getPrimitiveTypeSchema(type: ts.Type, schema: TypeSchema) {
     if (type.flags & PrimitiveTypeFlags) {
       schema.type = (<any>type).intrinsicName;
     } else if (type.flags & ts.TypeFlags.StringOrNumberLiteral) {
-      const value = (<ts.LiteralType>type).value;
-      // @ts-ignore
-      schema.type = typeof value;
+      const value = (<ts.StringLiteralType | ts.NumberLiteralType>type).value;
+      schema.type = ts.TypeFlags.StringLiteral ? 'string' : 'number';
       schema.enum = [value];
       schema.default = value;
     } else if (type.flags & ts.TypeFlags.BooleanLiteral) {
@@ -354,15 +350,21 @@ export class TypeGenerator {
   }
 
   private getUnionTypeSchema(unionType: ts.UnionType, schema: TypeSchema) {
-    const literalValues: PrimitiveType[] = [];
+    const literalValues: (string | number)[] = [];
+    const booleanLiteralValues: boolean[] = [];
     const schemas: TypeSchema[] = [];
 
     for (const subType of unionType.types) {
-      let value: any;
       if (subType.flags & ts.TypeFlags.StringOrNumberLiteral) {
-        value = (<ts.LiteralType>subType).value;
+        const value = (<ts.StringLiteralType | ts.NumberLiteralType>subType)
+          .value;
         if (literalValues.indexOf(value) === -1) {
           literalValues.push(value);
+        }
+      } else if (subType.flags & ts.TypeFlags.BooleanLiteral) {
+        const value = (<any>subType).intrinsicName === 'true';
+        if (booleanLiteralValues.indexOf(value) === -1) {
+          booleanLiteralValues.push(value);
         }
       } else {
         const subSchema = this.getTypeSchema(subType);
@@ -377,14 +379,21 @@ export class TypeGenerator {
       } else if (literalValues.every((x) => typeof x === 'number')) {
         type = 'number';
       } else {
-        console.warn(
-          colors.yellow(
-            'Multiple type use enum at ' +
-              this.typeChecker.typeToString(unionType),
-          ),
-        );
+        // multiple type
+        type = ['string', 'number'];
       }
-      schemas.push({ type, enum: literalValues.sort() });
+      schemas.push({
+        type,
+        enum: literalValues.sort(),
+      });
+    }
+    if (booleanLiteralValues.length) {
+      schemas.push({
+        type: 'boolean',
+        // when all boolean type, set enum undefined
+        enum:
+          booleanLiteralValues.length !== 2 ? booleanLiteralValues : undefined,
+      });
     }
 
     if (schemas.length === 1) {
@@ -400,21 +409,12 @@ export class TypeGenerator {
   }
 
   private getTupleTypeSchema(type: ts.TypeReference, schema: TypeSchema) {
-    const subType = type.typeArguments?.[0];
-    if (
-      !type.typeArguments?.length ||
-      !type.typeArguments.every((st) => st === subType)
-    ) {
-      console.warn(
-        colors.yellow(
-          'Multiple type in tuple is not support, ' +
-            this.typeChecker.typeToString(type),
-        ),
-      );
-    }
-
+    const items: TypeSchema[] = [];
+    type.typeArguments?.forEach((item) => {
+      items.push(this.getTypeSchema(item));
+    });
+    schema.items = items as any;
     schema.type = 'array';
-    schema.items = this.getTypeSchema(subType!);
     schema.minItems = schema.maxItems = type.typeArguments?.length;
   }
 

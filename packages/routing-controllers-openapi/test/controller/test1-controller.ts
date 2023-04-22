@@ -17,15 +17,15 @@ import {
 } from 'routing-controllers';
 import type {
   BodyParam1,
-  commonResponse,
-  getQueryParams1Request,
-  getUserRequest,
   IParam1,
   IParam2,
   IParam3,
   IParam4,
-  postBody1,
   Response1,
+  commonResponse,
+  getQueryParams1Request,
+  getUserRequest,
+  postBody1,
 } from '../types/types';
 
 @JsonController('/v1')
@@ -40,7 +40,11 @@ export default class Test1Controller {
     @QueryParams()
     data: {
       inlineQueryParam1: string;
-      inlineQueryParam2?: number | string;
+      inlineQueryParam2: number | string;
+      inlineQueryParam3: bigint;
+      inlineQueryParam4: null;
+      //inlineQueryParam5: [string,boolean];
+      //inlineQueryParam6: [string,boolean][];
     },
   ): commonResponse {
     return { a: '1' };

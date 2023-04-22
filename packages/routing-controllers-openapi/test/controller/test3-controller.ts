@@ -40,6 +40,10 @@ export default class Test3Controller {
     @QueryParam('queryParam8') queryParam8?: otherParam,
     @QueryParam('queryParam9') queryParam9?: { a: string; b: string },
     @QueryParam('queryParam10') queryParam10?: '1' | '2' | 3 | true,
+    @QueryParam('queryParam11') queryParam11?: '1' | '2' | 3 | true | false,
+    @QueryParam('queryParam12') queryParam12?: '1' | '2' | 3 | boolean,
+    @QueryParam('queryParam13') queryParam13?: true | false,
+    @QueryParam('queryParam14') queryParam14?: boolean,
   ): Promise<{ a33: string }> {
     return Promise.resolve({ a33: '1' });
   }

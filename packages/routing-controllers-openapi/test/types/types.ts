@@ -62,6 +62,8 @@ export interface IParam1 {
 export type IParam2 = {
   /** 单行注释 */
   param1: string;
+  param2: null;
+  // paramTuple3: [string,number];
 };
 export type IParam3 = {
   param1: { a: string } & { b: boolean; c: { a: number } };
