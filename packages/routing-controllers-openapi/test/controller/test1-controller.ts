@@ -43,8 +43,9 @@ export default class Test1Controller {
       inlineQueryParam2: number | string;
       inlineQueryParam3: bigint;
       inlineQueryParam4: null;
-      //inlineQueryParam5: [string,boolean];
-      //inlineQueryParam6: [string,boolean][];
+      inlineQueryParam5: [string, boolean];
+      inlineQueryParam6: [string, boolean][];
+      inlineQueryParam7: [[string, boolean], number][];
     },
   ): commonResponse {
     return { a: '1' };
