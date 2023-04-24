@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.3.0...v0.4.0) (2023-04-24)
+
+
+### Features
+
+* move cross-spawn,ts-node to devDependencies and upgrade dependencies ([8f2bc87](https://github.com/liangskyli/routing-controllers-openapi/commit/8f2bc87a50433a8de12ec23147ec07892c9f392e))
+* optimize union type and tuple type，and generator null schema ([fb5647c](https://github.com/liangskyli/routing-controllers-openapi/commit/fb5647cf465066708dd511adc7a3845d432a1f61))
+* use default config file openapi.config.ts and support array configuration ([b2b80ef](https://github.com/liangskyli/routing-controllers-openapi/commit/b2b80ef4e55f800b2597a6810fa93077c87563ba))
+
+
+### Bug Fixes
+
+* prettierOptions type use IPrettierOptions ([5cdddff](https://github.com/liangskyli/routing-controllers-openapi/commit/5cdddffa6f89feb6cbcb55732bf39c61ff317302))
+
+
+
 ## [0.3.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.3.0-beta.0...v0.3.0) (2023-03-25)
 
 
