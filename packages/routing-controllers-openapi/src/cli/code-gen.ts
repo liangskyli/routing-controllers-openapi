@@ -2,7 +2,7 @@ import { colors, getAbsolutePath, getConfig, lodash } from '@liangskyli/utils';
 import { program } from 'commander';
 import fs from 'fs-extra';
 import type { IGenOpenapiDataOpts, IGenOpenapiDataOptsCLI } from '../gen';
-import genOpenapiData from '../index';
+import genOpenapiData from '../gen';
 
 const commandCodeGenCli = (version: string) => {
   program
