@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.4.0...v0.4.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* bin file bug ([32fda41](https://github.com/liangskyli/routing-controllers-openapi/commit/32fda414ed2d9a859adf1d2e36c760e8836e06ac))
+
+
+
 ## [0.4.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.3.0...v0.4.0) (2023-04-24)
 
 
