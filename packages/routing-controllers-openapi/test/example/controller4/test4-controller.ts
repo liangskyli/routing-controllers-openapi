@@ -70,9 +70,7 @@ export default class Test4Controller {
   }
 
   @Put('/Put')
-  Put(@QueryParams() data: getQueryParams1Request) {
-    return 'string';
-  }
+  Put(@QueryParams() data: getQueryParams1Request): void {}
 
   @Delete('/Delete')
   Delete(@QueryParams() data: getQueryParams1Request) {

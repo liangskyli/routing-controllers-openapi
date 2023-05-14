@@ -1,2 +1,3 @@
-/test/gen-openapi-dir/openapi/
-/test/gen-openapi-dir2/openapi/
+/test/all-gen-dirs/gen-openapi-cli-1/openapi/
+/test/all-gen-dirs/gen-openapi-cli-2/openapi/
+/test/all-gen-dirs/gen-openapi-dir/openapi/

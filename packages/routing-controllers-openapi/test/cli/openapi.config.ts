@@ -2,11 +2,9 @@ import type { IGenOpenapiDataOptsCLI } from '../../lib';
 
 const config: IGenOpenapiDataOptsCLI = [
   {
-    genOpenapiDir: './test/gen-openapi-dir',
-    controllers: ['./test/controller/**/*.ts'],
+    genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-1',
+    controllers: ['./test/example/controller*/**/*.ts'],
     routePrefix: '/root',
-    // genOpenapiType: 'yaml',
-    // 自定义统一 response 返回结构（可选）
     responseSchema: {
       type: 'object',
       properties: {
@@ -24,8 +22,13 @@ const config: IGenOpenapiDataOptsCLI = [
     },
   },
   {
-    genOpenapiDir: './test/gen-openapi-dir2',
-    controllers: ['./test/controller/**/*.ts'],
+    genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-2',
+    controllers: [
+      './test/example/controller1/**/*.ts',
+      './test/example/controller2/**/*.ts',
+      './test/example/controller3/**/*.ts',
+      './test/example/controller4/**/*.ts',
+    ],
     routePrefix: '/root',
     genOpenapiType: 'yaml',
   },

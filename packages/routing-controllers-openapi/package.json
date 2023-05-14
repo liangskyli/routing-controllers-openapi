@@ -30,13 +30,13 @@
     "url": "git+https://github.com/liangskyli/routing-controllers-openapi.git"
   },
   "scripts": {
-    "test-code-gen": "cross-env LIANGSKY_ENV=development TS_NODE_PROJECT=test/tsconfig.json node -r ts-node/register test/gen/gen.ts",
-    "test-code-gen-cli": "cross-env TS_NODE_PROJECT=test/tsconfig.json node -r ts-node/register test/gen/gen-cli.ts",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
     "build": "rollup --bundleConfigAsCjs --config=./rollup.config.js",
     "update:deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
-    "@liangskyli/utils": "^2.0.0-beta.0",
+    "@liangskyli/utils": "^2.0.0",
     "commander": "^10.0.1",
     "fs-extra": "^11.1.1",
     "glob": "^10.2.2",

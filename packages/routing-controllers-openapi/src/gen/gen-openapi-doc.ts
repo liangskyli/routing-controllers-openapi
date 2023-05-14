@@ -1,14 +1,25 @@
+import fs from 'fs-extra';
 import type { oas31 as oa } from 'openapi3-ts';
-import * as process from 'process';
+import path from 'path';
 import type ts from 'typescript';
 import { SwaggerSpecBuilder } from '../build/swagger-spec-builder';
 import { getFilesFromControllers } from '../utils';
 import { MetadataGenerator } from './metadata-generator';
 
-// 因rollup构建后，文件目录位置变更
-const packageJson = require(process.env.LIANGSKY_ENV === 'development'
-  ? '../../package.json'
-  : '../package.json');
+const getPackageJsonInfo = () => {
+  // 因rollup构建后，文件目录位置变更
+  let packageJsonPath = path.join(__dirname, '../../package.json');
+  if (!fs.pathExistsSync(packageJsonPath)) {
+    // build path
+    packageJsonPath = path.join(__dirname, '../package.json');
+  }
+  const packageJson = fs.readJSONSync(packageJsonPath);
+  const { name, version } = packageJson;
+  return {
+    name,
+    version,
+  };
+};
 
 interface ResponseSchema {
   type: 'object';
@@ -22,7 +33,7 @@ export type GenOpenApiOption = {
   compilerOptions?: ts.CompilerOptions;
   servers?: oa.ServerObject[];
   responseSchema?: ResponseSchema;
-  genOpenapiType?: 'json' | 'yaml';
+  genOpenapiType: 'json' | 'yaml';
   typeUniqueNames?: boolean;
 };
 
@@ -47,6 +58,7 @@ const genOpenapiDoc = (
     typeUniqueNames,
   );
   metadata.generate();
+  const packageJson = getPackageJsonInfo();
   const specBuilder = new SwaggerSpecBuilder(metadata, {
     info: {
       title: title ? title : packageJson.name,

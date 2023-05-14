@@ -439,9 +439,7 @@ export class TypeGenerator {
     schema.type = 'object';
     schema.properties = {};
 
-    const typeDeclNode = type.symbol.declarations
-      ? type.symbol.declarations[0]
-      : undefined;
+    const typeDeclNode = type.symbol.declarations?.[0];
     const props = this.typeChecker.getPropertiesOfType(type);
     let hiddenClass = false;
     if (typeDeclNode) {

@@ -46,6 +46,8 @@ export default class Test3Controller {
     @QueryParam('queryParam14') queryParam14?: boolean,
     @QueryParam('queryParam15')
     queryParam15?: [otherParam, number, getQueryParams1Request][],
+    @QueryParam('queryParam16') queryParam16?: '1' | '2' | '3',
+    @QueryParam('queryParam17') queryParam17?: 1 | 2 | 3,
   ): Promise<{ a33: string }> {
     return Promise.resolve({ a33: '1' });
   }

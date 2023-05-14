@@ -206,7 +206,7 @@ export interface DecoratorMetadata {
   package: string;
   type: DecoratorType;
   options?: DecoratorOptions;
-  arguments?: any[];
+  arguments?: string[];
 }
 
 export interface DecoratorOptions {
@@ -215,10 +215,83 @@ export interface DecoratorOptions {
   wholeParam?: boolean;
 }
 
+class Decorator implements DecoratorMetadata {
+  name: string;
+  package: string;
+  type: DecoratorType = DecoratorType.Unknown;
+  options: DecoratorOptions;
+  arguments: string[] = [];
+
+  private readonly node: ts.Decorator;
+  private readonly metadata: MetadataGenerator;
+
+  constructor(decoratorNode: ts.Decorator, metadata: MetadataGenerator) {
+    this.node = decoratorNode;
+    this.metadata = metadata;
+    this.options = {};
+    const typeChecker = metadata.typeChecker;
+    const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program)
+      .sourceFileToPackageName;
+    const signature = typeChecker.getResolvedSignature(
+      <ts.CallExpression>this.node.expression,
+    );
+    const declaration = signature?.getDeclaration() as ts.FunctionDeclaration;
+    const fileName = declaration.getSourceFile().fileName;
+    this.name = declaration.name?.text ?? '';
+    this.package =
+      sourceFileToPackageName.get(
+        ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
+      ) ?? '';
+    this.findDecorator();
+    this.setArguments();
+  }
+
+  private findDecorator() {
+    for (const d of knownDecorators) {
+      if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
+        this.type = d.type;
+        this.options = d.options || {};
+        return;
+      }
+    }
+
+    for (const d of omitDecorators) {
+      if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
+        this.type = d.type;
+        return;
+      }
+    }
+
+    const sourceFile = this.node.getSourceFile();
+    const pos = sourceFile.getLineAndCharacterOfPosition(
+      this.node.getStart(sourceFile),
+    );
+    console.warn(
+      colors.yellow(
+        `Decorator unknown: ${this.package}.${this.name}: ${
+          sourceFile.fileName
+        }(${pos.line + 1},${pos.character + 1})`,
+      ),
+    );
+  }
+
+  private setArguments() {
+    const expression = <ts.CallExpression>this.node.expression;
+    const args = expression.arguments;
+    if (!args || !args.length) return;
+
+    for (const argNode of args) {
+      if (ts.isStringLiteral(argNode)) {
+        this.arguments.push(argNode.text);
+      }
+    }
+  }
+}
+
 export function processDecorators(
   node: ts.Node,
   metadata: MetadataGenerator,
-  cb: (decorator: DecoratorMetadata) => void,
+  cb: (decorator: Decorator) => void,
 ) {
   const decorators = ts.canHaveDecorators(node)
     ? ts.getDecorators(node)
@@ -227,80 +300,8 @@ export function processDecorators(
     return;
   }
 
-  const typeChecker = metadata.typeChecker;
-  const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program)
-    .sourceFileToPackageName;
-
-  class Decorator implements DecoratorMetadata {
-    name: string;
-    package: string;
-    type: DecoratorType = DecoratorType.Unknown;
-    options: DecoratorOptions;
-    arguments: any[] = [];
-
-    private readonly node: ts.Decorator;
-
-    constructor(decoratorNode: ts.Decorator) {
-      this.node = decoratorNode;
-      this.options = {};
-      const signature = typeChecker.getResolvedSignature(
-        <ts.CallExpression>this.node.expression,
-      );
-      const declaration = signature?.getDeclaration() as ts.FunctionDeclaration;
-      const fileName = declaration.getSourceFile().fileName;
-      this.name = declaration.name?.text ?? '';
-      this.package =
-        sourceFileToPackageName.get(
-          ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
-        ) ?? '';
-      this.findDecorator();
-      this.setArguments();
-    }
-
-    private findDecorator() {
-      for (const d of knownDecorators) {
-        if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
-          this.type = d.type;
-          this.options = d.options || {};
-          return;
-        }
-      }
-
-      for (const d of omitDecorators) {
-        if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
-          this.type = d.type;
-          return;
-        }
-      }
-
-      const sourceFile = this.node.getSourceFile();
-      const pos = sourceFile.getLineAndCharacterOfPosition(
-        this.node.getStart(sourceFile),
-      );
-      console.warn(
-        colors.yellow(
-          `Decorator unknown: ${this.package}.${this.name}: ${
-            sourceFile.fileName
-          }(${pos.line + 1},${pos.character + 1})`,
-        ),
-      );
-    }
-
-    private setArguments() {
-      const expression = <ts.CallExpression>this.node.expression;
-      const args = expression.arguments;
-      if (!args || !args.length) return;
-
-      for (const argNode of args) {
-        if (ts.isStringLiteral(argNode)) {
-          this.arguments.push(argNode.text);
-        }
-      }
-    }
-  }
-
   decorators.forEach((decorator) => {
-    const decoratorMetadata = new Decorator(decorator);
+    const decoratorMetadata = new Decorator(decorator, metadata);
     cb(decoratorMetadata);
   });
 }

@@ -69,7 +69,7 @@ export class MethodGenerator implements Method {
       if (decorator.type === DecoratorType.Action) {
         this.routes.push({
           method: decorator.name.toLowerCase() as OpenapiMethod,
-          route: decorator.arguments?.[0] ?? '',
+          route: decorator.arguments[0] ?? '',
         });
         this.options = decorator.options;
       } /*else if (decorator.type === DecoratorType.Authorization) {
