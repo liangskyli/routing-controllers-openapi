@@ -7,6 +7,12 @@
     },
     "version": "0.4.1"
   },
+  "tags": [
+    {
+      "name": "Test2",
+      "description": "Test2Controller 注释2"
+    }
+  ],
   "paths": {
     "/v2/getQueryParams1-v2": {
       "get": {
@@ -241,11 +247,5 @@
         ]
       }
     }
-  },
-  "tags": [
-    {
-      "name": "Test2",
-      "description": "Test2Controller 注释2"
-    }
-  ]
+  }
 }

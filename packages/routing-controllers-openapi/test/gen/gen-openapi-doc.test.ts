@@ -42,6 +42,7 @@ describe('genOpenapiDoc', () => {
     const specString1 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
       genOpenapiType: 'json',
       typeUniqueNames: false,
+      servers: [{ url: 'url' }],
     });
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-3.json',
@@ -49,6 +50,7 @@ describe('genOpenapiDoc', () => {
     const specString2 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
       typeUniqueNames: false,
       genOpenapiType: 'yaml',
+      servers: [{ url: 'url' }],
     });
     await expect(specString2).toMatchFileSnapshot(
       './__test__snapshots__/openapi-3.yaml',

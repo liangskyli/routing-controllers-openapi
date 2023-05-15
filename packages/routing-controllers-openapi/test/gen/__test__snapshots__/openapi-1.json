@@ -7,6 +7,12 @@
     },
     "version": "0.4.1"
   },
+  "tags": [
+    {
+      "name": "Test1",
+      "description": ""
+    }
+  ],
   "paths": {
     "/root/v1/getQueryParams1": {
       "get": {
@@ -1234,11 +1240,5 @@
         ]
       }
     }
-  },
-  "tags": [
-    {
-      "name": "Test1",
-      "description": ""
-    }
-  ]
+  }
 }

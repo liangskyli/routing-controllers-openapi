@@ -48,6 +48,7 @@ const genOpenapiDoc = (
     genOpenapiType,
     typeUniqueNames,
     title,
+    servers,
   } = options;
   // 获得所有需要编译的router文件
   const routePaths = getFilesFromControllers(controllerPaths);
@@ -66,6 +67,7 @@ const genOpenapiDoc = (
     },
     routePrefix,
     responseSchema,
+    servers,
   });
   const specString =
     genOpenapiType === 'yaml'

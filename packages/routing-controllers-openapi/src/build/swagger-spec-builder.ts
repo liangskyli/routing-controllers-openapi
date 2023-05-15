@@ -19,12 +19,13 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
     super();
     this.metadata = metadata;
     this.config = config;
+    this.generateSpec();
   }
 
-  public getSpec(): oa.OpenAPIObject {
+  private generateSpec(): oa.OpenAPIObject {
     const { info, servers, responseSchema } = this.config;
     this.addTitle(info.title).addVersion(info.version);
-    if (info.description) this.addDescription(info.description);
+    // if (info.description) this.addDescription(info.description);
     if (servers && servers.length) {
       servers.forEach((s) => this.addServer(s));
     }
@@ -126,10 +127,6 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
         method.routes.forEach((route) => {
           const path = this.buildFullRoute(route.route, controller);
-          let pathObj: oa.PathItemObject = this.rootDoc.paths![path];
-          if (!pathObj) {
-            this.addPath(path, (pathObj = {}));
-          }
 
           const operation: oa.OperationObject = {
             tags: [controllerName],
@@ -182,7 +179,10 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
             };
           }
 
-          pathObj[route.method] = operation;
+          const pathItem: oa.PathItemObject = {};
+          pathItem[route.method] = operation;
+
+          this.addPath(path, pathItem);
         });
       });
     });

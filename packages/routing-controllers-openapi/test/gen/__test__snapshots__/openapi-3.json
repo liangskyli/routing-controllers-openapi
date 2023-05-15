@@ -7,6 +7,17 @@
     },
     "version": "0.4.1"
   },
+  "servers": [
+    {
+      "url": "url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Test3",
+      "description": "Test3Controller 注释3"
+    }
+  ],
   "paths": {
     "/getQueryParams1-v3": {
       "get": {
@@ -451,11 +462,5 @@
         ]
       }
     }
-  },
-  "tags": [
-    {
-      "name": "Test3",
-      "description": "Test3Controller 注释3"
-    }
-  ]
+  }
 }
