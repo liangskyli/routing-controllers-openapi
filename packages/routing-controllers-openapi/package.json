@@ -46,12 +46,9 @@
     "typescript-json-schema": "^0.56.0"
   },
   "devDependencies": {
-    "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^11.0.1",
     "@types/js-yaml": "^4.0.5",
-    "cross-spawn": "^7.0.3",
-    "routing-controllers": "^0.10.3",
-    "ts-node": "^10.9.1"
+    "routing-controllers": "^0.10.3"
   },
   "peerDependencies": {
     "routing-controllers": "^0.9.0"
