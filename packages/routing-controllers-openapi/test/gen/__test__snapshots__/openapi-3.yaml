@@ -169,7 +169,14 @@ paths:
               items:
                 - $ref: '#/components/schemas/IParam2'
                 - type: number
-                - $ref: '#/components/schemas/getQueryParams1Request'
+                - type: object
+                  properties:
+                    activityBases:
+                      type: array
+                      items: *ref_0
+                      description: activityBases
+                  required:
+                    - activityBases
               type: array
               maxItems: 3
               minItems: 3
@@ -208,15 +215,6 @@ paths:
         required: true
 components:
   schemas:
-    getQueryParams1Request:
-      type: object
-      properties:
-        activityBases:
-          description: activityBases
-          type: array
-          items: *ref_0
-      required:
-        - activityBases
     ActivityBase:
       allOf:
         - type: object
@@ -274,6 +272,4 @@ components:
         - roomId
 tags:
   - name: Test3
-    description: |-
-      Test3Controller 注释
-      注释3
+    description: Test3Controller 注释3

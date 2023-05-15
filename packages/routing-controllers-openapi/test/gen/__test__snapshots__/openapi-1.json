@@ -19,7 +19,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -52,7 +52,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -180,7 +180,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -193,7 +193,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           },
           {
@@ -201,7 +201,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam2.533c44ea"
+              "$ref": "#/components/schemas/IParam2"
             }
           },
           {
@@ -209,7 +209,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam3.5823c769"
+              "$ref": "#/components/schemas/IParam3"
             }
           },
           {
@@ -217,7 +217,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam4.423f17a3"
+              "$ref": "#/components/schemas/IParam4"
             }
           },
           {
@@ -242,7 +242,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response1.aa335ba3"
+                  "$ref": "#/components/schemas/Response1"
                 }
               }
             }
@@ -288,7 +288,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           },
           {
@@ -296,7 +296,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam2.533c44ea"
+              "$ref": "#/components/schemas/IParam2"
             }
           },
           {
@@ -341,7 +341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -361,7 +361,7 @@
             "in": "header",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam3.5823c769"
+              "$ref": "#/components/schemas/IParam3"
             }
           },
           {
@@ -377,7 +377,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           },
           {
@@ -385,7 +385,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam2.533c44ea"
+              "$ref": "#/components/schemas/IParam2"
             }
           },
           {
@@ -393,7 +393,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam3.5823c769"
+              "$ref": "#/components/schemas/IParam3"
             }
           },
           {
@@ -401,7 +401,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam4.423f17a3"
+              "$ref": "#/components/schemas/IParam4"
             }
           },
           {
@@ -417,7 +417,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/getUserRequest.34eee32a"
+              "$ref": "#/components/schemas/getUserRequest"
             }
           }
         ]
@@ -434,7 +434,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response1.aa335ba3"
+                  "$ref": "#/components/schemas/Response1"
                 }
               }
             }
@@ -446,7 +446,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           },
           {
@@ -454,7 +454,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam2.533c44ea"
+              "$ref": "#/components/schemas/IParam2"
             }
           },
           {
@@ -462,7 +462,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           },
           {
@@ -470,7 +470,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam2.533c44ea"
+              "$ref": "#/components/schemas/IParam2"
             }
           },
           {
@@ -478,7 +478,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam3.5823c769"
+              "$ref": "#/components/schemas/IParam3"
             }
           },
           {
@@ -486,7 +486,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam4.423f17a3"
+              "$ref": "#/components/schemas/IParam4"
             }
           },
           {
@@ -502,7 +502,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/getUserRequest.34eee32a"
+              "$ref": "#/components/schemas/getUserRequest"
             }
           }
         ]
@@ -519,7 +519,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -531,7 +531,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/IParam1.75a8c941"
+              "$ref": "#/components/schemas/IParam1"
             }
           }
         ],
@@ -539,7 +539,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postBody1.2bdaea44"
+                "$ref": "#/components/schemas/postBody1"
               }
             }
           },
@@ -558,7 +558,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -568,7 +568,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IParam2.533c44ea"
+                "$ref": "#/components/schemas/IParam2"
               }
             }
           },
@@ -587,7 +587,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                  "$ref": "#/components/schemas/commonResponse"
                 }
               }
             }
@@ -597,7 +597,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/IParam3.5823c769"
+                "$ref": "#/components/schemas/IParam3"
               }
             }
           },
@@ -618,10 +618,10 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                      "$ref": "#/components/schemas/commonResponse"
                     },
                     {
-                      "$ref": "#/components/schemas/Response1.aa335ba3"
+                      "$ref": "#/components/schemas/Response1"
                     }
                   ]
                 }
@@ -633,7 +633,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/getQueryParams1Request.b20d307f"
+                "$ref": "#/components/schemas/getQueryParams1Request"
               }
             }
           },
@@ -654,10 +654,10 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                      "$ref": "#/components/schemas/commonResponse"
                     },
                     {
-                      "$ref": "#/components/schemas/Response1.aa335ba3"
+                      "$ref": "#/components/schemas/Response1"
                     }
                   ]
                 }
@@ -716,10 +716,10 @@
                   "type": "object",
                   "allOf": [
                     {
-                      "$ref": "#/components/schemas/commonResponse.2e0063f8"
+                      "$ref": "#/components/schemas/commonResponse"
                     },
                     {
-                      "$ref": "#/components/schemas/Response1.aa335ba3"
+                      "$ref": "#/components/schemas/Response1"
                     }
                   ]
                 }
@@ -734,22 +734,22 @@
                 "type": "object",
                 "properties": {
                   "BodyParam1": {
-                    "$ref": "#/components/schemas/BodyParam1.f281bbc7"
+                    "$ref": "#/components/schemas/BodyParam1"
                   },
                   "BodyParam2": {
-                    "$ref": "#/components/schemas/IParam2.533c44ea"
+                    "$ref": "#/components/schemas/IParam2"
                   },
                   "BodyParam3": {
-                    "$ref": "#/components/schemas/IParam3.5823c769"
+                    "$ref": "#/components/schemas/IParam3"
                   },
                   "BodyParam4": {
-                    "$ref": "#/components/schemas/IParam4.423f17a3"
+                    "$ref": "#/components/schemas/IParam4"
                   },
                   "BodyParam5": {
                     "type": "number"
                   },
                   "BodyParam6": {
-                    "$ref": "#/components/schemas/getUserRequest.34eee32a"
+                    "$ref": "#/components/schemas/getUserRequest"
                   }
                 },
                 "required": [
@@ -770,7 +770,7 @@
   },
   "components": {
     "schemas": {
-      "getQueryParams1Request.b20d307f": {
+      "getQueryParams1Request": {
         "type": "object",
         "properties": {
           "activityBases": {
@@ -826,7 +826,7 @@
           }
         ]
       },
-      "commonResponse.2e0063f8": {
+      "commonResponse": {
         "type": "object",
         "properties": {
           "a": {
@@ -837,7 +837,7 @@
           "a"
         ]
       },
-      "IParam1.75a8c941": {
+      "IParam1": {
         "type": "object",
         "properties": {
           "param1": {
@@ -851,7 +851,7 @@
           "param1"
         ]
       },
-      "IParam2.533c44ea": {
+      "IParam2": {
         "type": "object",
         "properties": {
           "param1": {
@@ -867,7 +867,7 @@
           "param2"
         ]
       },
-      "IParam3.5823c769": {
+      "IParam3": {
         "type": "object",
         "properties": {
           "param1": {
@@ -921,7 +921,7 @@
           "param2": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Partial<Pick<IUser,\"id\">>.1800f052"
+                "$ref": "#/components/schemas/Partial<Pick<IUser,\"id\">>"
               },
               {
                 "anyOf": [
@@ -988,7 +988,7 @@
           "param5"
         ]
       },
-      "Partial<Pick<IUser,\"id\">>.1800f052": {
+      "Partial<Pick<IUser,\"id\">>": {
         "type": "object",
         "properties": {
           "id": {
@@ -996,7 +996,7 @@
           }
         }
       },
-      "IParam4.423f17a3": {
+      "IParam4": {
         "type": "object",
         "properties": {
           "param1": {
@@ -1007,7 +1007,7 @@
           "param2": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Required<ActivityBase>.0036b956"
+                "$ref": "#/components/schemas/Required<ActivityBase>"
               },
               {
                 "type": "string"
@@ -1015,7 +1015,7 @@
             ]
           },
           "param3": {
-            "$ref": "#/components/schemas/Required<Pick<IUser,\"name\">>.0036b956"
+            "$ref": "#/components/schemas/Required<Pick<IUser,\"name\">>"
           }
         },
         "required": [
@@ -1024,7 +1024,7 @@
           "param3"
         ]
       },
-      "Required<ActivityBase>.0036b956": {
+      "Required<ActivityBase>": {
         "type": "object",
         "properties": {
           "activityId": {
@@ -1056,7 +1056,7 @@
           "roomCount"
         ]
       },
-      "Required<Pick<IUser,\"name\">>.0036b956": {
+      "Required<Pick<IUser,\"name\">>": {
         "type": "object",
         "properties": {
           "name": {
@@ -1067,7 +1067,7 @@
           "name"
         ]
       },
-      "Response1.aa335ba3": {
+      "Response1": {
         "type": "object",
         "properties": {
           "activityBases2": {
@@ -1135,7 +1135,7 @@
           "activityBases2"
         ]
       },
-      "getUserRequest.34eee32a": {
+      "getUserRequest": {
         "type": "object",
         "properties": {
           "a": {
@@ -1153,7 +1153,7 @@
             }
           },
           "user": {
-            "$ref": "#/components/schemas/userWithList.287fa0d1"
+            "$ref": "#/components/schemas/userWithList"
           }
         },
         "required": [
@@ -1163,7 +1163,7 @@
           "user"
         ]
       },
-      "userWithList.287fa0d1": {
+      "userWithList": {
         "type": "object",
         "properties": {
           "list": {
@@ -1196,7 +1196,7 @@
           "list"
         ]
       },
-      "postBody1.2bdaea44": {
+      "postBody1": {
         "type": "object",
         "properties": {
           "postBody1param1": {
@@ -1205,7 +1205,7 @@
           "tow": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Partial<postBody11>.1800f052"
+              "$ref": "#/components/schemas/Partial<postBody11>"
             }
           }
         },
@@ -1214,7 +1214,7 @@
           "tow"
         ]
       },
-      "Partial<postBody11>.1800f052": {
+      "Partial<postBody11>": {
         "type": "object",
         "properties": {
           "postBody1param11": {
@@ -1222,7 +1222,7 @@
           }
         }
       },
-      "BodyParam1.f281bbc7": {
+      "BodyParam1": {
         "type": "object",
         "properties": {
           "BodyParam1": {

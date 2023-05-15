@@ -1,12 +1,13 @@
 import { describe, expect, test } from 'vitest';
 import { genOpenapiDoc } from '../../src/gen/gen-openapi-doc';
 
-describe('genOpenapiData', () => {
-  test('genOpenapiData 1', async () => {
+describe('genOpenapiDoc', () => {
+  test('genOpenapiDoc-1', async () => {
     const specString1 = genOpenapiDoc(['./test/example/controller1/**/*.ts'], {
       title: 'custom title',
       routePrefix: '/root',
       genOpenapiType: 'json',
+      typeUniqueNames: false,
     });
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-1.json',
@@ -15,26 +16,29 @@ describe('genOpenapiData', () => {
       title: 'custom title',
       routePrefix: '/root',
       genOpenapiType: 'yaml',
+      typeUniqueNames: false,
     });
     await expect(specString2).toMatchFileSnapshot(
       './__test__snapshots__/openapi-1.yaml',
     );
   });
-  test('genOpenapiData 2', async () => {
+  test('genOpenapiDoc-2', async () => {
     const specString1 = genOpenapiDoc(['./test/example/controller2/**/*.ts'], {
       genOpenapiType: 'json',
+      typeUniqueNames: false,
     });
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-2.json',
     );
     const specString2 = genOpenapiDoc(['./test/example/controller2/**/*.ts'], {
       genOpenapiType: 'yaml',
+      typeUniqueNames: false,
     });
     await expect(specString2).toMatchFileSnapshot(
       './__test__snapshots__/openapi-2.yaml',
     );
   });
-  test('genOpenapiData 3', async () => {
+  test('genOpenapiDoc-3', async () => {
     const specString1 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
       genOpenapiType: 'json',
       typeUniqueNames: false,
@@ -50,9 +54,10 @@ describe('genOpenapiData', () => {
       './__test__snapshots__/openapi-3.yaml',
     );
   });
-  test('genOpenapiData 4', async () => {
+  test('genOpenapiDoc-4', async () => {
     const specString1 = genOpenapiDoc(['./test/example/controller4/**/*.ts'], {
       genOpenapiType: 'json',
+      typeUniqueNames: false,
       responseSchema: {
         type: 'object',
         properties: {
@@ -89,6 +94,7 @@ describe('genOpenapiData', () => {
         required: ['code', 'data'],
       },
       genOpenapiType: 'yaml',
+      typeUniqueNames: false,
     });
     await expect(specString2).toMatchFileSnapshot(
       './__test__snapshots__/openapi-4.yaml',

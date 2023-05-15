@@ -5,5 +5,7 @@ exports[`CLI > CLI test 1`] = `
 [32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m
 [32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m
 [32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-2/openapi[39m
-[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-2/openapi[39m"
+[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-2/openapi[39m
+[32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-3/openapi[39m
+[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-3/openapi[39m"
 `;

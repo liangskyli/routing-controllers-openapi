@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema: &ref_0
-                $ref: '#/components/schemas/commonResponse.2e0063f8'
+                $ref: '#/components/schemas/commonResponse'
       parameters:
         - name: activityBases
           in: query
@@ -114,22 +114,22 @@ paths:
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
         - name: queryParam2
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam2.533c44ea'
+            $ref: '#/components/schemas/IParam2'
         - name: queryParam3
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam3.5823c769'
+            $ref: '#/components/schemas/IParam3'
         - name: queryParam4
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam4.423f17a3'
+            $ref: '#/components/schemas/IParam4'
         - name: queryParam5
           in: query
           required: true
@@ -145,7 +145,7 @@ paths:
           content:
             application/json:
               schema: &ref_2
-                $ref: '#/components/schemas/Response1.aa335ba3'
+                $ref: '#/components/schemas/Response1'
       parameters:
         - name: param1
           in: header
@@ -173,12 +173,12 @@ paths:
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
         - name: queryParam2
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam2.533c44ea'
+            $ref: '#/components/schemas/IParam2'
         - name: activityBases
           in: query
           required: true
@@ -216,7 +216,7 @@ paths:
           in: header
           required: true
           schema:
-            $ref: '#/components/schemas/IParam3.5823c769'
+            $ref: '#/components/schemas/IParam3'
         - name: cookie1
           in: cookie
           required: true
@@ -226,22 +226,22 @@ paths:
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
         - name: param2
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam2.533c44ea'
+            $ref: '#/components/schemas/IParam2'
         - name: param3
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam3.5823c769'
+            $ref: '#/components/schemas/IParam3'
         - name: param4
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam4.423f17a3'
+            $ref: '#/components/schemas/IParam4'
         - name: param5
           in: path
           required: true
@@ -251,7 +251,7 @@ paths:
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/getUserRequest.34eee32a'
+            $ref: '#/components/schemas/getUserRequest'
   /root/v1/getQueryParamWithParam:
     get:
       tags:
@@ -267,32 +267,32 @@ paths:
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
         - name: queryParam2
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam2.533c44ea'
+            $ref: '#/components/schemas/IParam2'
         - name: param1
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
         - name: param2
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam2.533c44ea'
+            $ref: '#/components/schemas/IParam2'
         - name: param3
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam3.5823c769'
+            $ref: '#/components/schemas/IParam3'
         - name: param4
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/IParam4.423f17a3'
+            $ref: '#/components/schemas/IParam4'
         - name: param5
           in: path
           required: true
@@ -302,7 +302,7 @@ paths:
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/getUserRequest.34eee32a'
+            $ref: '#/components/schemas/getUserRequest'
   /root/v1/postBody1:
     post:
       tags:
@@ -318,12 +318,12 @@ paths:
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/IParam1.75a8c941'
+            $ref: '#/components/schemas/IParam1'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/postBody1.2bdaea44'
+              $ref: '#/components/schemas/postBody1'
         required: true
   /root/v1/postBody2:
     post:
@@ -339,7 +339,7 @@ paths:
         content:
           application/json:
             schema: &ref_3
-              $ref: '#/components/schemas/IParam2.533c44ea'
+              $ref: '#/components/schemas/IParam2'
         required: true
   /root/v1/postBody3:
     post:
@@ -355,7 +355,7 @@ paths:
         content:
           application/json:
             schema: &ref_4
-              $ref: '#/components/schemas/IParam3.5823c769'
+              $ref: '#/components/schemas/IParam3'
         required: true
   /root/v1/postBody4:
     post:
@@ -374,7 +374,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/getQueryParams1Request.b20d307f'
+              $ref: '#/components/schemas/getQueryParams1Request'
         required: true
   /root/v1/postBody5:
     post:
@@ -432,15 +432,15 @@ paths:
               type: object
               properties:
                 BodyParam1:
-                  $ref: '#/components/schemas/BodyParam1.f281bbc7'
+                  $ref: '#/components/schemas/BodyParam1'
                 BodyParam2: *ref_3
                 BodyParam3: *ref_4
                 BodyParam4:
-                  $ref: '#/components/schemas/IParam4.423f17a3'
+                  $ref: '#/components/schemas/IParam4'
                 BodyParam5:
                   type: number
                 BodyParam6:
-                  $ref: '#/components/schemas/getUserRequest.34eee32a'
+                  $ref: '#/components/schemas/getUserRequest'
               required:
                 - BodyParam1
                 - BodyParam2
@@ -451,7 +451,7 @@ paths:
         required: true
 components:
   schemas:
-    getQueryParams1Request.b20d307f:
+    getQueryParams1Request:
       type: object
       properties:
         activityBases:
@@ -486,14 +486,14 @@ components:
               type: boolean
           required:
             - customerCount
-    commonResponse.2e0063f8:
+    commonResponse:
       type: object
       properties:
         a:
           type: string
       required:
         - a
-    IParam1.75a8c941:
+    IParam1:
       type: object
       properties:
         param1:
@@ -503,7 +503,7 @@ components:
           type: number
       required:
         - param1
-    IParam2.533c44ea:
+    IParam2:
       type: object
       properties:
         param1:
@@ -514,7 +514,7 @@ components:
       required:
         - param1
         - param2
-    IParam3.5823c769:
+    IParam3:
       type: object
       properties:
         param1:
@@ -545,7 +545,7 @@ components:
             - type: number
         param2:
           anyOf:
-            - $ref: '#/components/schemas/Partial<Pick<IUser,"id">>.1800f052'
+            - $ref: '#/components/schemas/Partial<Pick<IUser,"id">>'
             - anyOf:
                 - type: string
                 - type: number
@@ -584,12 +584,12 @@ components:
         - param3
         - param4
         - param5
-    Partial<Pick<IUser,"id">>.1800f052:
+    Partial<Pick<IUser,"id">>:
       type: object
       properties:
         id:
           type: number
-    IParam4.423f17a3:
+    IParam4:
       type: object
       properties:
         param1:
@@ -598,15 +598,15 @@ components:
           type: string
         param2:
           anyOf:
-            - $ref: '#/components/schemas/Required<ActivityBase>.0036b956'
+            - $ref: '#/components/schemas/Required<ActivityBase>'
             - type: string
         param3:
-          $ref: '#/components/schemas/Required<Pick<IUser,"name">>.0036b956'
+          $ref: '#/components/schemas/Required<Pick<IUser,"name">>'
       required:
         - param1
         - param2
         - param3
-    Required<ActivityBase>.0036b956:
+    Required<ActivityBase>:
       type: object
       properties:
         activityId:
@@ -630,14 +630,14 @@ components:
         - customerCount
         - isException
         - roomCount
-    Required<Pick<IUser,"name">>.0036b956:
+    Required<Pick<IUser,"name">>:
       type: object
       properties:
         name:
           type: string
       required:
         - name
-    Response1.aa335ba3:
+    Response1:
       type: object
       properties:
         activityBases2:
@@ -679,7 +679,7 @@ components:
                 - activityBases2Other
       required:
         - activityBases2
-    getUserRequest.34eee32a:
+    getUserRequest:
       type: object
       properties:
         a:
@@ -692,13 +692,13 @@ components:
             d:
               type: string
         user:
-          $ref: '#/components/schemas/userWithList.287fa0d1'
+          $ref: '#/components/schemas/userWithList'
       required:
         - a
         - b
         - c
         - user
-    userWithList.287fa0d1:
+    userWithList:
       type: object
       properties:
         list:
@@ -720,7 +720,7 @@ components:
               - pics
       required:
         - list
-    postBody1.2bdaea44:
+    postBody1:
       type: object
       properties:
         postBody1param1:
@@ -728,16 +728,16 @@ components:
         tow:
           type: array
           items:
-            $ref: '#/components/schemas/Partial<postBody11>.1800f052'
+            $ref: '#/components/schemas/Partial<postBody11>'
       required:
         - postBody1param1
         - tow
-    Partial<postBody11>.1800f052:
+    Partial<postBody11>:
       type: object
       properties:
         postBody1param11:
           type: string
-    BodyParam1.f281bbc7:
+    BodyParam1:
       type: object
       properties:
         BodyParam1:

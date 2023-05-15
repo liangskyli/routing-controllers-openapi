@@ -67,7 +67,6 @@ export type IParam2 = {
 };
 export type IParam3 = {
   param1: { a: string } & { b: boolean; c: { a: number } };
-  // 生成问题
   param2_1: number | string;
   param2: number | IUserWithId;
   param3: '1' | '2' | '3';

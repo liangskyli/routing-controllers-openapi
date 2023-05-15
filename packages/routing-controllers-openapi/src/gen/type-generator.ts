@@ -303,7 +303,9 @@ export class TypeGenerator {
     } else if (type.flags & ts.TypeFlags.Object) {
       if (
         (<ts.ObjectType>type).objectFlags &
-        (ts.ObjectFlags.Reference | ts.ObjectFlags.Anonymous)
+        (ts.ObjectFlags.Reference |
+          ts.ObjectFlags.Anonymous |
+          ts.ObjectFlags.Interface)
       ) {
         returnSchema =
           this.getClassTypeSchema(<ts.TypeReference>type, schema) ||

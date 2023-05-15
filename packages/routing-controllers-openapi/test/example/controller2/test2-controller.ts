@@ -17,9 +17,7 @@ export interface getQueryParams1Request {
 }
 
 /**
- * Test2Controller 注释
- * 注释2
- * @注释2
+ * Test2Controller 注释2
  */
 @JsonController('/v2')
 export default class Test2Controller {

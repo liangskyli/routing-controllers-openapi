@@ -4,7 +4,7 @@ import { describe, expect, test, vi } from 'vitest';
 import genOpenapiData from '../../src/gen/index';
 
 describe('genOpenapiData', () => {
-  test('genTsData 1', async () => {
+  test('genOpenapiData-1', async () => {
     genOpenapiData({
       genOpenapiDir: './test/all-gen-dirs/gen-openapi-dir',
       controllers: ['./test/example/controller*/**/*.ts'],
@@ -51,7 +51,7 @@ describe('genOpenapiData', () => {
       'gen openapi success:',
     );
   });
-  test('genMockData genOpenapiDir not exist', () => {
+  test('genOpenapiData genOpenapiDir not exist', () => {
     expect(() =>
       genOpenapiData({
         genOpenapiDir: './test/all-gen-dirs/gen-openapi-dir-error',

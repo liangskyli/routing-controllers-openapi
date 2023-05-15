@@ -287,7 +287,19 @@
                     "type": "number"
                   },
                   {
-                    "$ref": "#/components/schemas/getQueryParams1Request"
+                    "type": "object",
+                    "properties": {
+                      "activityBases": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ActivityBase"
+                        },
+                        "description": "activityBases"
+                      }
+                    },
+                    "required": [
+                      "activityBases"
+                    ]
                   }
                 ],
                 "type": "array",
@@ -355,21 +367,6 @@
   },
   "components": {
     "schemas": {
-      "getQueryParams1Request": {
-        "type": "object",
-        "properties": {
-          "activityBases": {
-            "description": "activityBases",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ActivityBase"
-            }
-          }
-        },
-        "required": [
-          "activityBases"
-        ]
-      },
       "ActivityBase": {
         "allOf": [
           {
@@ -458,7 +455,7 @@
   "tags": [
     {
       "name": "Test3",
-      "description": "Test3Controller 注释\n注释3"
+      "description": "Test3Controller 注释3"
     }
   ]
 }

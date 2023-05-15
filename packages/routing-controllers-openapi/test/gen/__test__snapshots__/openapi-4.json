@@ -91,7 +91,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/proto.LockRequest.be7af638"
+                "$ref": "#/components/schemas/proto.LockRequest"
               }
             }
           },
@@ -134,7 +134,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/proto.LockRequest.be7af638"
+                "$ref": "#/components/schemas/proto.LockRequest"
               }
             }
           }
@@ -355,21 +355,6 @@
   },
   "components": {
     "schemas": {
-      "getQueryParams1Request.b20d307f": {
-        "type": "object",
-        "properties": {
-          "activityBases": {
-            "description": "activityBases",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ActivityBase"
-            }
-          }
-        },
-        "required": [
-          "activityBases"
-        ]
-      },
       "ActivityBase": {
         "allOf": [
           {
@@ -411,7 +396,7 @@
           }
         ]
       },
-      "proto.LockRequest.be7af638": {
+      "proto.LockRequest": {
         "type": "object",
         "properties": {
           "roomId": {
@@ -428,7 +413,7 @@
   "tags": [
     {
       "name": "Test4",
-      "description": "Test3Controller 注释\n注释3"
+      "description": "Test3Controller 注释4"
     }
   ]
 }

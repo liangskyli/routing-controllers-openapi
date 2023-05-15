@@ -17,9 +17,7 @@ import type { getQueryParams1Request } from '../types/types';
 import type * as types from '../types/types-2';
 
 /**
- * Test3Controller 注释
- * 注释3
- * @注释3
+ * Test3Controller 注释4
  */
 @Controller('/v4')
 export default class Test4Controller {

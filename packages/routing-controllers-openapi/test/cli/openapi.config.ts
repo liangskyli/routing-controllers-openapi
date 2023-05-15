@@ -32,5 +32,26 @@ const config: IGenOpenapiDataOptsCLI = [
     routePrefix: '/root',
     genOpenapiType: 'yaml',
   },
+  {
+    genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-3',
+    controllers: ['./test/example/controller*/**/*.ts'],
+    routePrefix: '/root',
+    typeUniqueNames: false,
+    responseSchema: {
+      type: 'object',
+      properties: {
+        code: {
+          type: 'number',
+          description: '接口返回code码字段',
+        },
+        data: '#ResponseSchema',
+        msg: {
+          type: 'string',
+          description: '接口返回信息字段',
+        },
+      },
+      required: ['code', 'data'],
+    },
+  },
 ];
 export default config;

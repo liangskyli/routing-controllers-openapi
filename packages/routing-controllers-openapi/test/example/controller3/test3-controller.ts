@@ -17,9 +17,7 @@ import type * as types from '../types/types-2';
 export type commonResponse = { a3: string; b: commonResponse2 };
 
 /**
- * Test3Controller 注释
- * 注释3
- * @注释3
+ * Test3Controller 注释3
  */
 @JsonController()
 export default class Test3Controller {

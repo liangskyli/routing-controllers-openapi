@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema: &ref_1
-              $ref: '#/components/schemas/proto.LockRequest.be7af638'
+              $ref: '#/components/schemas/proto.LockRequest'
         required: true
   /v4/postBody2-v4:
     post:
@@ -210,15 +210,6 @@ paths:
           description: activityBases
 components:
   schemas:
-    getQueryParams1Request.b20d307f:
-      type: object
-      properties:
-        activityBases:
-          description: activityBases
-          type: array
-          items: *ref_0
-      required:
-        - activityBases
     ActivityBase:
       allOf:
         - type: object
@@ -245,7 +236,7 @@ components:
               type: boolean
           required:
             - customerCount
-    proto.LockRequest.be7af638:
+    proto.LockRequest:
       type: object
       properties:
         roomId:
@@ -255,6 +246,4 @@ components:
         - roomId
 tags:
   - name: Test4
-    description: |-
-      Test3Controller 注释
-      注释3
+    description: Test3Controller 注释4
