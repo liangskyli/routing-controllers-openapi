@@ -102,4 +102,35 @@ describe('genOpenapiDoc', () => {
       './__test__snapshots__/openapi-4.yaml',
     );
   });
+  test('genOpenapiDoc-5 no ResponseSchema', async () => {
+    const specString1 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
+      genOpenapiType: 'json',
+      typeUniqueNames: false,
+      responseSchema: {
+        type: 'object',
+        properties: {
+          code: {
+            type: 'number',
+            description: 'code info',
+          },
+          msg: {
+            type: 'string',
+            description: 'message',
+          },
+        },
+        required: ['code', 'data'],
+      },
+    });
+    await expect(specString1).toMatchFileSnapshot(
+      './__test__snapshots__/openapi-5.json',
+    );
+  });
+  test('genOpenapiDoc-6 multiple path', () => {
+    expect(() =>
+      genOpenapiDoc(['./test/example/error/**/*.ts'], {
+        genOpenapiType: 'json',
+        typeUniqueNames: false,
+      }),
+    ).toThrow('exist path "/v2/getQueryParams1-v2"');
+  });
 });

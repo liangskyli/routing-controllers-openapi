@@ -43,11 +43,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
         for (const parameter of method.parameters) {
           if (parameter.options?.paramIn === 'body') {
-            const mediaType =
-              parameter.options.mediaType ||
-              method.options?.mediaType ||
-              controller.options?.mediaType ||
-              '*/*';
+            const mediaType = parameter.options.mediaType ?? '*/*';
             requestBody = requestBody ?? {
               content: { [mediaType]: {} },
             };
@@ -83,7 +79,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
                 );
               }
 
-              bodySchema.properties![parameter.name] = parameter.schema ?? {};
+              bodySchema.properties![parameter.name] = parameter.schema;
               if (parameter.required) {
                 requestBody.required = true;
                 if (bodySchema.required === undefined) {
@@ -139,10 +135,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
           let newResponseSchema: GenOpenApiOption['responseSchema'];
           const returnSchema = method.returnSchema;
           if (returnSchema) {
-            const responseMediaType =
-              method.options?.mediaType ||
-              controller.options?.mediaType ||
-              '*/*';
+            const responseMediaType = controller.options?.mediaType ?? '*/*';
             const isResponseTextPlain = responseMediaType === 'text/plain';
             if (responseSchema) {
               let haveResponseSchema = false;
