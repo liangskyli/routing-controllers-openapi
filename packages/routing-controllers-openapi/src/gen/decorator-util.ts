@@ -232,12 +232,14 @@ class Decorator implements DecoratorMetadata {
     const typeChecker = metadata.typeChecker;
     const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program)
       .sourceFileToPackageName;
-    const signature = typeChecker.getResolvedSignature(
-      <ts.CallExpression>this.node.expression,
-    );
+    const expression = <ts.CallExpression>this.node.expression;
+    const signature = typeChecker.getResolvedSignature(expression);
     const declaration = signature?.getDeclaration() as ts.FunctionDeclaration;
     const fileName = declaration.getSourceFile().fileName;
     this.name = declaration.name?.text ?? '';
+    if (this.name === '') {
+      this.name = expression.expression.getText();
+    }
     this.package =
       sourceFileToPackageName.get(
         ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
@@ -256,7 +258,7 @@ class Decorator implements DecoratorMetadata {
     }
 
     for (const d of omitDecorators) {
-      if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
+      if (d.name === this.name && this.package.indexOf(d.package) === 0) {
         this.type = d.type;
         return;
       }

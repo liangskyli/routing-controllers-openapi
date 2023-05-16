@@ -194,6 +194,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
         }
       }
       if (isAdd) {
+        // name is unique
         this.addSchema(name, schema);
       }
     }

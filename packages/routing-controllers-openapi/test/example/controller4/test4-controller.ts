@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { Context } from 'koa';
 import {
   Body,
   Controller,
+  Ctx,
   Delete,
   Get,
   Head,
@@ -13,16 +15,33 @@ import {
   UploadedFile,
   UploadedFiles,
 } from 'routing-controllers';
+import { Service } from 'typedi';
+import { logFunction1 } from '../types/log';
 import type { getQueryParams1Request } from '../types/types';
 import type * as types from '../types/types-2';
+
+const logFunction = (params: any) => {
+  console.log(params);
+  return (target: any, methodsName: any, desc: any) => {
+    console.log(target); // {constructor: ƒ, getData: ƒ}
+    console.log(methodsName); // getData
+    console.log(desc); // {writable: true, enumerable: false, configurable: true, value: ƒ}
+  };
+};
 
 /**
  * Test3Controller 注释4
  */
+@Service()
 @Controller('/v4')
 export default class Test4Controller {
   @Get('/getQueryParams1-v4')
-  getQueryParams1V4(@QueryParams() data: getQueryParams1Request): string {
+  @logFunction('logFunction')
+  @logFunction1('logFunction1')
+  getQueryParams1V4(
+    @Ctx() ctx: Context,
+    @QueryParams() data: getQueryParams1Request,
+  ): string {
     return 'string';
   }
 

@@ -27,14 +27,4 @@ export class OpenapiBuilder extends oa.OpenApiBuilder {
     this.rootDoc.paths[path] = pathItem;
     return this;
   }
-
-  public addSchema(name: string, schema: oa.SchemaObject): oa.OpenApiBuilder {
-    this.rootDoc.components = this.rootDoc.components || {};
-    this.rootDoc.components.schemas = this.rootDoc.components.schemas || {};
-    if (this.rootDoc.components.schemas[name] !== undefined) {
-      throw new Error(`exist schema "${name}"`);
-    }
-    this.rootDoc.components.schemas[name] = schema;
-    return this;
-  }
 }
