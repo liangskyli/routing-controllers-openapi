@@ -58,7 +58,8 @@ export default class Test3Controller {
     @QueryParam('queryParam24') queryParam24?: null,
     @QueryParam('queryParam25') queryParam25: string = 'queryParam25',
     @QueryParam('queryParam26') queryParam26: boolean = true,
-    @QueryParam('queryParam27') queryParam27: boolean = false,
+    // @ts-ignore
+    @QueryParam('queryParam27') queryParam27: boolean = false1,
   ): Promise<{ a33: string }> {
     return Promise.resolve({ a33: '1' });
   }

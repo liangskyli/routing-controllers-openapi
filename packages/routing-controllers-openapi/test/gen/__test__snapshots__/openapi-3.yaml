@@ -120,6 +120,9 @@ paths:
             required:
               - a
               - b
+            default:
+              a: a
+              b: b
         - name: queryParam10
           in: query
           schema:
@@ -256,7 +259,6 @@ paths:
           in: query
           schema:
             type: boolean
-            default: false
   /postBody1-v3:
     post:
       tags:

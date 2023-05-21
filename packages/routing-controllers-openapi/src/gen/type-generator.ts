@@ -466,21 +466,13 @@ export class TypeGenerator {
   }
 
   public getInitializerValue(node: ts.Expression): any {
-    switch (node.kind) {
-      case ts.SyntaxKind.ArrayLiteralExpression:
-        return (<ts.ArrayLiteralExpression>node).elements.map((e) =>
-          this.getInitializerValue(e),
-        );
-      case ts.SyntaxKind.NumericLiteral:
-        return Number((<ts.NumericLiteral>node).text);
-      case ts.SyntaxKind.StringLiteral:
-        return (<ts.StringLiteral>node).text;
-      case ts.SyntaxKind.TrueKeyword:
-        return true;
-      case ts.SyntaxKind.FalseKeyword:
-        return false;
-      default:
-        console.warn(colors.yellow('Unknown default value ' + node.getText()));
+    const resultFun = new Function(`return ${node.getText()}`);
+    let resultValue: any = undefined;
+    try {
+      resultValue = resultFun();
+    } catch {
+      console.warn(colors.yellow('Unknown default value: ' + node.getText()));
     }
+    return resultValue;
   }
 }

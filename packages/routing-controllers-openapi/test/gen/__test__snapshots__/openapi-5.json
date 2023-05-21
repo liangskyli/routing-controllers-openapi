@@ -201,7 +201,11 @@
               "required": [
                 "a",
                 "b"
-              ]
+              ],
+              "default": {
+                "a": "a",
+                "b": "b"
+              }
             }
           },
           {
@@ -432,8 +436,7 @@
             "name": "queryParam27",
             "in": "query",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ]
