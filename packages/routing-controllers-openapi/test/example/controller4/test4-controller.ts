@@ -93,4 +93,9 @@ export default class Test4Controller {
   Delete(@QueryParams() data: getQueryParams1Request) {
     return 'string';
   }
+
+  @Get()
+  getNoRouter(@QueryParams() data: getQueryParams1Request): string {
+    return 'string';
+  }
 }

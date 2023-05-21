@@ -11,8 +11,8 @@ export enum DecoratorType {
   Body,
   File,
   Authorization,
-  Exclude,
-  Expose,
+  //Exclude,
+  //Expose,
   Omit,
 }
 
@@ -206,7 +206,6 @@ export interface DecoratorMetadata {
   package: string;
   type: DecoratorType;
   options?: DecoratorOptions;
-  arguments?: string[];
 }
 
 export interface DecoratorOptions {

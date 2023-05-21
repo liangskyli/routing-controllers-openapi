@@ -1,9 +1,9 @@
 import * as ts from 'typescript';
+import * as TJS from 'typescript-json-schema';
 import type { Controller } from './controller-generator';
 import { ControllerGenerator } from './controller-generator';
 import type { TypeSchemaMap } from './type-generator';
 import { TypeGenerator } from './type-generator';
-import * as TJS from 'typescript-json-schema';
 
 export class MetadataGenerator {
   program: ts.Program;
@@ -39,6 +39,7 @@ export class MetadataGenerator {
 
   private walkNodeTree(node: ts.Node) {
     if (ts.isClassDeclaration(node) && node.name) {
+      // only support have class name
       const symbol = this.typeChecker.getSymbolAtLocation(node.name);
       if (symbol) {
         const generator = new ControllerGenerator(node, this);

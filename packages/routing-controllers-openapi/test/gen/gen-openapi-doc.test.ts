@@ -127,10 +127,31 @@ describe('genOpenapiDoc', () => {
   });
   test('genOpenapiDoc-6 multiple path', () => {
     expect(() =>
-      genOpenapiDoc(['./test/example/error/**/*.ts'], {
+      genOpenapiDoc(['./test/example/error/multiple-path/**/*.ts'], {
         genOpenapiType: 'json',
         typeUniqueNames: false,
       }),
     ).toThrow('exist path "/v2/getQueryParams1-v2"');
+  });
+  test('genOpenapiDoc-7 multiple parameters', () => {
+    expect(() =>
+      genOpenapiDoc(
+        ['./test/example/error/multiple-parameters/test1-controller.ts'],
+        {
+          genOpenapiType: 'json',
+          typeUniqueNames: false,
+        },
+      ),
+    ).toThrow('encountered multiple body parameters');
+
+    expect(() =>
+      genOpenapiDoc(
+        ['./test/example/error/multiple-parameters/test2-controller.ts'],
+        {
+          genOpenapiType: 'json',
+          typeUniqueNames: false,
+        },
+      ),
+    ).toThrow('encountered multiple body parameter BodyParam1');
   });
 });

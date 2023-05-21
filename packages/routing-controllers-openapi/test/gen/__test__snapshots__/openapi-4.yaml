@@ -211,6 +211,25 @@ paths:
             type: array
             items: *ref_0
           description: activityBases
+  /v4:
+    get:
+      tags:
+        - Test4
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+      parameters:
+        - name: activityBases
+          in: query
+          required: true
+          schema:
+            type: array
+            items: *ref_0
+          description: activityBases
 components:
   schemas:
     ActivityBase:

@@ -92,7 +92,9 @@
             "name": "inlineQueryParam3",
             "in": "query",
             "required": true,
-            "schema": {}
+            "schema": {
+              "type": "integer"
+            }
           },
           {
             "name": "inlineQueryParam4",
@@ -915,13 +917,9 @@
             ]
           },
           "param2_1": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
+            "type": [
+              "string",
+              "number"
             ]
           },
           "param2": {
@@ -930,13 +928,9 @@
                 "$ref": "#/components/schemas/Partial<Pick<IUser,\"id\">>"
               },
               {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "number"
-                  }
+                "type": [
+                  "string",
+                  "number"
                 ]
               }
             ]

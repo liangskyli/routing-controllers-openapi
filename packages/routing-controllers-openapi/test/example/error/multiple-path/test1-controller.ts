@@ -3,7 +3,7 @@ import { Get, JsonController, QueryParams } from 'routing-controllers';
 import type {
   commonResponse,
   getQueryParams1Request as getQueryParams1RequestCustom,
-} from '../../example/types/types';
+} from '../../types/types';
 
 export interface getQueryParams1Request {
   /** 注释getQueryParams1Request */

@@ -96,3 +96,10 @@ export type postBody1 = {
 export type BodyParam1 = {
   BodyParam1: string;
 };
+export type recordTest = {
+  a: Record<string, string>;
+  b: Record<any, any>;
+  c: Record<string, never>;
+  d: Date;
+  // e: bigint;
+};

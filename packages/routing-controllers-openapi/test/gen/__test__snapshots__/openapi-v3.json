@@ -346,6 +346,37 @@
         ]
       }
     },
+    "/root/v4": {
+      "get": {
+        "tags": ["Test4"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityBases",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ActivityBase"
+              }
+            },
+            "description": "activityBases"
+          }
+        ]
+      }
+    },
     "/root/getQueryParams1-v3": {
       "get": {
         "tags": ["Test3"],
@@ -648,6 +679,93 @@
             "schema": {
               "type": "number",
               "enum": [1, 2, 3]
+            }
+          },
+          {
+            "name": "queryParam18",
+            "in": "query",
+            "schema": {
+              "items": [],
+              "type": "array",
+              "maxItems": 0,
+              "minItems": 0
+            }
+          },
+          {
+            "name": "queryParam19",
+            "in": "query",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "object"
+                },
+                "b": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "required": ["a", "b"]
+            }
+          },
+          {
+            "name": "queryParam20",
+            "in": "query",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "queryParam21",
+            "in": "query",
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "queryParam22",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/recordTest"
+            }
+          },
+          {
+            "name": "queryParam23",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "queryParam24",
+            "in": "query",
+            "schema": {
+              "type": "null"
+            }
+          },
+          {
+            "name": "queryParam25",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "queryParam25"
+            }
+          },
+          {
+            "name": "queryParam26",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "queryParam27",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           }
         ]
@@ -1003,7 +1121,9 @@
             "name": "inlineQueryParam3",
             "in": "query",
             "required": true,
-            "schema": {}
+            "schema": {
+              "type": "integer"
+            }
           },
           {
             "name": "inlineQueryParam4",
@@ -1932,6 +2052,34 @@
         },
         "required": ["param1", "param2"]
       },
+      "recordTest": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "$ref": "#/components/schemas/Record<string,string>"
+          },
+          "b": {
+            "$ref": "#/components/schemas/Record<any,any>"
+          },
+          "c": {
+            "$ref": "#/components/schemas/Record<string,never>"
+          },
+          "d": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["a", "b", "c", "d"]
+      },
+      "Record<string,string>": {
+        "type": "object"
+      },
+      "Record<any,any>": {
+        "type": "object"
+      },
+      "Record<string,never>": {
+        "type": "object"
+      },
       "IParam1": {
         "type": "object",
         "properties": {
@@ -1979,14 +2127,7 @@
             ]
           },
           "param2_1": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              }
-            ]
+            "type": ["string", "number"]
           },
           "param2": {
             "anyOf": [
@@ -1994,14 +2135,7 @@
                 "$ref": "#/components/schemas/Partial<Pick<IUser,\"id\">>"
               },
               {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "number"
-                  }
-                ]
+                "type": ["string", "number"]
               }
             ]
           },

@@ -36,7 +36,7 @@ export class ControllerGenerator implements Controller {
   }
 
   public generate(): Controller {
-    this.name = this.node.name?.text ?? '';
+    this.name = this.node.name!.text;
     this.processJSDocs();
     this.processMethods();
     return this;

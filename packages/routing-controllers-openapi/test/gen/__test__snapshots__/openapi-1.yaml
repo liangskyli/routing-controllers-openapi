@@ -56,7 +56,8 @@ paths:
         - name: inlineQueryParam3
           in: query
           required: true
-          schema: {}
+          schema:
+            type: integer
         - name: inlineQueryParam4
           in: query
           required: true
@@ -543,15 +544,15 @@ components:
                 - b
                 - c
         param2_1:
-          anyOf:
-            - type: string
-            - type: number
+          type:
+            - string
+            - number
         param2:
           anyOf:
             - $ref: '#/components/schemas/Partial<Pick<IUser,"id">>'
-            - anyOf:
-                - type: string
-                - type: number
+            - type:
+                - string
+                - number
         param3:
           enum:
             - '1'
