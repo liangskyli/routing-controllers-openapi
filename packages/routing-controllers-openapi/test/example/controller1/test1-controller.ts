@@ -63,7 +63,7 @@ export default class Test1Controller {
     return { a: '1' };
   }
 
-  @Get('/getQueryParamWithQueryParams')
+  @Get('/getQueryParamWithQueryParams/:path1/:path2')
   getQueryParamWithQueryParams(
     @HeaderParams() headerParams: IParam2,
     @CookieParams() cookieParams: IParam2,
@@ -71,7 +71,7 @@ export default class Test1Controller {
     @QueryParam('queryParam2') queryParam2: IParam2,
 
     @QueryParams() data: getQueryParams1Request,
-    @Params() params: { param1: string; param2?: number },
+    @Params() params: { path1: string; path2?: number },
   ): Response1 {
     return { a: '1' } as any;
   }

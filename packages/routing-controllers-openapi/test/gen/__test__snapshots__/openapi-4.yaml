@@ -99,6 +99,11 @@ paths:
               schema:
                 type: string
       parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
         - name: activityBases
           in: query
           required: true

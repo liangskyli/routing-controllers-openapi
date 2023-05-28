@@ -168,6 +168,14 @@
         },
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
             "name": "activityBases",
             "in": "query",
             "required": true,
@@ -467,6 +475,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
           {
             "name": "queryParam1",
             "in": "query",
@@ -903,6 +919,14 @@
         },
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "queryParam1",
             "in": "query",
             "required": true,
@@ -1289,7 +1313,7 @@
         ]
       }
     },
-    "/root/v1/getQueryParamWithQueryParams": {
+    "/root/v1/getQueryParamWithQueryParams/{path1}/{path2}": {
       "get": {
         "tags": ["Test1"],
         "responses": {
@@ -1382,7 +1406,7 @@
             "description": "activityBases"
           },
           {
-            "name": "param1",
+            "name": "path1",
             "in": "path",
             "required": true,
             "schema": {
@@ -1390,7 +1414,7 @@
             }
           },
           {
-            "name": "param2",
+            "name": "path2",
             "in": "path",
             "required": true,
             "schema": {

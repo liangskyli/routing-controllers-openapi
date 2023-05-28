@@ -2,6 +2,7 @@
 import {
   Get,
   JsonController,
+  Param,
   QueryParam,
   QueryParams,
 } from 'routing-controllers';
@@ -30,6 +31,7 @@ export default class Test2Controller {
 
   @Get('/getQueryParam-v2/:id')
   getQueryParam(
+    @Param('id') id: string,
     @QueryParam('queryParam1', { required: true }) queryParam1: number,
     @QueryParam('queryParam2') queryParam2: number | string,
     @QueryParam('queryParam3') queryParam3: number[],

@@ -41,6 +41,11 @@ paths:
             application/json:
               schema: *ref_0
       parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
         - name: queryParam1
           in: query
           required: true

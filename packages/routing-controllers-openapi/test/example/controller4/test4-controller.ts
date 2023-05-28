@@ -7,6 +7,7 @@ import {
   Delete,
   Get,
   Head,
+  Param,
   Patch,
   Post,
   Put,
@@ -67,7 +68,10 @@ export default class Test4Controller {
   }
 
   @Head('/getQueryParams2-v4/:id')
-  getQueryParams2V4(@QueryParams() data: getQueryParams1Request): string {
+  getQueryParams2V4(
+    @Param('id') id: number,
+    @QueryParams() data: getQueryParams1Request,
+  ): string {
     return 'string';
   }
 

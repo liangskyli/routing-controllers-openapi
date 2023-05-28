@@ -3,6 +3,7 @@ import {
   Body,
   Get,
   JsonController,
+  Param,
   Post,
   QueryParam,
   QueryParams,
@@ -29,6 +30,7 @@ export default class Test3Controller {
 
   @Get('/getQueryParam-v3/:id')
   getQueryParam(
+    @Param('id') id: number,
     @QueryParam('queryParam1', { required: true }) queryParam1: number,
     @QueryParam('queryParam2') queryParam2: number | string,
     @QueryParam('queryParam3') queryParam3: number[] = [1, 2],

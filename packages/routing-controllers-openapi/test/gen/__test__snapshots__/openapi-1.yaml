@@ -139,7 +139,7 @@ paths:
           required: true
           schema:
             type: number
-  /root/v1/getQueryParamWithQueryParams:
+  /root/v1/getQueryParamWithQueryParams/{path1}/{path2}:
     get:
       tags:
         - Test1
@@ -190,12 +190,12 @@ paths:
             type: array
             items: *ref_1
           description: activityBases
-        - name: param1
+        - name: path1
           in: path
           required: true
           schema:
             type: string
-        - name: param2
+        - name: path2
           in: path
           required: true
           schema:

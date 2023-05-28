@@ -91,6 +91,14 @@
         },
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
             "name": "queryParam1",
             "in": "query",
             "required": true,

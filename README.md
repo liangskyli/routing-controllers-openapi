@@ -39,6 +39,10 @@ yarn gen-openapi -c ./openapi.config2.ts
 
 ### 命令参数 configFile openapi生成配置文件参数属性
 
+- 类型：IGenOpenapiDataOpts | IGenOpenapiDataOpts[]
+
+### IGenOpenapiDataOpts 参数属性
+
 | 属性                   | 说明                                                                                                                                                      | 默认值                        |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
 | genOpenapiDir        | 生成openapi文件夹所在目录                                                                                                                                        | `./`                       |
@@ -67,8 +71,8 @@ yarn gen-openapi -c ./openapi.config2.ts
 import type { IGenOpenapiDataOpts } from '@liangskyli/routing-controllers-openapi';
 
 const config: IGenOpenapiDataOpts = {
-  genOpenapiDir: './test/gen-openapi-dir',
-  controllers: ['./test/controller/**/*.ts'],
+  genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-1',
+  controllers: ['./test/example/controller*/**/*.ts'],
   routePrefix: '/root', 
   // genOpenapiType: 'yaml',
   // 自定义统一 response 返回结构（可选）
@@ -113,8 +117,8 @@ import genOpenapiData from '@liangskyli/routing-controllers-openapi';
 
 genOpenapiData({
     title: 'custom title',
-    genOpenapiDir: './test/gen-openapi-dir',
-    controllers: ['./test/controller/**/*.ts'],
+    genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-1',
+    controllers: ['./test/example/controller*/**/*.ts'],
     routePrefix: '/root',
     //genOpenapiType: 'yaml',
     // 自定义统一 response 返回结构（可选）
@@ -189,27 +193,5 @@ genOpenapiData({
 - 方法需要明确指定入参和返回类型，目前不会对方法返回类型类型进行推导(如下例子)
 - 支持所有的TS类型声明,含namespace的支持（any,never类型会忽略）
 
-```ts
-@JsonController('/v1')
-export default class Test1Controller {
-  @Get('/getQueryParams1')
-  getQueryParams1(@QueryParams() data: getQueryParams1Request): commonResponse {
-    return {a: '1'};
-  }
-
-  @Get('/getQueryParam-v2/:id')
-  getQueryParamV2(
-    @QueryParam('queryParam1', {required: true}) queryParam1: number,
-    @QueryParam('queryParam2') queryParam2: number | string,
-    @QueryParam('queryParam3') queryParam3: number[],
-    @QueryParam('queryParam4') queryParam4: (number | string)[],
-    @QueryParam('queryParam5') queryParam5: (number | string)[],
-    @QueryParam('queryParam6') queryParam6: any,
-    @QueryParam('queryParam7') queryParam7: never,
-    @QueryParam('queryParam8') queryParam8: IParam2,
-  ): Promise<commonResponse> {
-    return Promise.resolve({a: '1'});
-  }
-}
-
-```
+# routing-controllers示例
+- [示例](./test/example)
