@@ -194,4 +194,4 @@ genOpenapiData({
 - 支持所有的TS类型声明,含namespace的支持（any,never类型会忽略）
 
 # routing-controllers示例
-- [示例](./test/example)
+- [示例](./packages/routing-controllers-openapi/test/example)
