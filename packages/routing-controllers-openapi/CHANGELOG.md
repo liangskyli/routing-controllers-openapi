@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.4.1...v0.5.0) (2023-05-28)
+
+
+### Features
+
+* support default value generate ([d5d6b38](https://github.com/liangskyli/routing-controllers-openapi/commit/d5d6b38c4695e742fc82e6a6ae19e1c8c3ce8d6b))
+* support servers generate and builder code refactor ([f554fa6](https://github.com/liangskyli/routing-controllers-openapi/commit/f554fa6ad2c3d4d622c502aa65a8d7f3f94287d7))
+
+
+### Bug Fixes
+
+* typeUniqueNames set false, interface generate bug ([253d92f](https://github.com/liangskyli/routing-controllers-openapi/commit/253d92fb369c6bff52d77e4cbb0647f7f48cd4f7))
+
+
+
 ## [0.4.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.4.0...v0.4.1) (2023-04-25)
 
 
