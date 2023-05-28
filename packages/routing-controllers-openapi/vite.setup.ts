@@ -6,6 +6,14 @@ vi.mock('fs-extra', async (importOriginal) => {
     ...mod,
     default: {
       ...mod.default,
+      readJSONSync: (path: string) => {
+        const packageJson = mod.readJSONSync(path);
+        if (path.endsWith('package.json')) {
+          // mock version
+          packageJson.version = '0.5.0';
+        }
+        return packageJson;
+      },
       writeFileSync: vi.fn(),
       ensureDirSync: vi.fn(),
     },
