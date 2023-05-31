@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
+  BodyParam,
   Get,
   JsonController,
   Param,
@@ -68,7 +69,11 @@ export default class Test3Controller {
   }
 
   @Post('/postBody1-v3')
-  postBody1(@Body() body: types2.proto.LockRequest): string {
+  postBody1(
+    @BodyParam('body1') body1: types2.proto.LockRequest,
+    @BodyParam('body2') body2: types2.InterFaceSameAll,
+    @BodyParam('body3') body3: types2.InterfaceAndNamespaceSameAll,
+  ): string {
     return 'string';
   }
 

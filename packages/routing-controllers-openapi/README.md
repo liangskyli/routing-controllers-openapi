@@ -191,6 +191,7 @@ genOpenapiData({
   - @UseInterceptor
 - 使用customOmitDecorators配置忽略警告提示的装饰器
 - 方法需要明确指定入参和返回类型，目前不会对方法返回类型类型进行推导(如下例子)
+  - 类型文件里，同一个文件导出的类型定义名（含命名空间）唯一。请规范声明,不规范的，不生成，警告提示
 - 支持所有的TS类型声明,含namespace的支持（any,never类型会忽略）
 
 # routing-controllers示例

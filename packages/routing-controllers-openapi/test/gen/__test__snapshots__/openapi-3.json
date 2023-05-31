@@ -468,7 +468,23 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/proto.LockRequest"
+                "type": "object",
+                "properties": {
+                  "body1": {
+                    "$ref": "#/components/schemas/proto.LockRequest"
+                  },
+                  "body2": {
+                    "$ref": "#/components/schemas/InterFaceSameAll"
+                  },
+                  "body3": {
+                    "$ref": "#/components/schemas/InterfaceAndNamespaceSameAll"
+                  }
+                },
+                "required": [
+                  "body1",
+                  "body2",
+                  "body3"
+                ]
               }
             }
           },
@@ -622,6 +638,50 @@
         },
         "required": [
           "roomId"
+        ]
+      },
+      "InterFaceSameAll": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "id2": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "id2"
+        ]
+      },
+      "InterfaceAndNamespaceSameAll": {
+        "type": "object",
+        "properties": {
+          "name1": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/proto.InterfaceAndNamespaceSame.item"
+            }
+          }
+        },
+        "required": [
+          "name1"
+        ]
+      },
+      "proto.InterfaceAndNamespaceSame.item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
         ]
       },
       "CustomizeExportByFilterRequest": {
