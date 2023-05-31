@@ -235,6 +235,33 @@ paths:
             type: array
             items: *ref_0
           description: activityBases
+  /v4/postBody3-v4:
+    post:
+      tags:
+        - Test4
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                a:
+                  type: object
+                  properties:
+                    postBody1param1:
+                      type: string
+                  required:
+                    - postBody1param1
+              required:
+                - a
+        required: true
 components:
   schemas:
     ActivityBase:

@@ -281,6 +281,23 @@ paths:
             schema:
               $ref: '#/components/schemas/proto.LockRequest'
         required: true
+  /postBody2-v3:
+    post:
+      tags:
+        - Test3
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomizeExportByFilterRequest'
+        required: true
 components:
   schemas:
     ActivityBase:
@@ -361,3 +378,17 @@ components:
           type: number
       required:
         - roomId
+    CustomizeExportByFilterRequest:
+      type: object
+      properties:
+        a:
+          $ref: '#/components/schemas/Omit<postBody1,"tow">'
+      required:
+        - a
+    Omit<postBody1,"tow">:
+      type: object
+      properties:
+        postBody1param1:
+          type: string
+      required:
+        - postBody1param1

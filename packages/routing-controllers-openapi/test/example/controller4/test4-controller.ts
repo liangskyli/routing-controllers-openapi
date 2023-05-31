@@ -19,7 +19,8 @@ import {
 import { Service } from 'typedi';
 import { logFunction1 } from '../types/log';
 import type { getQueryParams1Request } from '../types/types';
-import type * as types from '../types/types-2';
+import type * as types2 from '../types/types-2';
+import type * as types3 from '../types/types-3';
 
 const logFunction = (params: any) => {
   console.log(params);
@@ -53,7 +54,7 @@ export default class Test4Controller {
 
   @Post('/postBody1-v4')
   postBody1(
-    @Body() body: types.proto.LockRequest,
+    @Body() body: types2.proto.LockRequest,
     @QueryParam('queryParam1', { required: true }) queryParam1: number,
   ): string {
     return 'string';
@@ -61,7 +62,7 @@ export default class Test4Controller {
 
   @Post('/postBody2-v4')
   postBody2(
-    @Body() body?: types.proto.LockRequest,
+    @Body() body?: types2.proto.LockRequest,
     @QueryParams() data?: getQueryParams1Request,
   ): string {
     return 'string';
@@ -100,6 +101,11 @@ export default class Test4Controller {
 
   @Get()
   getNoRouter(@QueryParams() data: getQueryParams1Request): string {
+    return 'string';
+  }
+
+  @Post('/postBody3-v4')
+  postBody3(@Body() body: types3.CustomizeExportByFilterRequest): string {
     return 'string';
   }
 }

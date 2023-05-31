@@ -8,13 +8,14 @@ import {
   QueryParam,
   QueryParams,
 } from 'routing-controllers';
+import type * as types1 from '../types/types';
 import type {
   /*commonResponse,*/ commonResponse2,
   getQueryParams1Request,
   IParam2 as otherParam,
   recordTest,
 } from '../types/types';
-import type * as types from '../types/types-2';
+import type * as types2 from '../types/types-2';
 
 export type commonResponse = { a3: string; b: commonResponse2 };
 
@@ -67,7 +68,12 @@ export default class Test3Controller {
   }
 
   @Post('/postBody1-v3')
-  postBody1(@Body() body: types.proto.LockRequest): string {
+  postBody1(@Body() body: types2.proto.LockRequest): string {
+    return 'string';
+  }
+
+  @Post('/postBody2-v3')
+  postBody2(@Body() body: types1.CustomizeExportByFilterRequest): string {
     return 'string';
   }
 }

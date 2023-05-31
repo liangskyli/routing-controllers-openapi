@@ -65,7 +65,10 @@ export class TypeSchemaMap {
   }
 
   // 生成schema
-  private genSchema(refName: string) {
+  private genSchema(
+    refName: string,
+    generatorJsonSchema = this.generatorJsonSchema,
+  ) {
     const processSchemas = (scope: Definition) => {
       delete scope.definitions;
       delete scope.$schema;
@@ -84,7 +87,7 @@ export class TypeSchemaMap {
     if (!this.schemasData[refName]) {
       try {
         const definition: Definition =
-          this.generatorJsonSchema.getSchemaForSymbol(refName);
+          generatorJsonSchema.getSchemaForSymbol(refName);
         (function fn(
           schemas: oa.SchemasObject,
           definitions: Definition['definitions'] = {},
@@ -118,12 +121,21 @@ export class TypeSchemaMap {
           const noMd5Name = uniqueRefName.replace(REGEX_UNIQUE_MD5, '');
           const symbolList = this.generatorJsonSchema.getSymbols(noMd5Name);
           if (symbolList.length > 1) {
-            // no unique to use schemaObj
+            // no unique symbol to use schemaObj
             this.genUniqueSchemaObj(uniqueRefName);
             scope = this.schemasData[uniqueRefName];
-          } else {
+          } else if (symbolList.length === 1) {
+            // only exist one symbol
             scope[key] = `${refParsePrefix}${noMd5Name}`;
             this.genSchema(noMd5Name);
+          } else {
+            // no symbol to use schemaObj
+            this.genSchema(refName, this.uniqueGeneratorJsonSchema!);
+            const schemasData = this.schemasData[uniqueRefName];
+            delete scope.$ref;
+            lodash.keys(schemasData).forEach((schemaKey) => {
+              (scope as any)[schemaKey] = (schemasData as any)[schemaKey];
+            });
           }
         }
         if (lodash.isObject(value)) {

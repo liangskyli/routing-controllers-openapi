@@ -385,6 +385,45 @@
         ]
       }
     },
+    "/root/v4/postBody3-v4": {
+      "post": {
+        "tags": ["Test4"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "object",
+                    "properties": {
+                      "postBody1param1": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["postBody1param1"]
+                  }
+                },
+                "required": ["a"]
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
     "/root/getQueryParams1-v3": {
       "get": {
         "tags": ["Test3"],
@@ -824,6 +863,59 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/proto.LockRequest"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/root/postBody2-v3": {
+      "post": {
+        "tags": ["Test3"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "description": "接口返回code码字段"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "接口返回信息字段"
+                    }
+                  },
+                  "required": ["code", "data"]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "object",
+                    "properties": {
+                      "postBody1param1": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["postBody1param1"]
+                  }
+                },
+                "required": ["a"]
               }
             }
           },

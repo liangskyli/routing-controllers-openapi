@@ -492,6 +492,57 @@
           "required": true
         }
       }
+    },
+    "/postBody2-v3": {
+      "post": {
+        "tags": [
+          "Test3"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "description": "code info"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "message"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "a"
+                ]
+              }
+            }
+          },
+          "required": true
+        }
+      }
     }
   },
   "components": {

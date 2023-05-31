@@ -103,3 +103,7 @@ export type recordTest = {
   d: Date;
   // e: bigint;
 };
+
+export interface CustomizeExportByFilterRequest {
+  a: Omit<postBody1, 'tow'>;
+}
