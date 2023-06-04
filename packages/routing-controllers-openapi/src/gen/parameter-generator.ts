@@ -11,30 +11,36 @@ export interface Parameter {
   required?: boolean;
 }
 
-export class ParameterGenerator implements Parameter {
-  name: string;
-  schema: TypeSchema = {};
-  options?: DecoratorOptions;
-  required?: boolean;
+export class ParameterGenerator {
+  data: Omit<Parameter, 'schema'> & Pick<Partial<Parameter>, 'schema'>;
 
   private readonly node: ts.ParameterDeclaration;
   private readonly metadata: MetadataGenerator;
 
   constructor(node: ts.ParameterDeclaration, metadata: MetadataGenerator) {
+    this.data = {
+      name: '',
+    };
     this.node = node;
     this.metadata = metadata;
-    this.name = '';
     this.processDecorators();
   }
 
-  public isValid(): boolean {
-    return this.options !== undefined && this.options.paramIn !== undefined;
+  private isValid(): boolean {
+    return (
+      this.data.schema !== undefined &&
+      this.data.options !== undefined &&
+      this.data.options.paramIn !== undefined
+    );
   }
 
-  public generate(): Parameter {
-    this.name = this.name || this.node.name.getText();
+  public generate(): Parameter | undefined {
+    if (!this.isValid()) {
+      return undefined;
+    }
+    this.data.name = this.data.name || this.node.name.getText();
     this.processTokens();
-    return this;
+    return this.data as unknown as Parameter;
   }
 
   private processDecorators(): void {
@@ -43,22 +49,22 @@ export class ParameterGenerator implements Parameter {
         decorator.type === DecoratorType.Param ||
         decorator.type === DecoratorType.Body
       ) {
-        this.name = decorator.arguments?.[0];
-        this.options = decorator.options;
+        this.data.name = decorator.arguments?.[0];
+        this.data.options = decorator.options;
         if (this.node.type) {
           const type = this.metadata.typeChecker.getTypeFromTypeNode(
             this.node.type,
           );
-          this.schema = this.metadata.typeGenerator.getTypeSchema(type);
+          this.data.schema = this.metadata.typeGenerator.getTypeSchema(type);
         }
       } else if (decorator.type === DecoratorType.File) {
-        this.name = decorator.arguments?.[0];
-        this.options = decorator.options;
-        if (this.options?.wholeParam) {
-          this.schema = {
+        this.data.name = decorator.arguments?.[0];
+        this.data.options = decorator.options;
+        if (this.data.options?.wholeParam) {
+          this.data.schema = {
             type: 'object',
             properties: {
-              [this.name]: {
+              [this.data.name]: {
                 type: 'array',
                 items: {
                   type: 'string',
@@ -66,22 +72,22 @@ export class ParameterGenerator implements Parameter {
                 },
               },
             },
-            required: [this.name],
+            required: [this.data.name],
           };
         } else {
-          this.schema = { type: 'string', format: 'binary' };
+          this.data.schema = { type: 'string', format: 'binary' };
         }
       }
     });
   }
 
   private processTokens() {
-    if (this.node.initializer) {
-      this.schema.default = this.metadata.typeGenerator.getInitializerValue(
-        this.node.initializer,
-      );
+    if (this.node.initializer && this.data.schema) {
+      // if there has a default value, treat prop as optional
+      this.data.schema.default =
+        this.metadata.typeGenerator.getInitializerValue(this.node.initializer);
     } else if (!this.node.questionToken) {
-      this.required = true;
+      this.data.required = true;
     }
   }
 }

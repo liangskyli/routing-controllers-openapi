@@ -446,10 +446,31 @@
                           "type": "string"
                         },
                         "b": {
-                          "$ref": "#/components/schemas/commonResponse2"
+                          "type": "object",
+                          "properties": {
+                            "param1": {
+                              "description": "多行注释",
+                              "minimum": 1,
+                              "maximum": 10,
+                              "type": "number"
+                            }
+                          },
+                          "required": ["param1"]
+                        },
+                        "c": {
+                          "type": "object",
+                          "properties": {
+                            "param2": {
+                              "description": "多行注释",
+                              "minimum": 1,
+                              "maximum": 10,
+                              "type": "number"
+                            }
+                          },
+                          "required": ["param2"]
                         }
                       },
-                      "required": ["a3", "b"]
+                      "required": ["a3", "b", "c"]
                     },
                     "msg": {
                       "type": "string",
@@ -599,12 +620,6 @@
             "schema": {}
           },
           {
-            "name": "queryParam7",
-            "in": "query",
-            "required": true,
-            "schema": {}
-          },
-          {
             "name": "queryParam8",
             "in": "query",
             "schema": {
@@ -622,12 +637,14 @@
                 },
                 "b": {
                   "type": "string"
-                }
+                },
+                "c": {}
               },
-              "required": ["a", "b"],
+              "required": ["a", "b", "c"],
               "default": {
                 "a": "a",
-                "b": "b"
+                "b": "b",
+                "c": "c"
               }
             }
           },
@@ -824,6 +841,17 @@
             "in": "query",
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "name": "queryParam28",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 0,
+              "items": [],
+              "default": []
             }
           }
         ]
@@ -1102,12 +1130,6 @@
           },
           {
             "name": "queryParam6",
-            "in": "query",
-            "required": true,
-            "schema": {}
-          },
-          {
-            "name": "queryParam7",
             "in": "query",
             "required": true,
             "schema": {}
@@ -1465,6 +1487,18 @@
             }
           },
           {
+            "name": "param4",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "param5",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          },
+          {
             "name": "param1",
             "in": "cookie",
             "required": true,
@@ -1480,6 +1514,18 @@
             "schema": {
               "type": "null"
             }
+          },
+          {
+            "name": "param4",
+            "in": "cookie",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "param5",
+            "in": "cookie",
+            "required": true,
+            "schema": {}
           },
           {
             "name": "queryParam1",
@@ -2158,18 +2204,6 @@
         },
         "required": ["roomId"]
       },
-      "commonResponse2": {
-        "type": "object",
-        "properties": {
-          "param1": {
-            "description": "多行注释",
-            "minimum": 1,
-            "maximum": 10,
-            "type": "number"
-          }
-        },
-        "required": ["param1"]
-      },
       "IParam2": {
         "type": "object",
         "properties": {
@@ -2179,9 +2213,11 @@
           },
           "param2": {
             "type": "null"
-          }
+          },
+          "param4": {},
+          "param5": {}
         },
-        "required": ["param1", "param2"]
+        "required": ["param1", "param2", "param4", "param5"]
       },
       "recordTest": {
         "type": "object",
@@ -2324,9 +2360,11 @@
                   },
                   "param2": {
                     "type": "null"
-                  }
+                  },
+                  "param4": {},
+                  "param5": {}
                 },
-                "required": ["param1", "param2"]
+                "required": ["param1", "param2", "param4", "param5"]
               },
               {
                 "enum": ["1", "2", 3]

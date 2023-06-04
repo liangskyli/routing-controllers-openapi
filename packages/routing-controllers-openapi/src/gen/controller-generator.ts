@@ -80,8 +80,9 @@ export class ControllerGenerator implements Controller {
             this.metadata,
             this.name,
           );
-          if (generator.isValid()) {
-            this.methods.push(generator.generate());
+          const generatorData = generator.generate();
+          if (generatorData) {
+            this.methods.push(generatorData);
           }
         });
     }

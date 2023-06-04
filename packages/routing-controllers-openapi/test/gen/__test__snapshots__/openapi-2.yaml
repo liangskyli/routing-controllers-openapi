@@ -87,10 +87,6 @@ paths:
           in: query
           required: true
           schema: {}
-        - name: queryParam7
-          in: query
-          required: true
-          schema: {}
         - name: queryParam8
           in: query
           required: true
@@ -150,6 +146,10 @@ components:
           type: string
         param2:
           type: 'null'
+        param4: {}
+        param5: {}
       required:
         - param1
         - param2
+        - param4
+        - param5

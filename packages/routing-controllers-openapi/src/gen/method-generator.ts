@@ -52,11 +52,14 @@ export class MethodGenerator implements Method {
     this.processDecorators();
   }
 
-  public isValid() {
+  private isValid() {
     return this.routes && this.routes.length;
   }
 
-  public generate(): Method {
+  public generate(): Method | undefined {
+    if (!this.isValid()) {
+      return undefined;
+    }
     this.name = (this.node.name as ts.Identifier).text;
     this.processParameters();
     this.processReturnType();
@@ -96,14 +99,15 @@ export class MethodGenerator implements Method {
       .filter((m) => ts.isParameter(m))
       .forEach((parameter: ts.ParameterDeclaration) => {
         const generator = new ParameterGenerator(parameter, this.metadata);
-        if (generator.isValid()) {
-          this.parameters.push(generator.generate());
+        const generatorData = generator.generate();
+        if (generatorData) {
+          this.parameters.push(generatorData);
         }
       });
   }
 
   private processReturnType() {
     const type = this.metadata.typeChecker.getTypeFromTypeNode(this.node.type!);
-    this.returnSchema = this.metadata.typeGenerator.getTypeSchema(type);
+    this.returnSchema = this.metadata.typeGenerator.getTypeSchema(type) ?? {};
   }
 }

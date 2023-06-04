@@ -275,6 +275,18 @@
             }
           },
           {
+            "name": "param4",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "param5",
+            "in": "header",
+            "required": true,
+            "schema": {}
+          },
+          {
             "name": "param1",
             "in": "cookie",
             "required": true,
@@ -290,6 +302,18 @@
             "schema": {
               "type": "null"
             }
+          },
+          {
+            "name": "param4",
+            "in": "cookie",
+            "required": true,
+            "schema": {}
+          },
+          {
+            "name": "param5",
+            "in": "cookie",
+            "required": true,
+            "schema": {}
           },
           {
             "name": "queryParam1",
@@ -868,11 +892,15 @@
           },
           "param2": {
             "type": "null"
-          }
+          },
+          "param4": {},
+          "param5": {}
         },
         "required": [
           "param1",
-          "param2"
+          "param2",
+          "param4",
+          "param5"
         ]
       },
       "IParam3": {
@@ -962,11 +990,15 @@
                   },
                   "param2": {
                     "type": "null"
-                  }
+                  },
+                  "param4": {},
+                  "param5": {}
                 },
                 "required": [
                   "param1",
-                  "param2"
+                  "param2",
+                  "param4",
+                  "param5"
                 ]
               },
               {

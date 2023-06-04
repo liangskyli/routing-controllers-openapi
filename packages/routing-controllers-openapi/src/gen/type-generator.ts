@@ -61,7 +61,7 @@ export class TypeSchemaMap {
   getSchemaByRef(ref: string): TypeSchema {
     // ref must begin with #/components/schemas/
     const name = ref.match(REGEX_REF_PARSE_PREFIX)![1];
-    return this.schemasData[name] ?? {};
+    return this.schemasData[name];
   }
 
   // 生成schema
@@ -120,16 +120,12 @@ export class TypeSchemaMap {
           const uniqueRefName = scope['$ref'].replace(/#\/definitions\//g, '');
           const noMd5Name = uniqueRefName.replace(REGEX_UNIQUE_MD5, '');
           const symbolList = this.generatorJsonSchema.getSymbols(noMd5Name);
-          if (symbolList.length > 1) {
-            // no unique symbol to use schemaObj
-            this.genUniqueSchemaObj(uniqueRefName);
-            scope = this.schemasData[uniqueRefName];
-          } else if (symbolList.length === 1) {
+          if (symbolList.length === 1) {
             // only exist one symbol
             scope[key] = `${refParsePrefix}${noMd5Name}`;
             this.genSchema(noMd5Name);
           } else {
-            // no symbol to use schemaObj
+            // no symbol or no unique symbol to use schemaObj
             this.genSchema(refName, this.uniqueGeneratorJsonSchema!);
             const schemasData = this.schemasData[uniqueRefName];
             delete scope.$ref;
@@ -249,13 +245,14 @@ export class TypeGenerator {
     this.reffedSchemas = new TypeSchemaMap(this.metadata);
   }
 
-  public getTypeSchema(type: ts.Type, schema: TypeSchema = {}): TypeSchema {
+  public getTypeSchema(
+    type: ts.Type,
+    schema: TypeSchema | undefined = {},
+  ): TypeSchema | undefined {
     const schemaData = this.reffedSchemas.getSchemaData(type, this.typeChecker);
     if (schemaData) {
       return schemaData as TypeSchema;
     }
-
-    let returnSchema = schema;
 
     if (!type.symbol) {
       if (type.flags & PrimitiveTypeFlags) {
@@ -277,6 +274,12 @@ export class TypeGenerator {
       ) {
         // 元祖类型
         this.getTupleTypeSchema(<ts.TypeReference>type, schema);
+      } else if (type.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown)) {
+        // used a not recommended type
+        schema.type = undefined;
+      } else if (type.flags & ts.TypeFlags.Never) {
+        // when never need remove schema
+        schema = undefined;
       } else {
         schema.type = undefined;
         console.warn(
@@ -290,9 +293,8 @@ export class TypeGenerator {
           ts.ObjectFlags.Anonymous |
           ts.ObjectFlags.Interface)
       ) {
-        returnSchema =
-          this.getClassTypeSchema(<ts.TypeReference>type, schema) ||
-          returnSchema;
+        schema =
+          this.getClassTypeSchema(<ts.TypeReference>type, schema) || schema;
       } /*else if (
         (<ts.ObjectType>type).objectFlags & ts.ObjectFlags.Mapped
       ) {
@@ -314,8 +316,7 @@ export class TypeGenerator {
         ),
       );
     }
-
-    return returnSchema;
+    return schema;
   }
 
   private getUnionTypeSchema(unionType: ts.UnionType, schema: TypeSchema) {
@@ -337,7 +338,9 @@ export class TypeGenerator {
         }
       } else {
         const subSchema = this.getTypeSchema(subType);
-        schemas.push(subSchema);
+        if (subSchema) {
+          schemas.push(subSchema);
+        }
       }
     }
 
@@ -380,7 +383,10 @@ export class TypeGenerator {
   private getTupleTypeSchema(type: ts.TypeReference, schema: TypeSchema) {
     const items: TypeSchema[] = [];
     type.typeArguments?.forEach((item) => {
-      items.push(this.getTypeSchema(item));
+      const typeSchema = this.getTypeSchema(item);
+      if (typeSchema) {
+        items.push(typeSchema);
+      }
     });
     schema.items = items as any;
     schema.type = 'array';
@@ -394,14 +400,17 @@ export class TypeGenerator {
     schema.type = 'object';
     schema.allOf = [];
     for (const subType of type.types) {
-      schema.allOf.push(this.getTypeSchema(subType));
+      const subSchema = this.getTypeSchema(subType);
+      if (subSchema) {
+        schema.allOf.push(subSchema);
+      }
     }
   }
 
   private getClassTypeSchema(
     type: ts.TypeReference,
     schema: TypeSchema,
-  ): TypeSchema | void {
+  ): TypeSchema | undefined {
     if (type.typeArguments && type.typeArguments.length) {
       return this.getGenericTypeSchema(type, schema);
     }
@@ -423,20 +432,17 @@ export class TypeGenerator {
             prop,
             typeDeclNode!,
           );
-          const subSchema = (schema.properties[prop.name] =
-            this.getTypeSchema(subType));
-
+          const subSchema = this.getTypeSchema(subType);
+          if (subSchema) {
+            schema.properties[prop.name] = subSchema;
+          }
           const comments = prop.getDocumentationComment(this.typeChecker);
-          if (comments.length) {
+          if (comments.length && subSchema) {
             subSchema.description = ts.displayPartsToString(comments).trim();
           }
 
-          if (propDeclNode.initializer) {
-            subSchema.default = this.getInitializerValue(
-              propDeclNode.initializer,
-            );
-            // if there has a default value, treat prop as optional
-          } else if (!propDeclNode.questionToken) {
+          // default value not exist, so no need process propDeclNode.initializer
+          if (!propDeclNode.questionToken) {
             if (!schema.required) {
               schema.required = [];
             }
@@ -449,12 +455,13 @@ export class TypeGenerator {
     } else if (!(type.symbol.flags & ts.SymbolFlags.TypeLiteral)) {
       console.warn(colors.yellow('no members in class declaration'));
     }
+    return schema;
   }
 
   private getGenericTypeSchema(
     type: ts.TypeReference,
     schema: TypeSchema,
-  ): TypeSchema | void {
+  ): TypeSchema | undefined {
     if (type.symbol.name === 'Promise' && type.typeArguments?.length === 1) {
       return this.getTypeSchema(type.typeArguments[0], schema);
     } else if (
@@ -462,12 +469,15 @@ export class TypeGenerator {
       type.typeArguments?.length === 1
     ) {
       schema.type = 'array';
-      schema.items = this.getTypeSchema(type.typeArguments[0]);
-    } else if (type.symbol.name === 'Map' && type.typeArguments?.length === 2) {
-      schema.type = 'object';
-      schema.properties = {};
-      schema.additionalProperties = this.getTypeSchema(type.typeArguments[1]);
-      // need handle 'K' type?
+      const typeSchema = this.getTypeSchema(type.typeArguments[0]);
+      if (typeSchema) {
+        schema.items = typeSchema;
+      } else {
+        schema.minItems = 0;
+        schema.maxItems = 0;
+        // @ts-ignore
+        schema.items = [];
+      }
     } else {
       console.warn(
         colors.yellow(
@@ -475,6 +485,7 @@ export class TypeGenerator {
         ),
       );
     }
+    return schema;
   }
 
   public getInitializerValue(node: ts.Expression): any {

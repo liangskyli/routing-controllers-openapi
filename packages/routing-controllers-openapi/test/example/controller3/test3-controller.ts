@@ -18,7 +18,11 @@ import type {
 } from '../types/types';
 import type * as types2 from '../types/types-2';
 
-export type commonResponse = { a3: string; b: commonResponse2 };
+export type commonResponse = {
+  a3: string;
+  b: commonResponse2;
+  c: types2.commonResponse2;
+};
 
 /**
  * Test3Controller 注释3
@@ -42,7 +46,11 @@ export default class Test3Controller {
     @QueryParam('queryParam7') queryParam7: never,
     @QueryParam('queryParam8') queryParam8?: otherParam,
     @QueryParam('queryParam9')
-    queryParam9: { a: string; b: string } = { a: 'a', b: 'b' },
+    queryParam9: { a: string; b: string; c: unknown; d?: never } = {
+      a: 'a',
+      b: 'b',
+      c: 'c',
+    },
     @QueryParam('queryParam10') queryParam10?: '1' | '2' | 3 | true,
     @QueryParam('queryParam11') queryParam11?: '1' | '2' | 3 | true | false,
     @QueryParam('queryParam12') queryParam12?: '1' | '2' | 3 | boolean,
@@ -64,6 +72,7 @@ export default class Test3Controller {
     @QueryParam('queryParam26') queryParam26: boolean = true,
     // @ts-ignore
     @QueryParam('queryParam27') queryParam27: boolean = false1,
+    @QueryParam('queryParam28') queryParam28: never[] = [],
   ): Promise<{ a33: string }> {
     return Promise.resolve({ a33: '1' });
   }

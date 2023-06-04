@@ -27,10 +27,29 @@ paths:
                   a3:
                     type: string
                   b:
-                    $ref: '#/components/schemas/commonResponse2'
+                    type: object
+                    properties:
+                      param1:
+                        description: 多行注释
+                        minimum: 1
+                        maximum: 10
+                        type: number
+                    required:
+                      - param1
+                  c:
+                    type: object
+                    properties:
+                      param2:
+                        description: 多行注释
+                        minimum: 1
+                        maximum: 10
+                        type: number
+                    required:
+                      - param2
                 required:
                   - a3
                   - b
+                  - c
       parameters:
         - name: activityBases
           in: query
@@ -105,10 +124,6 @@ paths:
           in: query
           required: true
           schema: {}
-        - name: queryParam7
-          in: query
-          required: true
-          schema: {}
         - name: queryParam8
           in: query
           schema:
@@ -122,12 +137,15 @@ paths:
                 type: string
               b:
                 type: string
+              c: {}
             required:
               - a
               - b
+              - c
             default:
               a: a
               b: b
+              c: c
         - name: queryParam10
           in: query
           schema:
@@ -264,6 +282,14 @@ paths:
           in: query
           schema:
             type: boolean
+        - name: queryParam28
+          in: query
+          schema:
+            type: array
+            minItems: 0
+            maxItems: 0
+            items: []
+            default: []
   /postBody1-v3:
     post:
       tags:
@@ -337,16 +363,6 @@ components:
               type: boolean
           required:
             - customerCount
-    commonResponse2:
-      type: object
-      properties:
-        param1:
-          description: 多行注释
-          minimum: 1
-          maximum: 10
-          type: number
-      required:
-        - param1
     IParam2:
       type: object
       properties:
@@ -355,9 +371,13 @@ components:
           type: string
         param2:
           type: 'null'
+        param4: {}
+        param5: {}
       required:
         - param1
         - param2
+        - param4
+        - param5
     recordTest:
       type: object
       properties:

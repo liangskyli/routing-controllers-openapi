@@ -297,7 +297,7 @@ export function processDecorators(
   const decorators = ts.canHaveDecorators(node)
     ? ts.getDecorators(node)
     : undefined;
-  if (!decorators || !decorators.length) {
+  if (!decorators) {
     return;
   }
 

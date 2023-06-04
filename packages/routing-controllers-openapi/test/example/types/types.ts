@@ -63,6 +63,9 @@ export type IParam2 = {
   /** 单行注释 */
   param1: string;
   param2: null;
+  param3: never;
+  param4: any;
+  param5: unknown;
   // paramTuple3: [string,number];
 };
 export type IParam3 = {

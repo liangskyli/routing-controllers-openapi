@@ -181,12 +181,6 @@
             "schema": {}
           },
           {
-            "name": "queryParam7",
-            "in": "query",
-            "required": true,
-            "schema": {}
-          },
-          {
             "name": "queryParam8",
             "in": "query",
             "schema": {
@@ -204,15 +198,18 @@
                 },
                 "b": {
                   "type": "string"
-                }
+                },
+                "c": {}
               },
               "required": [
                 "a",
-                "b"
+                "b",
+                "c"
               ],
               "default": {
                 "a": "a",
-                "b": "b"
+                "b": "b",
+                "c": "c"
               }
             }
           },
@@ -446,6 +443,17 @@
             "schema": {
               "type": "boolean"
             }
+          },
+          {
+            "name": "queryParam28",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 0,
+              "items": [],
+              "default": []
+            }
           }
         ]
       }
@@ -604,20 +612,6 @@
           }
         ]
       },
-      "commonResponse2": {
-        "type": "object",
-        "properties": {
-          "param1": {
-            "description": "多行注释",
-            "minimum": 1,
-            "maximum": 10,
-            "type": "number"
-          }
-        },
-        "required": [
-          "param1"
-        ]
-      },
       "IParam2": {
         "type": "object",
         "properties": {
@@ -627,11 +621,15 @@
           },
           "param2": {
             "type": "null"
-          }
+          },
+          "param4": {},
+          "param5": {}
         },
         "required": [
           "param1",
-          "param2"
+          "param2",
+          "param4",
+          "param5"
         ]
       },
       "recordTest": {

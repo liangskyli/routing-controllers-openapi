@@ -32,3 +32,12 @@ export interface InterFaceSameAll extends InterFaceSame {}
 // eslint-disable-next-line  @typescript-eslint/no-empty-interface
 export interface InterfaceAndNamespaceSameAll
   extends proto.InterfaceAndNamespaceSame {}
+
+export interface commonResponse2 {
+  /**
+   * 多行注释
+   * @minimum 1
+   * @maximum 10
+   * */
+  param2: number;
+}
