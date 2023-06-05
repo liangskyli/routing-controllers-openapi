@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.5.0...v0.5.1) (2023-06-05)
+
+
+### Features
+
+* support same type name generator schema data,any and unknown type generator,never no generator ([a94b2e3](https://github.com/liangskyli/routing-controllers-openapi/commit/a94b2e39818b043f0e8da7a51e3c8779dd1489d4))
+
+
+### Bug Fixes
+
+* set typeUniqueNames false, generator schema bug ([ebdf07c](https://github.com/liangskyli/routing-controllers-openapi/commit/ebdf07c67dd4737838911311d678247f3a732854))
+
+
+
 ## [0.5.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.4.1...v0.5.0) (2023-05-28)
 
 
