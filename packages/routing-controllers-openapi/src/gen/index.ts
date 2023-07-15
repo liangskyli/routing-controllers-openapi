@@ -19,7 +19,7 @@ export type IGenOpenapiDataOptsCLI =
   | IGenOpenapiDataOpts
   | IGenOpenapiDataOpts[];
 
-const genOpenapiData = (opts: IGenOpenapiDataOpts) => {
+const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   const {
     genOpenapiDir = './',
     controllers,
@@ -61,7 +61,7 @@ const genOpenapiData = (opts: IGenOpenapiDataOpts) => {
     `openapi-v3.${genOpenApiOption.genOpenapiType}`,
   );
 
-  writePrettierFile({
+  await writePrettierFile({
     absolutePath: openApiV3Path,
     prettierOptions,
     data: specOpenapiString,

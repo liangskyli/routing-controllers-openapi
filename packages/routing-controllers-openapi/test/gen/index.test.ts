@@ -5,7 +5,7 @@ import genOpenapiData from '../../src/gen/index';
 
 describe('genOpenapiData', () => {
   test('genOpenapiData-1', async () => {
-    genOpenapiData({
+    await genOpenapiData({
       genOpenapiDir: './test/all-gen-dirs/gen-openapi-dir',
       controllers: ['./test/example/controller*/**/*.ts'],
       routePrefix: '/root',
@@ -52,7 +52,7 @@ describe('genOpenapiData', () => {
     );
   });
   test('genOpenapiData-2', async () => {
-    genOpenapiData({
+    await genOpenapiData({
       genOpenapiDir: './test/all-gen-dirs/gen-openapi-dir',
       controllers: ['./test/example/controller*/**/*.ts'],
       routePrefix: '/root',
@@ -103,6 +103,6 @@ describe('genOpenapiData', () => {
         routePrefix: '/root',
         typeUniqueNames: false,
       }),
-    ).toThrow('genOpenapiDir not exits!');
+    ).rejects.toThrowError('genOpenapiDir not exits!');
   });
 });
