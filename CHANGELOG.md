@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.5.1...v0.6.0) (2023-07-15)
+
+
+### Features
+
+* upgrade dependencies and support prettier v3 ([983c0ba](https://github.com/liangskyli/routing-controllers-openapi/commit/983c0ba5cdbffee2a33d12633b9dd1ed39b0ea49))
+
+
+
 ## [0.5.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.5.0...v0.5.1) (2023-06-05)
 
 
