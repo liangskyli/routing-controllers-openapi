@@ -16,6 +16,11 @@
 yarn add @liangskyli/routing-controllers-openapi --dev
 ```
 
+如果项目没有安装prettier，需要安装prettier(^2.0.0 || ^3.0.0)
+```bash
+yarn add prettier --dev
+```
+
 # 生成方式:
 ## 1、CLI 命令方式（推荐）
 
