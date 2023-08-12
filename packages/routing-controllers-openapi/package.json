@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/js-yaml": "^4.0.5",
-    "@types/koa": "^2.13.6",
+    "@types/koa": "^2.13.8",
     "koa": "^2.14.2",
     "routing-controllers": "^0.10.4",
     "typedi": "^0.10.0"
