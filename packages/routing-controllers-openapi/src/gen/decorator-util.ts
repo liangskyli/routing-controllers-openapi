@@ -229,7 +229,7 @@ class Decorator implements DecoratorMetadata {
     this.metadata = metadata;
     this.options = {};
     const typeChecker = metadata.typeChecker;
-    const sourceFileToPackageName: ts.Map<string> = (<any>metadata.program)
+    const sourceFileToPackageName: Map<string, string> = (<any>metadata.program)
       .sourceFileToPackageName;
     const expression = <ts.CallExpression>this.node.expression;
     const signature = typeChecker.getResolvedSignature(expression);
