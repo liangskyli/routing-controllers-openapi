@@ -37,18 +37,18 @@
   },
   "dependencies": {
     "@liangskyli/utils": "^3.0.0",
-    "commander": "^11.0.0",
+    "commander": "^11.1.0",
     "fs-extra": "^11.1.1",
-    "glob": "^10.3.4",
+    "glob": "^10.3.10",
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^4.1.2",
     "typescript": "~5.1.0",
-    "typescript-json-schema": "^0.60.0"
+    "typescript-json-schema": "^0.62.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@types/js-yaml": "^4.0.5",
-    "@types/koa": "^2.13.8",
+    "@types/fs-extra": "^11.0.2",
+    "@types/js-yaml": "^4.0.7",
+    "@types/koa": "^2.13.9",
     "koa": "^2.14.2",
     "routing-controllers": "^0.10.4",
     "typedi": "^0.10.0"
