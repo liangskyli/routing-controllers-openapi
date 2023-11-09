@@ -71,14 +71,15 @@ yarn gen-openapi -c ./openapi.config2.ts
 | package | 包名或路径前缀 `string`                            |      |
 
 - configFile openapi生成配置文件示例
+  - 使用defineConfig定义配置支持ts类型
 
 ```ts
-import type { IGenOpenapiDataOpts } from '@liangskyli/routing-controllers-openapi';
+import { defineConfig } from '@liangskyli/routing-controllers-openapi';
 
-const config: IGenOpenapiDataOpts = {
+export default defineConfig({
   genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-1',
   controllers: ['./test/example/controller*/**/*.ts'],
-  routePrefix: '/root', 
+  routePrefix: '/root',
   // genOpenapiType: 'yaml',
   // 自定义统一 response 返回结构（可选）
   responseSchema: {
@@ -96,8 +97,7 @@ const config: IGenOpenapiDataOpts = {
     },
     required: ['code', 'data'],
   },
-};
-export default config;
+});
 ```
 
 # 生成openapi文件结构指引
