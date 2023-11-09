@@ -1,6 +1,6 @@
-import type { IGenOpenapiDataOptsCLI } from '../../lib';
+import { defineConfig } from '../../lib/index.esm';
 
-const config: IGenOpenapiDataOptsCLI = [
+export default defineConfig([
   {
     genOpenapiDir: './test/all-gen-dirs/gen-openapi-cli-1',
     controllers: ['./test/example/controller*/**/*.ts'],
@@ -53,5 +53,4 @@ const config: IGenOpenapiDataOptsCLI = [
       required: ['code', 'data'],
     },
   },
-];
-export default config;
+]);
