@@ -71,7 +71,7 @@ yarn gen-openapi -c ./openapi.config2.ts
 | package | 包名或路径前缀 `string`                            |      |
 
 - configFile openapi生成配置文件示例
-  - 使用defineConfig定义配置支持ts类型
+  - 配置文件支持使用defineConfig定义ts类型
 
 ```ts
 import { defineConfig } from '@liangskyli/routing-controllers-openapi';
