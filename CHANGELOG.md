@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.0...v0.7.1) (2023-12-03)
+
+
+### Features
+
+* add defineConfig config support ts type ([48f312c](https://github.com/liangskyli/routing-controllers-openapi/commit/48f312c45447407ac99223caa74fc40ac3636317))
+
+
+
 ## [0.7.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.6.0...v0.7.0) (2023-10-14)
 
 **Note:** Version bump only for package root
