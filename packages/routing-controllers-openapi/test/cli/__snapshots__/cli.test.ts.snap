@@ -1,6 +1,16 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`CLI > CLI test 1`] = `
+exports[`CLI > CLI test cjs 1`] = `
+"[32muse configFile path: ./test/cli/openapi.config.ts[39m
+[32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m
+[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m
+[32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-2/openapi[39m
+[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-2/openapi[39m
+[32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-3/openapi[39m
+[32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-3/openapi[39m"
+`;
+
+exports[`CLI > CLI test esm 1`] = `
 "[32muse configFile path: ./test/cli/openapi.config.ts[39m
 [32mClean openapi dir: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m
 [32mgen openapi success: test/all-gen-dirs/gen-openapi-cli-1/openapi[39m

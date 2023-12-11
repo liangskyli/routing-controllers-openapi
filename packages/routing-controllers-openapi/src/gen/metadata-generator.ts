@@ -1,4 +1,4 @@
-import * as ts from 'typescript';
+import ts from 'typescript';
 import * as TJS from 'typescript-json-schema';
 import type { Controller } from './controller-generator';
 import { ControllerGenerator } from './controller-generator';

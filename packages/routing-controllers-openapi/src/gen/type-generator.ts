@@ -1,6 +1,6 @@
 import { colors, lodash } from '@liangskyli/utils';
 import type { oas31 as oa } from 'openapi3-ts';
-import * as ts from 'typescript';
+import ts from 'typescript';
 import type { Definition } from 'typescript-json-schema';
 import * as TJS from 'typescript-json-schema';
 import type { MetadataGenerator } from './metadata-generator';

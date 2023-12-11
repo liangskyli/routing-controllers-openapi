@@ -1,6 +1,6 @@
 import { colors } from '@liangskyli/utils';
 import type { oas31 as oa } from 'openapi3-ts';
-import * as ts from 'typescript';
+import ts from 'typescript';
 import type { MetadataGenerator } from './metadata-generator';
 
 export enum DecoratorType {

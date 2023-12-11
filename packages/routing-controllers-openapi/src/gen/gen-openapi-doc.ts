@@ -1,17 +1,20 @@
 import fs from 'fs-extra';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { oas31 as oa } from 'openapi3-ts';
-import path from 'path';
 import type ts from 'typescript';
 import { SwaggerSpecBuilder } from '../build/swagger-spec-builder';
 import { getFilesFromControllers } from '../utils';
 import { MetadataGenerator } from './metadata-generator';
 
+const curDirName = path.dirname(fileURLToPath(import.meta.url));
+
 const getPackageJsonInfo = () => {
   // 因rollup构建后，文件目录位置变更
-  let packageJsonPath = path.join(__dirname, '../../package.json');
+  let packageJsonPath = path.join(curDirName, '../../package.json');
   if (!fs.pathExistsSync(packageJsonPath)) {
     // build path
-    packageJsonPath = path.join(__dirname, '../package.json');
+    packageJsonPath = path.join(curDirName, '../package.json');
   }
   const packageJson = fs.readJSONSync(packageJsonPath);
   const { name, version } = packageJson;
