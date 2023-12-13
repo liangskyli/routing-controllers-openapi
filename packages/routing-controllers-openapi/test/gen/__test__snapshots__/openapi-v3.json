@@ -1499,6 +1499,27 @@
             "schema": {}
           },
           {
+            "name": "param6",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          },
+          {
             "name": "param1",
             "in": "cookie",
             "required": true,
@@ -1526,6 +1547,27 @@
             "in": "cookie",
             "required": true,
             "schema": {}
+          },
+          {
+            "name": "param6",
+            "in": "cookie",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
           },
           {
             "name": "queryParam1",
@@ -2215,9 +2257,25 @@
             "type": "null"
           },
           "param4": {},
-          "param5": {}
+          "param5": {},
+          "param6": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
         },
-        "required": ["param1", "param2", "param4", "param5"]
+        "required": ["param1", "param2", "param4", "param5", "param6"]
       },
       "recordTest": {
         "type": "object",
@@ -2362,9 +2420,25 @@
                     "type": "null"
                   },
                   "param4": {},
-                  "param5": {}
+                  "param5": {},
+                  "param6": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ],
+                      "minItems": 2,
+                      "maxItems": 2
+                    }
+                  }
                 },
-                "required": ["param1", "param2", "param4", "param5"]
+                "required": ["param1", "param2", "param4", "param5", "param6"]
               },
               {
                 "enum": ["1", "2", 3]

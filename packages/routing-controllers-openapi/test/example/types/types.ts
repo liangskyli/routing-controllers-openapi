@@ -66,6 +66,7 @@ export type IParam2 = {
   param3: never;
   param4: any;
   param5: unknown;
+  param6: [string, boolean][];
   // paramTuple3: [string,number];
 };
 export type IParam3 = {

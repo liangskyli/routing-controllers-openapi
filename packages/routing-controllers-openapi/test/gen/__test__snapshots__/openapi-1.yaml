@@ -27,7 +27,7 @@ paths:
           required: true
           schema:
             type: array
-            items: &ref_1
+            items: &ref_2
               $ref: '#/components/schemas/ActivityBase'
           description: activityBases
   /root/v1/getQueryParams2:
@@ -148,7 +148,7 @@ paths:
           description: Success
           content:
             application/json:
-              schema: &ref_2
+              schema: &ref_3
                 $ref: '#/components/schemas/Response1'
       parameters:
         - name: param1
@@ -170,6 +170,18 @@ paths:
           in: header
           required: true
           schema: {}
+        - name: param6
+          in: header
+          required: true
+          schema:
+            type: array
+            items: &ref_1
+              type: array
+              items:
+                - type: string
+                - type: boolean
+              minItems: 2
+              maxItems: 2
         - name: param1
           in: cookie
           required: true
@@ -189,6 +201,12 @@ paths:
           in: cookie
           required: true
           schema: {}
+        - name: param6
+          in: cookie
+          required: true
+          schema:
+            type: array
+            items: *ref_1
         - name: queryParam1
           in: query
           required: true
@@ -204,7 +222,7 @@ paths:
           required: true
           schema:
             type: array
-            items: *ref_1
+            items: *ref_2
           description: activityBases
         - name: path1
           in: path
@@ -281,7 +299,7 @@ paths:
           description: Success
           content:
             application/json:
-              schema: *ref_2
+              schema: *ref_3
       parameters:
         - name: queryParam1
           in: query
@@ -358,7 +376,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &ref_3
+            schema: &ref_4
               $ref: '#/components/schemas/IParam2'
         required: true
   /root/v1/postBody3:
@@ -374,7 +392,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &ref_4
+            schema: &ref_5
               $ref: '#/components/schemas/IParam3'
         required: true
   /root/v1/postBody4:
@@ -389,7 +407,7 @@ paths:
               schema:
                 anyOf:
                   - *ref_0
-                  - *ref_2
+                  - *ref_3
       requestBody:
         content:
           application/json:
@@ -408,7 +426,7 @@ paths:
               schema:
                 anyOf:
                   - *ref_0
-                  - *ref_2
+                  - *ref_3
       requestBody:
         content:
           application/json:
@@ -444,7 +462,7 @@ paths:
                 type: object
                 allOf:
                   - *ref_0
-                  - *ref_2
+                  - *ref_3
       requestBody:
         content:
           application/json:
@@ -453,8 +471,8 @@ paths:
               properties:
                 BodyParam1:
                   $ref: '#/components/schemas/BodyParam1'
-                BodyParam2: *ref_3
-                BodyParam3: *ref_4
+                BodyParam2: *ref_4
+                BodyParam3: *ref_5
                 BodyParam4:
                   $ref: '#/components/schemas/IParam4'
                 BodyParam5:
@@ -477,7 +495,7 @@ components:
         activityBases:
           description: activityBases
           type: array
-          items: *ref_1
+          items: *ref_2
       required:
         - activityBases
     ActivityBase:
@@ -533,11 +551,15 @@ components:
           type: 'null'
         param4: {}
         param5: {}
+        param6:
+          type: array
+          items: *ref_1
       required:
         - param1
         - param2
         - param4
         - param5
+        - param6
     IParam3:
       type: object
       properties:
@@ -596,11 +618,21 @@ components:
                   type: 'null'
                 param4: {}
                 param5: {}
+                param6:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      - type: string
+                      - type: boolean
+                    minItems: 2
+                    maxItems: 2
               required:
                 - param1
                 - param2
                 - param4
                 - param5
+                - param6
             - enum:
                 - '1'
                 - '2'
