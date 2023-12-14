@@ -30,6 +30,22 @@ paths:
             items: &ref_2
               $ref: '#/components/schemas/ActivityBase'
           description: activityBases
+    post:
+      tags:
+        - Test1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commonResponse3'
+      requestBody:
+        content:
+          application/json:
+            schema: &ref_4
+              $ref: '#/components/schemas/getQueryParams1Request'
+        required: true
   /root/v1/getQueryParams2:
     get:
       tags:
@@ -376,7 +392,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &ref_4
+            schema: &ref_5
               $ref: '#/components/schemas/IParam2'
         required: true
   /root/v1/postBody3:
@@ -392,7 +408,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &ref_5
+            schema: &ref_6
               $ref: '#/components/schemas/IParam3'
         required: true
   /root/v1/postBody4:
@@ -411,8 +427,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/getQueryParams1Request'
+            schema: *ref_4
         required: true
   /root/v1/postBody5:
     post:
@@ -471,8 +486,8 @@ paths:
               properties:
                 BodyParam1:
                   $ref: '#/components/schemas/BodyParam1'
-                BodyParam2: *ref_4
-                BodyParam3: *ref_5
+                BodyParam2: *ref_5
+                BodyParam3: *ref_6
                 BodyParam4:
                   $ref: '#/components/schemas/IParam4'
                 BodyParam5:
@@ -531,6 +546,13 @@ components:
           type: string
       required:
         - a
+    commonResponse3:
+      type: object
+      properties:
+        a2:
+          type: string
+      required:
+        - a2
     IParam1:
       type: object
       properties:

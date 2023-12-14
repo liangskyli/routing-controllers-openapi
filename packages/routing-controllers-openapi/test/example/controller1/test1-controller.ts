@@ -23,6 +23,7 @@ import type {
   IParam4,
   Response1,
   commonResponse,
+  commonResponse3,
   getQueryParams1Request,
   getUserRequest,
   postBody1,
@@ -33,6 +34,11 @@ export default class Test1Controller {
   @Get('/getQueryParams1')
   getQueryParams1(@QueryParams() data: getQueryParams1Request): commonResponse {
     return { a: '1' };
+  }
+
+  @Post('/getQueryParams1')
+  postQueryParams1(@Body() data: getQueryParams1Request): commonResponse3 {
+    return { a2: '1' };
   }
 
   @Get('/getQueryParams2')

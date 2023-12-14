@@ -45,6 +45,33 @@
             "description": "activityBases"
           }
         ]
+      },
+      "post": {
+        "tags": [
+          "Test1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonResponse3"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/getQueryParams1Request"
+              }
+            }
+          },
+          "required": true
+        }
       }
     },
     "/root/v1/getQueryParams2": {
@@ -909,6 +936,17 @@
         },
         "required": [
           "a"
+        ]
+      },
+      "commonResponse3": {
+        "type": "object",
+        "properties": {
+          "a2": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "a2"
         ]
       },
       "IParam1": {

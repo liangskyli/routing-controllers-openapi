@@ -125,13 +125,13 @@ describe('genOpenapiDoc', () => {
       './__test__snapshots__/openapi-5.json',
     );
   });
-  test('genOpenapiDoc-6 multiple path', () => {
+  test('genOpenapiDoc-6 same method multiple path', () => {
     expect(() =>
       genOpenapiDoc(['./test/example/error/multiple-path/**/*.ts'], {
         genOpenapiType: 'json',
         typeUniqueNames: false,
       }),
-    ).toThrow('exist path "/v2/getQueryParams1-v2"');
+    ).toThrow('exist path "/v2/getQueryParams1-v2" have same method "get"');
   });
   test('genOpenapiDoc-7 multiple parameters', () => {
     expect(() =>

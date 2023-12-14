@@ -1209,6 +1209,55 @@
             "description": "activityBases"
           }
         ]
+      },
+      "post": {
+        "tags": ["Test1"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "description": "接口返回code码字段"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/commonResponse3"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "接口返回信息字段"
+                    }
+                  },
+                  "required": ["code", "data"]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "activityBases": {
+                    "description": "activityBases",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ActivityBase"
+                    }
+                  }
+                },
+                "required": ["activityBases"]
+              }
+            }
+          },
+          "required": true
+        }
       }
     },
     "/root/v1/getQueryParams2": {
@@ -2340,6 +2389,15 @@
           }
         },
         "required": ["id", "name"]
+      },
+      "commonResponse3": {
+        "type": "object",
+        "properties": {
+          "a2": {
+            "type": "string"
+          }
+        },
+        "required": ["a2"]
       },
       "IParam1": {
         "type": "object",

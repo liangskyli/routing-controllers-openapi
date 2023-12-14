@@ -37,6 +37,7 @@ export type IUserWithId = string | Partial<Pick<IUser, 'id'>>;
 export type IUserWithName = Required<Pick<IUser, 'name'>>;
 
 export type commonResponse = { a: string };
+export type commonResponse3 = { a2: string };
 export interface getQueryParams1Request {
   /** activityBases */
   activityBases: ActivityBase[];
