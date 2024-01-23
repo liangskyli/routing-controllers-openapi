@@ -46,20 +46,20 @@
     "update:deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
-    "@liangskyli/utils": "^3.2.0-beta.0",
+    "@liangskyli/utils": "3.2.0-beta.0",
     "commander": "^11.1.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "js-yaml": "^4.1.0",
-    "openapi3-ts": "^4.1.2",
+    "openapi3-ts": "^4.2.1",
     "typescript": "~5.1.0",
     "typescript-json-schema": "^0.62.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/js-yaml": "^4.0.9",
-    "@types/koa": "^2.13.12",
-    "koa": "^2.14.2",
+    "@types/koa": "^2.14.0",
+    "koa": "^2.15.0",
     "routing-controllers": "^0.10.4",
     "typedi": "^0.10.0"
   },
