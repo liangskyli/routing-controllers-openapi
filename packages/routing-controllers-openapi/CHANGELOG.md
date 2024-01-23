@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.1...v0.7.2) (2024-01-23)
+
+
+### Features
+
+* add "type": "module" as default,for support esm ([167fb03](https://github.com/liangskyli/routing-controllers-openapi/commit/167fb034b9047d841bf9c66dbf7ef2f7a1767137))
+* support same path generator multiple method ([2282a7e](https://github.com/liangskyli/routing-controllers-openapi/commit/2282a7e816b2936adce5ed8b7e2c9f931702fe70))
+
+
+
 ## [0.7.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.0...v0.7.1) (2023-12-03)
 
 
