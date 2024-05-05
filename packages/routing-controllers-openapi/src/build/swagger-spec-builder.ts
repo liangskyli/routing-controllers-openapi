@@ -163,7 +163,7 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
                 }
               }
             }
-            operation.responses['200'].content = {
+            operation.responses!['200'].content = {
               [responseMediaType]: {
                 schema:
                   newResponseSchema ??
