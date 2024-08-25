@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.2...v0.8.0) (2024-08-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop node < 18, support node>=18
+
+### Miscellaneous Chores
+
+* upgrade dependencies,node to v18,pnpm to v9 ([2d7d2fa](https://github.com/liangskyli/routing-controllers-openapi/commit/2d7d2fa5dad989bcd3b7416c7d2ea4f6e2214d42))
+
+
+
 ## [0.7.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.1...v0.7.2) (2024-01-23)
 
 
