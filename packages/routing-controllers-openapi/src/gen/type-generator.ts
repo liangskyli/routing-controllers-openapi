@@ -370,8 +370,8 @@ export class TypeGenerator {
 
     if (schemas.length === 1) {
       for (const key in schemas[0]) {
-        if (schemas[0].hasOwnProperty(key)) {
-          // @ts-ignore
+        if (Object.prototype.hasOwnProperty.call(schemas[0], key)) {
+          // @ts-expect-error own property
           schema[key] = schemas[0][key];
         }
       }
@@ -475,7 +475,7 @@ export class TypeGenerator {
       } else {
         schema.minItems = 0;
         schema.maxItems = 0;
-        // @ts-ignore
+        // @ts-expect-error only empty array
         schema.items = [];
       }
     } else {

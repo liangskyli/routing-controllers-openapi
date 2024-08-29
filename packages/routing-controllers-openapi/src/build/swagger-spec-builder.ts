@@ -95,7 +95,10 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
             if (schema.properties) {
               for (const name in schema.properties) {
                 if (
-                  schema.properties.hasOwnProperty(name) &&
+                  Object.prototype.hasOwnProperty.call(
+                    schema.properties,
+                    name,
+                  ) &&
                   parameter.options.paramIn
                 ) {
                   paramObjs.push(
@@ -227,9 +230,9 @@ export class SwaggerSpecBuilder extends OpenapiBuilder {
 
     paramObj.schema = {};
     for (const key in schema) {
-      if (schema.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(schema, key)) {
         if (key !== 'description') {
-          // @ts-ignore
+          // @ts-expect-error not description key
           paramObj.schema[key] = schema[key];
         } else {
           paramObj[key] = schema[key];
