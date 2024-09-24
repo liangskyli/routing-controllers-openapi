@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3-beta.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.2...v0.7.3-beta.0) (2024-09-24)
+
+
+### Features
+
+* support set custom routing libraries name，default is routing-controllers ([eb80b46](https://github.com/liangskyli/routing-controllers-openapi/commit/eb80b4679d5428020928cc280ff5640515e303af))
+
+
+
 ## [0.7.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.1...v0.7.2) (2024-01-23)
 
 
