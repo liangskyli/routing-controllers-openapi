@@ -16,190 +16,208 @@ export enum DecoratorType {
   Omit,
 }
 
-const knownDecorators: DecoratorMetadata[] = [
-  {
-    package: 'routing-controllers',
-    name: 'Controller',
-    type: DecoratorType.Controller,
-    options: {
-      mediaType: 'text/plain',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'JsonController',
-    type: DecoratorType.Controller,
-    options: {
-      mediaType: 'application/json',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Get',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Put',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Post',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Delete',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Head',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Patch',
-    type: DecoratorType.Action,
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Param',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'path',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Params',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'path',
-      wholeParam: true,
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'QueryParam',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'query',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'QueryParams',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'query',
-      wholeParam: true,
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'HeaderParam',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'header',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'HeaderParams',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'header',
-      wholeParam: true,
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'CookieParam',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'cookie',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'CookieParams',
-    type: DecoratorType.Param,
-    options: {
-      paramIn: 'cookie',
-      wholeParam: true,
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'BodyParam',
-    type: DecoratorType.Body,
-    options: {
-      paramIn: 'body',
-      mediaType: 'application/json',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'Body',
-    type: DecoratorType.Body,
-    options: {
-      paramIn: 'body',
-      mediaType: 'application/json',
-      wholeParam: true,
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'UploadedFile',
-    type: DecoratorType.File,
-    options: {
-      mediaType: 'multipart/form-data',
-      paramIn: 'body',
-    },
-  },
-  {
-    package: 'routing-controllers',
-    name: 'UploadedFiles',
-    type: DecoratorType.File,
-    options: {
-      mediaType: 'multipart/form-data',
-      paramIn: 'body',
-      wholeParam: true,
-    },
-  },
-  /*{
-    package: 'routing-controllers',
-    name: 'Authorized',
-    type: DecoratorType.Authorization,
-  },*/
-];
+export const defaultRoutingControllersPackageName = 'routing-controllers';
+export class RoutingControllersPackage {
+  static packageName: string = 'RoutingControllers';
+  static knownDecorators: DecoratorMetadata[] = [];
+  static allOmitDecorators: DecoratorMetadata[] = [];
 
-const getOmitDecorators: () => DecoratorMetadata[] = () => {
-  const omitRoutingControllersName = [
-    'Ctx',
-    'CurrentUser',
-    'Interceptor',
-    'Header',
-    'Middleware',
-    'Session',
-    'SessionParam',
-    'State',
-    'UseAfter',
-    'UseBefore',
-    'UseInterceptor',
-  ];
-  return omitRoutingControllersName.map((name) => {
-    return {
-      package: 'routing-controllers',
-      name: name,
-      type: DecoratorType.Omit,
-    };
-  });
-};
+  static setPackageName(packageName: string): void {
+    this.packageName = packageName;
+    this.knownDecorators = [
+      {
+        package: packageName,
+        name: 'Controller',
+        type: DecoratorType.Controller,
+        options: {
+          mediaType: 'text/plain',
+        },
+      },
+      {
+        package: packageName,
+        name: 'JsonController',
+        type: DecoratorType.Controller,
+        options: {
+          mediaType: 'application/json',
+        },
+      },
+      {
+        package: packageName,
+        name: 'Get',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Put',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Post',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Delete',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Head',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Patch',
+        type: DecoratorType.Action,
+      },
+      {
+        package: packageName,
+        name: 'Param',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'path',
+        },
+      },
+      {
+        package: packageName,
+        name: 'Params',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'path',
+          wholeParam: true,
+        },
+      },
+      {
+        package: packageName,
+        name: 'QueryParam',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'query',
+        },
+      },
+      {
+        package: packageName,
+        name: 'QueryParams',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'query',
+          wholeParam: true,
+        },
+      },
+      {
+        package: packageName,
+        name: 'HeaderParam',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'header',
+        },
+      },
+      {
+        package: packageName,
+        name: 'HeaderParams',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'header',
+          wholeParam: true,
+        },
+      },
+      {
+        package: packageName,
+        name: 'CookieParam',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'cookie',
+        },
+      },
+      {
+        package: packageName,
+        name: 'CookieParams',
+        type: DecoratorType.Param,
+        options: {
+          paramIn: 'cookie',
+          wholeParam: true,
+        },
+      },
+      {
+        package: packageName,
+        name: 'BodyParam',
+        type: DecoratorType.Body,
+        options: {
+          paramIn: 'body',
+          mediaType: 'application/json',
+        },
+      },
+      {
+        package: packageName,
+        name: 'Body',
+        type: DecoratorType.Body,
+        options: {
+          paramIn: 'body',
+          mediaType: 'application/json',
+          wholeParam: true,
+        },
+      },
+      {
+        package: packageName,
+        name: 'UploadedFile',
+        type: DecoratorType.File,
+        options: {
+          mediaType: 'multipart/form-data',
+          paramIn: 'body',
+        },
+      },
+      {
+        package: packageName,
+        name: 'UploadedFiles',
+        type: DecoratorType.File,
+        options: {
+          mediaType: 'multipart/form-data',
+          paramIn: 'body',
+          wholeParam: true,
+        },
+      },
+      /*{
+        package: packageName,
+        name: 'Authorized',
+        type: DecoratorType.Authorization,
+      },*/
+    ];
+    const omitRoutingControllersName = [
+      'Ctx',
+      'CurrentUser',
+      'Interceptor',
+      'Header',
+      'Middleware',
+      'Session',
+      'SessionParam',
+      'State',
+      'UseAfter',
+      'UseBefore',
+      'UseInterceptor',
+    ];
+    this.allOmitDecorators = omitRoutingControllersName.map((name) => {
+      return {
+        package: packageName,
+        name: name,
+        type: DecoratorType.Omit,
+      };
+    });
+  }
 
-export const omitDecorators = getOmitDecorators();
+  static getKnownDecorators(): DecoratorMetadata[] {
+    return this.knownDecorators;
+  }
+  static getOmitDecorators(): DecoratorMetadata[] {
+    return this.allOmitDecorators;
+  }
+  static addOmitDecorator(item: DecoratorMetadata): void {
+    this.allOmitDecorators.push(item);
+  }
+}
+
+// init default RoutingControllers packageName
+RoutingControllersPackage.setPackageName(defaultRoutingControllersPackageName);
 
 export interface DecoratorMetadata {
   name: string;
@@ -248,6 +266,7 @@ class Decorator implements DecoratorMetadata {
   }
 
   private findDecorator() {
+    const knownDecorators = RoutingControllersPackage.getKnownDecorators();
     for (const d of knownDecorators) {
       if (d.name === this.name && this.package?.indexOf(d.package) === 0) {
         this.type = d.type;
@@ -256,6 +275,7 @@ class Decorator implements DecoratorMetadata {
       }
     }
 
+    const omitDecorators = RoutingControllersPackage.getOmitDecorators();
     for (const d of omitDecorators) {
       if (d.name === this.name && this.package.indexOf(d.package) === 0) {
         this.type = d.type;

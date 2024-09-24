@@ -48,19 +48,20 @@ yarn gen-openapi -c ./openapi.config2.ts
 
 ### IGenOpenapiDataOpts 参数属性
 
-| 属性                   | 说明                                                                                                                                                      | 默认值                        |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| genOpenapiDir        | 生成openapi文件夹所在目录                                                                                                                                        | `./`                       |
-| controllers          | routing-controllers 里的controllers目录                                                                                                                     |                            |
-| prettierOptions      | 生成文件格式化，默认取项目配置，该配置优先级更高，会合并覆盖项目prettier配置文件，如项目有prettier配置文件，这里无需配置，详情配置见 [prettier文档](https://github.com/prettier/prettier/blob/main/docs/options.md) |                            |
-| customOmitDecorators | 忽略警告提示的装饰器                                                                                                                                              | `详见customOmitDecorators属性` |
-| title                | openapi文件里info=>title配置  `string`                                                                                                                       | 不设置，取项目package.json里name的值 |
-| routePrefix          | 全局路由前缀  `string`                                                                                                                                        |                            |
-| compilerOptions      | ts编译参数  `TJS.CompilerOptions`                                                                                                                           | `undefined`                |
-| servers              | openapi文件里servers配置  `ServerObject[]`                                                                                                                   | `undefined`                |
-| responseSchema       | openapi文件里responses响应数据包裹格式  `ResponseSchema`                                                                                                           | `undefined`                |
-| genOpenapiType       | openapi文件生成格式  `json｜yaml`                                                                                                                              | `json`                     |
-| typeUniqueNames      | 生成类型使用唯一名称  `boolean`                                                                                                                                   | `true`                     |
+| 属性                            | 说明                                                                                                                                                      | 默认值                        |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| genOpenapiDir                 | 生成openapi文件夹所在目录                                                                                                                                        | `./`                       |
+| controllers                   | routing-controllers 里的controllers目录                                                                                                                     |                            |
+| prettierOptions               | 生成文件格式化，默认取项目配置，该配置优先级更高，会合并覆盖项目prettier配置文件，如项目有prettier配置文件，这里无需配置，详情配置见 [prettier文档](https://github.com/prettier/prettier/blob/main/docs/options.md) |                            |
+| routingControllersPackageName | routing-controllers包名设置，支持自定义二次封装修改包名                                                                                                                   | `routing-controllers`      |
+| customOmitDecorators          | 忽略警告提示的装饰器                                                                                                                                              | `详见customOmitDecorators属性` |
+| title                         | openapi文件里info=>title配置  `string`                                                                                                                       | 不设置，取项目package.json里name的值 |
+| routePrefix                   | 全局路由前缀  `string`                                                                                                                                        |                            |
+| compilerOptions               | ts编译参数  `TJS.CompilerOptions`                                                                                                                           | `undefined`                |
+| servers                       | openapi文件里servers配置  `ServerObject[]`                                                                                                                   | `undefined`                |
+| responseSchema                | openapi文件里responses响应数据包裹格式  `ResponseSchema`                                                                                                           | `undefined`                |
+| genOpenapiType                | openapi文件生成格式  `json｜yaml`                                                                                                                              | `json`                     |
+| typeUniqueNames               | 生成类型使用唯一名称  `boolean`                                                                                                                                   | `true`                     |
 
 
 #### customOmitDecorators属性
