@@ -4,7 +4,11 @@ import fs from 'fs-extra';
 import path from 'node:path';
 import { writePrettierFile } from '../utils';
 import type { DecoratorMetadata } from './decorator-util';
-import { DecoratorType, omitDecorators } from './decorator-util';
+import {
+  DecoratorType,
+  RoutingControllersPackage,
+  defaultRoutingControllersPackageName,
+} from './decorator-util';
 import type { GenOpenApiOption } from './gen-openapi-doc';
 import { genOpenapiDoc } from './gen-openapi-doc';
 
@@ -12,6 +16,7 @@ export type IGenOpenapiDataOpts = {
   genOpenapiDir: string;
   controllers: string[];
   prettierOptions?: IPrettierOptions;
+  routingControllersPackageName?: string;
   customOmitDecorators?: Pick<DecoratorMetadata, 'name' | 'package'>[];
 } & Partial<GenOpenApiOption>;
 
@@ -23,6 +28,7 @@ const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
   const {
     genOpenapiDir = './',
     controllers,
+    routingControllersPackageName = defaultRoutingControllersPackageName,
     customOmitDecorators = [],
     genOpenapiType = 'json',
     ...genOpenApiOptionWithoutType
@@ -42,9 +48,12 @@ const genOpenapiData = async (opts: IGenOpenapiDataOpts) => {
 
   fs.ensureDirSync(genOpenapiAbsolutePath);
 
+  // set RoutingControllers packageName
+  RoutingControllersPackage.setPackageName(routingControllersPackageName);
+
   // add customOmitDecorators
   customOmitDecorators.forEach((item) => {
-    omitDecorators.push({
+    RoutingControllersPackage.addOmitDecorator({
       name: item.name,
       package: item.package,
       type: DecoratorType.Omit,
