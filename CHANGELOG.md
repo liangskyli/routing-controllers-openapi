@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.3-beta.0...v0.7.3) (2024-09-25)
+
+**Note:** Version bump only for package root
+
+
+
+
+
 ## [0.7.3-beta.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.7.2...v0.7.3-beta.0) (2024-09-24)
 
 
