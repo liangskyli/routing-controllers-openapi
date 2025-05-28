@@ -18,7 +18,7 @@ export class MetadataGenerator {
     typeUniqueNames: boolean = true,
   ) {
     this.typeUniqueNames = typeUniqueNames;
-    this.program = TJS.getProgramFromFiles(files, jsonCompilerOptions);
+    this.program = TJS.getProgramFromFiles(files, jsonCompilerOptions) as any;
     this.typeChecker = this.program.getTypeChecker();
     this.typeGenerator = new TypeGenerator(this);
   }

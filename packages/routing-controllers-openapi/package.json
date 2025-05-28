@@ -46,10 +46,10 @@
     "update:deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
-    "@liangskyli/utils": "4.0.1",
+    "@liangskyli/utils": "5.0.0",
     "commander": "^12.1.0",
-    "fs-extra": "^11.2.0",
-    "glob": "^11.0.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.2",
     "js-yaml": "^4.1.0",
     "openapi3-ts": "^4.3.3",
     "typescript": "~5.5.0",
