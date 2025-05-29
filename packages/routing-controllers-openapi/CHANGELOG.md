@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.1...v0.8.2) (2025-05-29)
+
+
+### Features
+
+* support routing-controllers@0.11.0 ([f12556f](https://github.com/liangskyli/routing-controllers-openapi/commit/f12556fa17d3696686b19c687fd3c6b0b99b6b66))
+
+
+### Bug Fixes
+
+* support node18 for glob ([34e9b4e](https://github.com/liangskyli/routing-controllers-openapi/commit/34e9b4e5cdf31a79c71aff53a9047cb6e539bb64))
+
+
+
 ## [0.8.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.0...v0.8.1) (2024-12-07)
 
 
