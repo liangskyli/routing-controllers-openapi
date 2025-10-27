@@ -11,15 +11,13 @@
     "routing-controllers generate openapi file"
   ],
   "type": "module",
-  "main": "./lib/index.cjs",
   "module": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-  "typings": "./lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./lib/index.cjs"
+      "import": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
     }
   },
   "files": [
