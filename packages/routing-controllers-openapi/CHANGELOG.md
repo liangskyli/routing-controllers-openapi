@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.2...v0.8.3) (2025-10-27)
+
+
+### Features
+
+* node>=20.19.0 support require esm ([336b20d](https://github.com/liangskyli/routing-controllers-openapi/commit/336b20d8c18feac9e7308cc5a5e0bdbaef41dacb))
+* routing-controllers support version change to >=0.9.0 ([58ee92d](https://github.com/liangskyli/routing-controllers-openapi/commit/58ee92dc84292260ad34b755d52893f4add37e77))
+
+
+
 ## [0.8.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.1...v0.8.2) (2025-05-29)
 
 
