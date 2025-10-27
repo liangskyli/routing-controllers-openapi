@@ -31,8 +31,7 @@
     "package.json"
   ],
   "bin": {
-    "gen-openapi": "bin/index.js",
-    "gen-openapi-cjs": "bin/index.cjs"
+    "gen-openapi": "bin/index.js"
   },
   "repository": {
     "type": "git",
