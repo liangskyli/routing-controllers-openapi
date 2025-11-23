@@ -11,6 +11,9 @@
 
 - routing-controllers 生成 openapi v3文件。
 
+## 注意
+- V0.9.0 版本开始，仅支持esm版本的使用，不再支持cjs的使用。
+
 ## 安装:
 ```bash
 yarn add @liangskyli/routing-controllers-openapi --dev

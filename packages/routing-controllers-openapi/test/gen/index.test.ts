@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { fs } from '@liangskyli/utils';
 import path from 'node:path';
 import { describe, expect, test, vi } from 'vitest';
 import genOpenapiData from '../../src/gen/index';
@@ -95,14 +95,14 @@ describe('genOpenapiData', () => {
       'gen openapi success:',
     );
   });
-  test('genOpenapiData genOpenapiDir not exist', () => {
-    expect(() =>
+  test('genOpenapiData genOpenapiDir not exist', async () => {
+    await expect(
       genOpenapiData({
         genOpenapiDir: './test/all-gen-dirs/gen-openapi-dir-error',
-        controllers: ['./test/example/controller*/**/*.ts'],
+        controllers: ['./test/example/controller*!/!**!/!*.ts'],
         routePrefix: '/root',
         typeUniqueNames: false,
       }),
-    ).rejects.toThrowError('genOpenapiDir not exits!');
+    ).rejects.toThrow('genOpenapiDir not exits!');
   });
 });

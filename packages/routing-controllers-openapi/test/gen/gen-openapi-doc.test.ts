@@ -22,15 +22,15 @@ describe('genOpenapiDoc', () => {
       './__test__snapshots__/openapi-1.yaml',
     );
   });
-  /*test('genOpenapiDoc-2', async () => {
-    const specString1 = genOpenapiDoc(['./test/example/controller2/!**!/!*.ts'], {
+  test('genOpenapiDoc-2', async () => {
+    const specString1 = genOpenapiDoc(['./test/example/controller2/**/*.ts'], {
       genOpenapiType: 'json',
       typeUniqueNames: false,
     });
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-2.json',
     );
-    const specString2 = genOpenapiDoc(['./test/example/controller2/!**!/!*.ts'], {
+    const specString2 = genOpenapiDoc(['./test/example/controller2/**/*.ts'], {
       genOpenapiType: 'yaml',
       typeUniqueNames: false,
     });
@@ -39,16 +39,16 @@ describe('genOpenapiDoc', () => {
     );
   });
   test('genOpenapiDoc-3', async () => {
-    const specString1 = genOpenapiDoc(['./test/example/controller3/!**!/!*.ts'], {
+    const specString1 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
       genOpenapiType: 'json',
-      typeUniqueNames: false,
+      typeUniqueNames: true,
       servers: [{ url: 'url' }],
     });
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-3.json',
     );
-    const specString2 = genOpenapiDoc(['./test/example/controller3/!**!/!*.ts'], {
-      typeUniqueNames: false,
+    const specString2 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
+      typeUniqueNames: true,
       genOpenapiType: 'yaml',
       servers: [{ url: 'url' }],
     });
@@ -57,7 +57,7 @@ describe('genOpenapiDoc', () => {
     );
   });
   test('genOpenapiDoc-4', async () => {
-    const specString1 = genOpenapiDoc(['./test/example/controller4/!**!/!*.ts'], {
+    const specString1 = genOpenapiDoc(['./test/example/controller4/**/*.ts'], {
       genOpenapiType: 'json',
       typeUniqueNames: false,
       responseSchema: {
@@ -79,7 +79,7 @@ describe('genOpenapiDoc', () => {
     await expect(specString1).toMatchFileSnapshot(
       './__test__snapshots__/openapi-4.json',
     );
-    const specString2 = genOpenapiDoc(['./test/example/controller4/!**!/!*.ts'], {
+    const specString2 = genOpenapiDoc(['./test/example/controller4/**/*.ts'], {
       responseSchema: {
         type: 'object',
         properties: {
@@ -103,7 +103,7 @@ describe('genOpenapiDoc', () => {
     );
   });
   test('genOpenapiDoc-5 no ResponseSchema', async () => {
-    const specString1 = genOpenapiDoc(['./test/example/controller3/!**!/!*.ts'], {
+    const specString1 = genOpenapiDoc(['./test/example/controller3/**/*.ts'], {
       genOpenapiType: 'json',
       typeUniqueNames: false,
       responseSchema: {
@@ -127,7 +127,7 @@ describe('genOpenapiDoc', () => {
   });
   test('genOpenapiDoc-6 same method multiple path', () => {
     expect(() =>
-      genOpenapiDoc(['./test/example/error/multiple-path/!**!/!*.ts'], {
+      genOpenapiDoc(['./test/example/error/multiple-path/**/*.ts'], {
         genOpenapiType: 'json',
         typeUniqueNames: false,
       }),
@@ -153,5 +153,5 @@ describe('genOpenapiDoc', () => {
         },
       ),
     ).toThrow('encountered multiple body parameter BodyParam1');
-  });*/
+  });
 });

@@ -1,8 +1,12 @@
 import type { IPrettierOptions } from '@liangskyli/utils';
-import { colors, getAbsolutePath, removeFilesSync } from '@liangskyli/utils';
-import fs from 'fs-extra';
+import {
+  colors,
+  fs,
+  getAbsolutePath,
+  removeFilesSync,
+  writePrettierFile,
+} from '@liangskyli/utils';
 import path from 'node:path';
-import { writePrettierFile } from '../utils';
 import type { DecoratorMetadata } from './decorator-util';
 import {
   DecoratorType,

@@ -2330,13 +2330,13 @@
         "type": "object",
         "properties": {
           "a": {
-            "$ref": "#/components/schemas/Record<string,string>"
+            "$ref": "#/components/schemas/Record%3Cstring%2Cstring%3E"
           },
           "b": {
-            "$ref": "#/components/schemas/Record<any,any>"
+            "$ref": "#/components/schemas/Record%3Cany%2Cany%3E"
           },
           "c": {
-            "$ref": "#/components/schemas/Record<string,never>"
+            "$ref": "#/components/schemas/Record%3Cstring%2Cnever%3E"
           },
           "d": {
             "type": "string",
@@ -2451,7 +2451,7 @@
           "param2": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Partial<Pick<IUser,\"id\">>"
+                "$ref": "#/components/schemas/Partial%3CPick%3CIUser%2C%22id%22%3E%3E"
               },
               {
                 "type": ["string", "number"]
@@ -2532,7 +2532,7 @@
           "param2": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Required<ActivityBase>"
+                "$ref": "#/components/schemas/Required%3CActivityBase%3E"
               },
               {
                 "type": "string"
@@ -2540,7 +2540,7 @@
             ]
           },
           "param3": {
-            "$ref": "#/components/schemas/Required<Pick<IUser,\"name\">>"
+            "$ref": "#/components/schemas/Required%3CPick%3CIUser%2C%22name%22%3E%3E"
           }
         },
         "required": ["param1", "param2", "param3"]
@@ -2702,7 +2702,7 @@
           "tow": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Partial<postBody11>"
+              "$ref": "#/components/schemas/Partial%3CpostBody11%3E"
             }
           }
         },

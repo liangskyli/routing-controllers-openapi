@@ -22,34 +22,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  a3:
-                    type: string
-                  b:
-                    type: object
-                    properties:
-                      param1:
-                        description: 多行注释
-                        minimum: 1
-                        maximum: 10
-                        type: number
-                    required:
-                      - param1
-                  c:
-                    type: object
-                    properties:
-                      param2:
-                        description: 多行注释
-                        minimum: 1
-                        maximum: 10
-                        type: number
-                    required:
-                      - param2
-                required:
-                  - a3
-                  - b
-                  - c
+                $ref: '#/components/schemas/commonResponse.a34b3e8a'
       parameters:
         - name: activityBases
           in: query
@@ -127,7 +100,7 @@ paths:
         - name: queryParam8
           in: query
           schema:
-            $ref: '#/components/schemas/IParam2'
+            $ref: '#/components/schemas/IParam2.e6163d31'
         - name: queryParam9
           in: query
           schema:
@@ -198,16 +171,9 @@ paths:
             type: array
             items:
               items:
-                - $ref: '#/components/schemas/IParam2'
+                - $ref: '#/components/schemas/IParam2.e6163d31'
                 - type: number
-                - type: object
-                  properties:
-                    activityBases:
-                      type: array
-                      items: *ref_0
-                      description: activityBases
-                  required:
-                    - activityBases
+                - $ref: '#/components/schemas/getQueryParams1Request.894f0d11'
               type: array
               maxItems: 3
               minItems: 3
@@ -258,12 +224,11 @@ paths:
         - name: queryParam22
           in: query
           schema:
-            $ref: '#/components/schemas/recordTest'
+            $ref: '#/components/schemas/recordTest.5cb8d7f4'
         - name: queryParam23
           in: query
           schema:
-            type: string
-            format: date-time
+            $ref: '#/components/schemas/Date.85951187'
         - name: queryParam24
           in: query
           schema:
@@ -308,11 +273,11 @@ paths:
               type: object
               properties:
                 body1:
-                  $ref: '#/components/schemas/proto.LockRequest'
+                  $ref: '#/components/schemas/proto.LockRequest.be7af638'
                 body2:
-                  $ref: '#/components/schemas/InterFaceSameAll'
+                  $ref: '#/components/schemas/InterFaceSameAll.3ff18c23'
                 body3:
-                  $ref: '#/components/schemas/InterfaceAndNamespaceSameAll'
+                  $ref: '#/components/schemas/InterfaceAndNamespaceSameAll.a39abe05'
               required:
                 - body1
                 - body2
@@ -333,10 +298,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomizeExportByFilterRequest'
+              $ref: '#/components/schemas/CustomizeExportByFilterRequest.fa53094d'
         required: true
 components:
   schemas:
+    getQueryParams1Request.894f0d11:
+      type: object
+      properties:
+        activityBases:
+          description: activityBases
+          type: array
+          items: *ref_0
+      required:
+        - activityBases
     ActivityBase:
       allOf:
         - type: object
@@ -363,7 +337,40 @@ components:
               type: boolean
           required:
             - customerCount
-    IParam2:
+    commonResponse.a34b3e8a:
+      type: object
+      properties:
+        a3:
+          type: string
+        b:
+          $ref: '#/components/schemas/commonResponse2.32fcda05'
+        c:
+          $ref: '#/components/schemas/commonResponse2_1.3f6cf707'
+      required:
+        - a3
+        - b
+        - c
+    commonResponse2.32fcda05:
+      type: object
+      properties:
+        param1:
+          description: 多行注释
+          minimum: 1
+          maximum: 10
+          type: number
+      required:
+        - param1
+    commonResponse2_1.3f6cf707:
+      type: object
+      properties:
+        param2:
+          description: 多行注释
+          minimum: 1
+          maximum: 10
+          type: number
+      required:
+        - param2
+    IParam2.e6163d31:
       type: object
       properties:
         param1:
@@ -388,15 +395,15 @@ components:
         - param4
         - param5
         - param6
-    recordTest:
+    recordTest.5cb8d7f4:
       type: object
       properties:
         a:
-          $ref: '#/components/schemas/Record<string,string>'
+          $ref: '#/components/schemas/Record%3Cstring%2Cstring%3E.cfdae68e'
         b:
-          $ref: '#/components/schemas/Record<any,any>'
+          $ref: '#/components/schemas/Record%3Cany%2Cany%3E.cfdae68e'
         c:
-          $ref: '#/components/schemas/Record<string,never>'
+          $ref: '#/components/schemas/Record%3Cstring%2Cnever%3E.cfdae68e'
         d:
           type: string
           format: date-time
@@ -405,13 +412,16 @@ components:
         - b
         - c
         - d
-    Record<string,string>:
+    Record<string,string>.cfdae68e:
       type: object
-    Record<any,any>:
+    Record<any,any>.cfdae68e:
       type: object
-    Record<string,never>:
+    Record<string,never>.cfdae68e:
       type: object
-    proto.LockRequest:
+    Date.85951187:
+      type: string
+      format: date-time
+    proto.LockRequest.be7af638:
       type: object
       properties:
         roomId:
@@ -419,7 +429,7 @@ components:
           type: number
       required:
         - roomId
-    InterFaceSameAll:
+    InterFaceSameAll.3ff18c23:
       type: object
       properties:
         id:
@@ -429,16 +439,16 @@ components:
       required:
         - id
         - id2
-    InterfaceAndNamespaceSameAll:
+    InterfaceAndNamespaceSameAll.a39abe05:
       type: object
       properties:
         name1:
           type: array
           items:
-            $ref: '#/components/schemas/proto.InterfaceAndNamespaceSame.item'
+            $ref: '#/components/schemas/proto.InterfaceAndNamespaceSame.item.f3759083'
       required:
         - name1
-    proto.InterfaceAndNamespaceSame.item:
+    proto.InterfaceAndNamespaceSame.item.f3759083:
       type: object
       properties:
         id:
@@ -448,14 +458,14 @@ components:
       required:
         - id
         - name
-    CustomizeExportByFilterRequest:
+    CustomizeExportByFilterRequest.fa53094d:
       type: object
       properties:
         a:
-          $ref: '#/components/schemas/Omit<postBody1,"tow">'
+          $ref: '#/components/schemas/Omit%3CpostBody1%2C%22tow%22%3E.232e16b3'
       required:
         - a
-    Omit<postBody1,"tow">:
+    Omit<postBody1,"tow">.232e16b3:
       type: object
       properties:
         postBody1param1:

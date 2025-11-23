@@ -117,7 +117,12 @@ export class TypeSchemaMap {
         const value = scope[key];
         if (key === '$ref' && scope['$ref']) {
           // ref change to openapi ref
-          const uniqueRefName = scope['$ref'].replace(/#\/definitions\//g, '');
+          const encodeUniqueRefName = scope['$ref'].replace(
+            /#\/definitions\//g,
+            '',
+          );
+          // typescript-json-schema@0.66.0 encode ref name, see https://github.com/YousefED/typescript-json-schema/commit/927543715b6df16df9fc104ef63fa1cc1f1e83c2
+          const uniqueRefName = decodeURIComponent(encodeUniqueRefName);
           const noMd5Name = uniqueRefName.replace(REGEX_UNIQUE_MD5, '');
           const symbolList = this.generatorJsonSchema.getSymbols(noMd5Name);
           if (symbolList.length === 1) {

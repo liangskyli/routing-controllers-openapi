@@ -653,13 +653,13 @@
         "type": "object",
         "properties": {
           "a": {
-            "$ref": "#/components/schemas/Record<string,string>"
+            "$ref": "#/components/schemas/Record%3Cstring%2Cstring%3E"
           },
           "b": {
-            "$ref": "#/components/schemas/Record<any,any>"
+            "$ref": "#/components/schemas/Record%3Cany%2Cany%3E"
           },
           "c": {
-            "$ref": "#/components/schemas/Record<string,never>"
+            "$ref": "#/components/schemas/Record%3Cstring%2Cnever%3E"
           },
           "d": {
             "type": "string",

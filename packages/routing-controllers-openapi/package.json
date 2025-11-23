@@ -16,6 +16,7 @@
     ".": {
       "import": {
         "types": "./lib/index.d.ts",
+        "import": "./lib/index.js",
         "default": "./lib/index.js"
       }
     }
@@ -43,17 +44,15 @@
     "update:deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
-    "@liangskyli/utils": "6.0.0",
+    "@liangskyli/utils": "7.0.0",
     "commander": "^13.1.0",
-    "fs-extra": "^11.3.2",
     "glob": "^10.4.5",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "openapi3-ts": "^4.5.0",
     "typescript": "~5.5.0",
-    "typescript-json-schema": "^0.65.1"
+    "typescript-json-schema": "^0.66.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/koa": "^3.0.1",
     "koa": "^3.1.1",

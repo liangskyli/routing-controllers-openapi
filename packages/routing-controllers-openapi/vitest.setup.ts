@@ -1,33 +1,34 @@
 import { beforeEach, vi } from 'vitest';
 
-vi.mock('fs-extra', async (importOriginal) => {
+const mockWriteFileSync = vi.fn();
+const mockEnsureDirSync = vi.fn();
+
+vi.mock('@liangskyli/utils', async (importOriginal) => {
   const mod = await importOriginal<any>();
   return {
     ...mod,
-    default: {
-      ...mod.default,
+    fs: {
+      ...mod.fs,
       readJSONSync: (path: string) => {
-        const packageJson = mod.readJSONSync(path);
+        const packageJson = mod.fs.readJSONSync(path);
         if (path.endsWith('package.json')) {
           // mock version
           packageJson.version = '0.5.0';
         }
         return packageJson;
       },
-      writeFileSync: vi.fn(),
-      ensureDirSync: vi.fn(),
+      writeFileSync: mockWriteFileSync,
+      ensureDirSync: mockEnsureDirSync,
     },
-  };
-});
-
-vi.mock('./src/utils.ts', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    writePrettierFile: async (opts: any) => {
+    writePrettierFile: vi.fn(async (opts: any) => {
       vi.stubGlobal('writePrettierFileArgs', opts);
-      await mod.writePrettierFile(opts);
-    },
+      // Format the data using the real prettierData function, then call mocked writeFileSync
+      const formattedData = await mod.prettierData(
+        opts.data,
+        mod.copyOptions(opts.prettierOptions),
+      );
+      mockWriteFileSync(opts.absolutePath, formattedData);
+    }),
   };
 });
 

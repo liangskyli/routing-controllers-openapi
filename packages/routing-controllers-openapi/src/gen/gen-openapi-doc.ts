@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { fs } from '@liangskyli/utils';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { oas31 as oa } from 'openapi3-ts';

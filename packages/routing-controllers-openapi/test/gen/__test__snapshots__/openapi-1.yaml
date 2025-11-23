@@ -613,7 +613,7 @@ components:
             - number
         param2:
           anyOf:
-            - $ref: '#/components/schemas/Partial<Pick<IUser,"id">>'
+            - $ref: '#/components/schemas/Partial%3CPick%3CIUser%2C%22id%22%3E%3E'
             - type:
                 - string
                 - number
@@ -680,10 +680,10 @@ components:
           type: string
         param2:
           anyOf:
-            - $ref: '#/components/schemas/Required<ActivityBase>'
+            - $ref: '#/components/schemas/Required%3CActivityBase%3E'
             - type: string
         param3:
-          $ref: '#/components/schemas/Required<Pick<IUser,"name">>'
+          $ref: '#/components/schemas/Required%3CPick%3CIUser%2C%22name%22%3E%3E'
       required:
         - param1
         - param2
@@ -810,7 +810,7 @@ components:
         tow:
           type: array
           items:
-            $ref: '#/components/schemas/Partial<postBody11>'
+            $ref: '#/components/schemas/Partial%3CpostBody11%3E'
       required:
         - postBody1param1
         - tow
