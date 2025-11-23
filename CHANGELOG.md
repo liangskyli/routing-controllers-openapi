@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.3...v0.9.0) (2025-11-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove gen-openapi-cjs bin, not support cjs format
+
+### Features
+
+* build remove cjs ([179ca40](https://github.com/liangskyli/routing-controllers-openapi/commit/179ca403cd3fc90c4319b6759eeb8ab632ac4a42))
+* remove gen-openapi-cjs bin, not support cjs format ([162e201](https://github.com/liangskyli/routing-controllers-openapi/commit/162e201ee03c7af60c4a214b06ca2652fb433633))
+* upgrade @liangskyli/utils,typescript-json-schema, and other dependencies ([667c36c](https://github.com/liangskyli/routing-controllers-openapi/commit/667c36cc3614b80616d02b1d6da4b7009345f21f))
+
+
+
 ## [0.8.3](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.2...v0.8.3) (2025-10-27)
 
 
