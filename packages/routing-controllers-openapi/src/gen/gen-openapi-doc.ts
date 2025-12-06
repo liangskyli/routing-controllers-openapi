@@ -2,7 +2,7 @@ import { fs } from '@liangskyli/utils';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { oas31 as oa } from 'openapi3-ts';
-import type ts from 'typescript';
+import type { ts } from 'typescript-json-schema';
 import { SwaggerSpecBuilder } from '../build/swagger-spec-builder';
 import { getFilesFromControllers } from '../utils';
 import { MetadataGenerator } from './metadata-generator';

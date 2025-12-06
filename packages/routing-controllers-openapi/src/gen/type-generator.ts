@@ -1,8 +1,7 @@
 import { colors, lodash } from '@liangskyli/utils';
 import type { oas31 as oa } from 'openapi3-ts';
-import ts from 'typescript';
-import type { Definition } from 'typescript-json-schema';
-import * as TJS from 'typescript-json-schema';
+import type { Definition, JsonSchemaGenerator } from 'typescript-json-schema';
+import { buildGenerator, ts } from 'typescript-json-schema';
 import type { MetadataGenerator } from './metadata-generator';
 
 const REGEX_FILE_NAME_OR_SPACE = /(\bimport\(".*?"\)|".*?")\.| /g;
@@ -27,15 +26,14 @@ export class TypeSchemaMap {
     oa.SchemaObject | oa.ReferenceObject | undefined
   > = {};
   private readonly metadata: MetadataGenerator;
-  private readonly generatorJsonSchema: TJS.JsonSchemaGenerator;
-  private readonly uniqueGeneratorJsonSchema: TJS.JsonSchemaGenerator | null =
-    null;
+  private readonly generatorJsonSchema: JsonSchemaGenerator;
+  private readonly uniqueGeneratorJsonSchema: JsonSchemaGenerator | null = null;
 
   private schemasData: oa.SchemasObject = {};
 
   constructor(metadata: MetadataGenerator) {
     this.metadata = metadata;
-    const jsonSchemaGeneratorData = TJS.buildGenerator(metadata.program, {
+    const jsonSchemaGeneratorData = buildGenerator(metadata.program, {
       required: true,
       ignoreErrors: true,
       uniqueNames: this.metadata.typeUniqueNames,
@@ -46,7 +44,7 @@ export class TypeSchemaMap {
       throw Error('generatorJsonSchema error');
     }
     if (!this.metadata.typeUniqueNames) {
-      this.uniqueGeneratorJsonSchema = TJS.buildGenerator(metadata.program, {
+      this.uniqueGeneratorJsonSchema = buildGenerator(metadata.program, {
         required: true,
         ignoreErrors: true,
         uniqueNames: true,

@@ -1,4 +1,4 @@
-import type ts from 'typescript';
+import type { ts } from 'typescript-json-schema';
 import type { DecoratorOptions } from './decorator-util';
 import { DecoratorType, processDecorators } from './decorator-util';
 import type { MetadataGenerator } from './metadata-generator';

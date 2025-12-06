@@ -49,8 +49,7 @@
     "glob": "^10.4.5",
     "js-yaml": "^4.1.1",
     "openapi3-ts": "^4.5.0",
-    "typescript": "~5.5.0",
-    "typescript-json-schema": "^0.66.0"
+    "typescript-json-schema": "^0.67.0"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
