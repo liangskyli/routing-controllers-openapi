@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.9.0...v0.9.1) (2025-12-07)
+
+
+### Features
+
+* upgrade typescript-json-schema@0.67.0, remove typescript ([c901af7](https://github.com/liangskyli/routing-controllers-openapi/commit/c901af7b3369850dd350dda689c2a78f42cec933))
+
+
+
 ## [0.9.0](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.8.3...v0.9.0) (2025-11-23)
 
 
