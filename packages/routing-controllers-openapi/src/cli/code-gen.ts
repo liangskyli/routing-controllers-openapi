@@ -6,6 +6,7 @@ import {
   tsImport,
 } from '@liangskyli/utils';
 import { program } from 'commander';
+import { pathToFileURL } from 'node:url';
 import type { IGenOpenapiDataOpts, IGenOpenapiDataOptsCLI } from '../gen';
 import genOpenapiData from '../gen';
 
@@ -27,8 +28,10 @@ const commandCodeGenCli = async (version: string) => {
     process.exit(1);
   }
 
+  // Convert Windows path to file:// URL for ESM compatibility
+  const configFileURL = pathToFileURL(configFilePath).href;
   let opts: IGenOpenapiDataOptsCLI = (
-    await tsImport(configFilePath, import.meta.url)
+    await tsImport(configFileURL, import.meta.url)
   ).default;
 
   const runningScript = async () => {
