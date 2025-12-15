@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.9.1...v0.9.2) (2025-12-15)
+
+
+### Bug Fixes
+
+* window path tsImport load error ([a5f226f](https://github.com/liangskyli/routing-controllers-openapi/commit/a5f226feff00b07476d0727669d643fba60a002d))
+
+
+
 ## [0.9.1](https://github.com/liangskyli/routing-controllers-openapi/compare/v0.9.0...v0.9.1) (2025-12-07)
 
 
